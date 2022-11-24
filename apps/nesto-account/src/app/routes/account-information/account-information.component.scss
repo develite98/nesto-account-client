@@ -1,0 +1,9 @@
+[tuitab][type='button'] {
+  background-color: #fff;
+  border-top: 1px solid var(--text-on-white);
+  padding: 24px 0px !important;
+}
+
+[tuitab][type='button']._active {
+  font-weight: 700;
+}

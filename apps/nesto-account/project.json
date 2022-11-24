@@ -19,7 +19,10 @@
           "apps/nesto-account/src/favicon.ico",
           "apps/nesto-account/src/assets"
         ],
-        "styles": ["apps/nesto-account/src/styles.scss"],
+        "styles": [
+          "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
+          "apps/nesto-account/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
