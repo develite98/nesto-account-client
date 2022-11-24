@@ -1,0 +1,11 @@
+<div class="file-indicator">
+  <button type="button"
+          [disabled]="state === 'loading'"
+          [size]="'s'"
+          (click)="onRemove()"
+          tuiIconButton
+          appearance="outline"
+          icon="tuiIconClose"></button>
+  <tui-file [file]="file"
+            [state]="state"></tui-file>
+</div>

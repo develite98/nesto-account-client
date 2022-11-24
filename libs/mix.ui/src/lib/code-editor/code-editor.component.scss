@@ -1,0 +1,13 @@
+.code-editor {
+  height: 100%;
+  overflow: auto;
+  min-height: 500px;
+
+  ngx-monaco-editor {
+    height: 100%;
+  }
+}
+
+:host {
+  height: 100%;
+}

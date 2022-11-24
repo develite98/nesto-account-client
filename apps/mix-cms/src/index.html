@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mixcore CMS</title>
+    <base href="/" />
+    <script>
+      (function () {
+        var options = window.location.search
+          .slice(1)
+          .split('&')
+          .reduce(function _reduce(a, b) {
+            b = b.split('=');
+            a[b[0]] = decodeURIComponent(b[1]);
+            return a;
+          }, {});
+
+        window['_app_base'] = options['baseHref'];
+        window['_app_base-route'] = options['baseRoute'];
+      })();
+    </script>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="favicon.ico"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap-grid.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap-utilities.min.css"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.3.1/css/flag-icon.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <mix-cms-root></mix-cms-root>
+  </body>
+</html>

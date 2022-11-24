@@ -1,0 +1,24 @@
+<mix-data-table [fetchDataFn]="fetchDataFn">
+  <div [columnType]="'CHECKBOX'"
+       mixTableColumn></div>
+  <div [header]="'Username'"
+       key="userName"
+       mixTableColumn>
+    <ng-template let-data
+                 mixColumnCell>
+      <a type="button"
+         (click)="edit(data.id)"
+         tuiLink>
+        {{ data.userName }}
+      </a>
+    </ng-template>
+  </div>
+  <div [header]="'Email'"
+       key="email"
+       mixTableColumn></div>
+  <div [columnType]="'DATE'"
+       [header]="'Created date'"
+       key="createdDateTime"
+       mixTableColumn>
+  </div>
+</mix-data-table>

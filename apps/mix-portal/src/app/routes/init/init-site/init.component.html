@@ -1,0 +1,46 @@
+<div class="init-page"
+     [ngClass]="{'container': step !== 3, 'container-fluid': step === 3}">
+  <ng-container *ngIf="step === 0">
+    <mix-init-site-information (siteSubmit)="siteSubmit($event)"></mix-init-site-information>
+  </ng-container>
+
+  <ng-container *ngIf="step === 1">
+    <mix-init-account-information [loading]="loading"
+                                  (accountSubmit)="accountSubmit($event)"></mix-init-account-information>
+  </ng-container>
+
+  <ng-container *ngIf="step === 2">
+    <mix-init-mode (modeSubmit)="modeSubmit($event)"></mix-init-mode>
+  </ng-container>
+
+  <ng-container *ngIf="step === 3">
+    <mix-init-themes></mix-init-themes>
+  </ng-container>
+</div>
+
+<ng-template [(tuiDialog)]="showProgress"
+             [tuiDialogOptions]="$any({ closeable: false, dismissible: false })"
+             let-observer>
+  <div class="init-progress-dialog">
+    <div class="init-progress-dialog__title">
+      <h4>{{ progressMessage }}</h4>
+    </div>
+
+    <progress [max]="100"
+              [value]="initProgress"
+              tuiProgressBar></progress>
+    <div class="init-progress-dialog__description tui-space_top-2">
+      <label tuiLabel
+             label="Init tenant">
+        Init tenant
+      </label>
+      <label tuiLabel
+             label="Install theme">
+        {{ themeData ? ('Download ' + themeData.title ): 'Blank theme' }}
+        <span *ngIf="(initApplicationStep === 1 || initApplicationStep === 2) && themeData">
+          {{ downloadProgress }}%
+        </span>
+      </label>
+    </div>
+  </div>
+</ng-template>

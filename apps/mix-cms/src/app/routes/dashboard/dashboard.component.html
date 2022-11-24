@@ -1,0 +1,24 @@
+<div class="dashboard-page">
+  <div class="container-fluid d-flex align-items-center flex-column">
+    <p class="tui-island__category">{{ currentDay}}, {{ currentDate }}</p>
+    <h2 class="bolt-header-title-l"> {{ helloPrefix }}, Phong Cao </h2>
+  </div>
+
+  <div class="container-fluid margin-t-2 d-flex justify-content-center">
+    <!-- <div class="dashboard-page__chart-tile"
+         [style.height]="'500px'"
+         [style.width]="'450px'">
+      <ngx-charts-pie-chart [labels]="true"
+                            [results]="cmsData"
+                            [scheme]="$any(colorScheme)"> </ngx-charts-pie-chart>
+    </div> -->
+
+    <div class="dashboard-page__chart-tile margin-l-2"
+         [style.height]="'500px'"
+         [style.width]="'750px'">
+      <ngx-charts-pie-grid [results]="cmsData"
+                           [scheme]="$any(colorScheme)">
+      </ngx-charts-pie-grid>
+    </div>
+  </div>
+</div>

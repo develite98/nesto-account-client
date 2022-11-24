@@ -1,0 +1,38 @@
+.sidebar-container {
+  display: flex;
+  width: 65vw;
+  height: 100%;
+
+  &__overlay {
+    content: '';
+    width: 5vw;
+    height: 100%;
+  }
+
+  &__main-frame {
+    width: 60vw;
+    height: 100%;
+    background-color: var(--tui-base-01);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+    border-radius: var(--mix-border-radius-02);
+    overflow: hidden;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: var(--mix-sub-header-height);
+    border-bottom: 1px solid var(--tui-base-03);
+    padding: 0 20px;
+  }
+
+  &__title {
+    font-weight: 500;
+  }
+
+  &__content {
+    height: calc(100% - var(--mix-sub-header-height));
+  }
+}

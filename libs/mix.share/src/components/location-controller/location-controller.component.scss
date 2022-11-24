@@ -1,0 +1,13 @@
+.location-controller {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  border-radius: var(--mix-border-radius-01);
+  background-color: var(--mix-main-widget-color);
+  padding: 4px;
+  height: 46px;
+
+  button {
+    margin-right: var(--mix-space-01);
+  }
+}

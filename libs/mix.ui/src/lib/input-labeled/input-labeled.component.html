@@ -1,0 +1,17 @@
+<label [tuiLabel]="label + ':'">
+  <tui-input *ngIf="type === 'text'"
+             [disabled]="disabled"
+             [ngModel]="value"
+             [tuiTextfieldLabelOutside]="true"
+             [tuiTextfieldSize]="size"
+             (ngModelChange)="onValueChange($event)">
+    {{ placeHolder }}
+    <input tuiTextfield>
+  </tui-input>
+
+  <tui-text-area *ngIf="type === 'text-area'"
+                 [disabled]="disabled"
+                 [ngModel]="value"
+                 [tuiTextfieldLabelOutside]="true"
+                 (ngModelChange)="onValueChange($event)"></tui-text-area>
+</label>

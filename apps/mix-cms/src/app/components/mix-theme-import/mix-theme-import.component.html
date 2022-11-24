@@ -1,0 +1,72 @@
+<div class="mix-theme-import">
+  <div class="mix-form"
+       [formGroup]="themeForm">
+    <div class="mix-form__row">
+      <label [tuiLabel]="'Display Name:'">
+        <tui-input [tuiTextfieldLabelOutside]="true"
+                   tuiTextfieldSize="m"
+                   formControlName="displayName">
+          <input type="text"
+                 tuiTextfield>
+        </tui-input>
+      </label>
+    </div>
+
+    <div class="mix-form__row">
+      <label [tuiLabel]="'Preview Url:'">
+        <tui-input [tuiTextfieldLabelOutside]="true"
+                   tuiTextfieldSize="m"
+                   formControlName="previewUrl">
+          <input type="text"
+                 tuiTextfield>
+        </tui-input>
+      </label>
+    </div>
+
+    <!-- <div class="row">
+      <div class="col-6">
+        <div class="mix-form__row">
+          <label> Assets: </label>
+          <mix-files-input></mix-files-input>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="mix-form__row">
+          <label> Imports: </label>
+          <mix-files-input></mix-files-input>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="mix-form__separator"></div>
+
+    <div class="mix-form__row">
+      <tui-checkbox-labeled formControlName="isCloneFromCurrentTheme">
+        Set this theme as default theme.
+      </tui-checkbox-labeled>
+    </div>
+  </div>
+
+  <div class="mix-theme-import__footer">
+    <tui-stepper *ngIf="isSaving"
+                 [activeItemIndex]="4">
+      <button [disabled]="true"
+              [icon]="'tuiIconTimeLarge'"
+              [stepState]="passCreateTheme ? 'pass' : 'normal'"
+              tuiStep>
+        Create new theme
+      </button>
+      <button [disabled]="true"
+              [icon]="'tuiIconTimeLarge'"
+              [stepState]="passCreateFolder ? 'pass' : 'normal'"
+              tuiStep>
+        Create assets folder
+      </button>
+    </tui-stepper>
+
+    <button [showLoader]="isSaving"
+            (click)="onImportTheme()"
+            tuiButton> Create </button>
+  </div>
+</div>

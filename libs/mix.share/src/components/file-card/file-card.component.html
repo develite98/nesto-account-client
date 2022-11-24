@@ -1,0 +1,26 @@
+<div class="file-card">
+  <tui-file [file]="nativeFile"
+            [leftContent]="state !== 'loading' ? icon : undefined"
+            [state]="state">
+  </tui-file>
+
+  <div class="file-card__copy">
+    <tui-input-copy [ngModel]="file.fullPath"
+                    tuiTextfieldSize="s">
+      File path
+      <input tuiTextfield
+             placeholder="Placeholder">
+    </tui-input-copy>
+  </div>
+
+  <div class="file-card__toolbar">
+    <button [size]="'s'"
+            tuiButton> Edit </button>
+    <button [appearance]="'accent'"
+            [size]="'s'"
+            (click)="onDelete()"
+            tuiButton> Remove </button>
+  </div>
+</div>
+
+<ng-template #icon><tui-svg src="tuiIconFileLarge"></tui-svg></ng-template>

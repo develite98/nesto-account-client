@@ -1,0 +1,39 @@
+<div class="menu">
+  <div class="menu__separator"></div>
+  <tui-accordion class="menu__accordion">
+    <tui-accordion-item *ngFor="let item of items"
+                        [borders]="null"
+                        [open]="true"
+                        [size]="'s'">
+      <div class="menu__group">{{ item.groupName }}</div>
+      <ng-template tuiAccordionItemContent>
+        <div *ngFor="let child of item.child"
+             class="menu__item"
+             (click)="child.action()"><a> {{ child.title }} </a></div>
+      </ng-template>
+    </tui-accordion-item>
+  </tui-accordion>
+
+  <div class="menu__separator"></div>
+
+  <tui-accordion class="menu__accordion"
+                 [closeOthers]="false">
+    <tui-accordion-item [borders]="null"
+                        [open]="true"
+                        [size]="'s'">
+      <div class="menu__group">Recommend</div>
+      <ng-template tuiAccordionItemContent>
+        <div class="menu__no-data"> Empty </div>
+      </ng-template>
+    </tui-accordion-item>
+
+    <tui-accordion-item [borders]="null"
+                        [open]="true"
+                        [size]="'s'">
+      <div class="menu__group">Quick access</div>
+      <ng-template tuiAccordionItemContent>
+        <div class="menu__no-data"> Empty </div>
+      </ng-template>
+    </tui-accordion-item>
+  </tui-accordion>
+</div>

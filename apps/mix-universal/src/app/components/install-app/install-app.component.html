@@ -1,0 +1,68 @@
+<div class="install-app">
+  <ng-container *ngIf="!selectedApp">
+    <div class="bolt-header-title"> Available applications </div>
+    <div class="sub-header-title"> Please select one: </div>
+
+    <div *ngIf="!loading; else skeleton"
+         class="container margin-t-2">
+      <div class="row">
+        <ng-container *ngFor="let app of availableApp">
+          <tui-island class="col-4 margin-1"
+                      [hoverable]="true">
+            <img class="tui-island__image"
+                 [src]="app.image">
+            <p class="tui-island__category"> by {{ app.createdBy }} </p>
+            <h3 class="tui-island__title"> {{ app.title }}</h3>
+            <p class="tui-island__paragraph">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+              et dolore magna aliqua.
+            </p>
+            <button class="tui-island__footer-button"
+                    type="button"
+                    (click)="selectApp(app)"
+                    tuiButton
+                    appearance="flat"
+                    size="m">
+              Select
+            </button>
+          </tui-island>
+        </ng-container>
+      </div>
+    </div>
+
+    <ng-template #skeleton>
+      <mix-skeleton-loading></mix-skeleton-loading>
+    </ng-template>
+  </ng-container>
+
+
+  <ng-container *ngIf="selectedApp">
+    <div class="bolt-header-title"> {{ selectedApp.title }} </div>
+    <div class="sub-header-title"> Please config some application data: </div>
+
+    <form class="mix-form margin-t-2"
+          [formGroup]="appForm"
+          (ngSubmit)="installApp()">
+      <formly-form [fields]="fields"
+                   [form]="appForm"
+                   [model]="model">
+      </formly-form>
+
+      <div *ngIf="isInstalling"
+           class="mix-form__row">
+        <progress class="progress"
+                  [value]="progressPercentage | async"
+                  tuiProgressBar
+                  max="100"
+                  color="linear-gradient(to right, var(--tui-support-02), var(--tui-support-14), var(--tui-support-12))"></progress>
+      </div>
+
+      <div class="margin-t-2">
+        <button type="submit"
+                [showLoader]="isInstalling"
+                [size]="'l'"
+                tuiButton> Install </button>
+      </div>
+    </form>
+  </ng-container>
+</div>

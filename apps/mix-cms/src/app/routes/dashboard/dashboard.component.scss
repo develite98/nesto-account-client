@@ -1,0 +1,21 @@
+.dashboard-page {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 16px;
+  width: 100%;
+
+  &__hello {
+    tui-badge {
+      margin: 5px;
+    }
+  }
+
+  &__chart-tile {
+    border-radius: 8px;
+    border: 1px solid #edeae9;
+    &:hover {
+      border: 1px solid rgba(0, 0, 0, 0.5);
+    }
+  }
+}

@@ -1,0 +1,23 @@
+:root {
+  each(range(15), {
+    --mix-space-@{value}: calc(@value * 8px);
+  });
+}
+
+each(range(15), {
+  .margin-b-@{value} {
+    margin-bottom: calc(@value * 8px);
+  }
+
+  .margin-t-@{value} {
+    margin-top: calc(@value * 8px);
+  }
+
+  .margin-r-@{value} {
+    margin-right: calc(@value * 8px);
+  }
+
+  .margin-l-@{value} {
+    margin-left: calc(@value * 8px);
+  }
+});

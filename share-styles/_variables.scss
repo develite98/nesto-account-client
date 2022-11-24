@@ -1,0 +1,32 @@
+:root {
+  --mix-header-height: 64px;
+  --mix-sub-header-height: 47px;
+  --font-family: 'Lexend Deca', 'Roboto', -apple-system, BlinkMacSystemFont,
+    'Apple Color Emoji', 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+  --sidebar-box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  --sidebar-background-color: #fff;
+  --mix-main-widget-color: #fff;
+  --mix-toolbar-background-color: #fff;
+  --mix-box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  --mix-border-radius-01: 8px;
+  --mix-border-radius-02: 16px;
+  --mix-primary: #0f92f3;
+  --mix-toolbar-color: #fff;
+  --mix-tab-height: 2.5rem;
+  --mix-hover-background: #f3f9fe;
+
+  --mix-side-menu-bg: rgba(15, 146, 243, 0.05);
+  --mix-side-menu-text-color: #000;
+  --mix-main-workspace-background: #fff;
+  --mix-sub-workspace-background: #fff;
+  --mix-body-background: #f3f9fe;
+}
+
+:dark-root {
+  --mix-side-menu-bg: rgba(255, 255, 255, 0.161);
+  --mix-side-menu-text-color: #fff;
+  --mix-main-workspace-background: rgba(255, 255, 255, 0.8);
+  --mix-sub-workspace-background: rgba(255, 255, 255, 0.8);
+  --mix-body-background: #3a258d;
+}

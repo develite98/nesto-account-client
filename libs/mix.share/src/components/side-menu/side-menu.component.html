@@ -1,0 +1,24 @@
+<div *ngIf="groups"
+     class="side-menu"
+     [style.--groupHeight]="!!(sideMenuService.miniSize$ | async) ? '40px' : '64px'"
+     [style.--groupWidth]="!!(sideMenuService.miniSize$ | async) ? '48px' : '72px'">
+  <div class="side-menu__groups"
+       [ngClass]="{'--mini': !!(sideMenuService.miniSize$ | async)}">
+    <mix-side-menu-button *ngFor="let menu of groups"
+                          [currentSelectedItem]="currentSelectedItem"
+                          [menu]="menu"
+                          (selectMenu)="selectMenu($event)"></mix-side-menu-button>
+    <div class="toggle-mini-size"
+         title="Mini toolbar"
+         (click)="toggleMiniSize()">
+    </div>
+  </div>
+
+
+  <div class="side-menu__menu"
+       [ngClass]="{'--collapse': !currentSelectedItem || !currentSelectedItem.childMenuTpl || !!!(sideMenuService.open$ | async)}">
+    <ng-container *ngIf="currentSelectedItem && currentSelectedItem.childMenuTpl">
+      <ng-container *ngTemplateOutlet="currentSelectedItem.childMenuTpl"></ng-container>
+    </ng-container>
+  </div>
+</div>

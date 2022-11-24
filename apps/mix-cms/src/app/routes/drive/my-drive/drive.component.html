@@ -1,0 +1,105 @@
+<div class="drive-page">
+  <div class="hidden">
+    <tui-input-files [formControl]="fileControl"
+                     [multiple]="true"></tui-input-files>
+  </div>
+
+  <div class="drive-page__toolbar margin-b-2">
+    <tui-breadcrumbs class="margin-r-2"
+                     size="l">
+      <ng-container *ngFor="let item of items; let i = index">
+        <a *tuiItem
+           (click)="breadcrumbsClick(i)"
+           tuiLink>
+          {{ item }}
+        </a>
+      </ng-container>
+    </tui-breadcrumbs>
+
+    <tui-hosted-dropdown [(open)]="open"
+                         [content]="content">
+      <button type="button"
+              [shape]="'rounded'"
+              [size]="'s'"
+              icon="tuiIconUpload"
+              tuiButton>
+        Upload
+      </button>
+    </tui-hosted-dropdown>
+
+    <ng-template #content>
+      <tui-data-list role="menu">
+        <a (click)="upload()"
+           tuiOption> New File </a>
+        <a tuiOption> New Folder </a>
+      </tui-data-list>
+    </ng-template>
+
+    <button class="margin-l-1"
+            type="button"
+            [shape]="'rounded'"
+            [size]="'s'"
+            icon="tuiIconUpload"
+            tuiButton>
+      Extract
+    </button>
+
+    <form class="group w-fit-content ml-auto"
+          [collapsed]="true"
+          [formGroup]="driveSettingForm"
+          tuiGroup>
+      <tui-radio-block [style.width]="'100px'"
+                       size="m"
+                       contentAlign="right"
+                       formControlName="mode"
+                       item="list">
+        List
+      </tui-radio-block>
+      <tui-radio-block [style.width]="'100px'"
+                       formControlName="mode"
+                       size="m"
+                       contentAlign="right"
+                       item="grid">
+        Grid
+      </tui-radio-block>
+    </form>
+  </div>
+
+  <div class="container-fluid">
+    <ng-container *ngIf="loadingFiles.length">
+      <div class="header-title margin-b-2"> Uploading
+      </div>
+      <div class="row margin-b-3 g-2">
+        <mix-file-indicator *ngFor="let file of loadingFiles; let i = index"
+                            [file]="file"
+                            [folder]="currentFolder"
+                            (fileUploadSuccess)="fileReload$.next()"
+                            (remove)="removeUploadingFile(file)"> </mix-file-indicator>
+      </div>
+    </ng-container>
+
+    <div class="header-title margin-b-2"> Directories
+    </div>
+
+    <div class="row margin-b-3 g-2">
+      <div *ngFor="let direct of currentDirectories"
+           class="col-2">
+        <div class="folder-card"
+             (click)="moveToFolder(direct)">
+          <i-tabler name="folder"></i-tabler>
+          <p> {{ direct }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-title margin-b-2"> Files
+    </div>
+
+    <div class="row margin-b-3 g-2">
+      <ng-container *ngFor="let file of currentFiles">
+        <mix-file-card [file]="file"
+                       (fileDeleteSuccess)="fileReload$.next()"></mix-file-card>
+      </ng-container>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="menu">
+  <button class="margin-b-3"
+          type="button"
+          [icon]="'tuiIconPlusCircleLarge'"
+          [size]="'l'"
+          (click)="installApp()"
+          tuiButton>
+    Install new app
+  </button>
+
+  <tui-accordion class="menu__accordion"
+                 [closeOthers]="false">
+    <tui-accordion-item *ngFor="let item of items"
+                        [borders]="null"
+                        [open]="true"
+                        [size]="'s'">
+      <div class="menu__group">{{ item.groupName }}</div>
+      <ng-template tuiAccordionItemContent>
+        <div *ngFor="let child of item.child"
+             class="menu__item"
+             (click)="child.action()"><a> {{ child.title }} </a></div>
+      </ng-template>
+    </tui-accordion-item>
+  </tui-accordion>
+</div>

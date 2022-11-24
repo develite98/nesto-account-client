@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-12 margin-b-2">
+    <img src="assets/images/mixcore-logo-red-2.svg"
+         width="100px">
+  </div>
+
+  <div class="col-6">
+    <div class="init-account-information mix-form"
+         [formGroup]="accountForm"
+         (keyup.enter)="submitForm()">
+      <h3 class="mix-form__header">Create your Admin Account</h3>
+      <p class="mix-form__sub-header"> To continue to using Mixcore CMS </p>
+
+      <div class="mix-form__row">
+        <label [tuiLabel]="'Username:'">
+          <tui-input [tuiTextfieldLabelOutside]="true"
+                     tuiTextfieldSize="m"
+                     formControlName="userName">
+            <input tuiTextfield>
+          </tui-input>
+          <tui-field-error formControlName="userName"></tui-field-error>
+        </label>
+      </div>
+
+      <div class="mix-form__row">
+        <label [tuiLabel]="'Email:'">
+          <tui-input [tuiTextfieldLabelOutside]="true"
+                     tuiTextfieldSize="m"
+                     formControlName="email">
+
+            <input tuiTextfield>
+          </tui-input>
+          <tui-field-error formControlName="email"></tui-field-error>
+        </label>
+      </div>
+
+      <div class="mix-form__row">
+        <label [tuiLabel]="'Password:'">
+          <tui-input [tuiTextfieldLabelOutside]="true"
+                     tuiTextfieldSize="m"
+                     formControlName="password">
+            <input type="password"
+                   autocomplete="off"
+                   tuiTextfield>
+          </tui-input>
+          <tui-field-error formControlName="password"></tui-field-error>
+        </label>
+      </div>
+
+      <div class="mix-form__row">
+        <label [tuiLabel]="'Confirm Password:'">
+          <tui-input [tuiTextfieldLabelOutside]="true"
+                     tuiTextfieldSize="m"
+                     formControlName="confirmPassword">
+            <input type="password"
+                   autocomplete="off"
+                   tuiTextfield>
+          </tui-input>
+          <tui-field-error formControlName="confirmPassword"></tui-field-error>
+        </label>
+      </div>
+
+      <div class="mix-form__toolbar-right --column margin-t-4">
+        <button class="w-100"
+                [size]="'m'"
+                (click)="submitForm()"
+                tuiButton>Continue</button>
+        <button [disabled]="loading"
+                [pseudo]="true"
+                tuiLink>Previous step</button>
+      </div>
+
+      <p class="margin-t-1">By signing up, you’re agree to our <a style="color: #1DA1D1"> Terms & Conditions </a>
+        and <a style="color: #1DA1D1"> Privacy Policy </a> </p>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <img class="w-100"
+         src="assets/images/init-banner-01.jpg"
+         style="transform: translate(0, -20%);">
+  </div>
+</div>

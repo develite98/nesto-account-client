@@ -1,0 +1,11 @@
+<div class="mix-workspace-container detail-template"
+     style="padding: 2px">
+  <mix-template-editor *ngIf="templateId"
+                       class="w-100 h-100"
+                       [disabled]="true"
+                       [templateId]="templateId"></mix-template-editor>
+</div>
+
+<ng-template #templateTree>
+  <mix-theme-template-tree></mix-theme-template-tree>
+</ng-template>

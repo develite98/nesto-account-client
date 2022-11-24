@@ -1,0 +1,100 @@
+<div class="row">
+  <div class="col-12 margin-b-2">
+    <img src="assets/images/mixcore-logo-red-2.svg"
+         width="100px">
+  </div>
+
+  <div class="col-6">
+    <div class="init-site-information mix-form">
+      <h3 *ngIf="step === 'general'"
+          class="mix-form__header">Tell us your website's info</h3>
+      <h3 *ngIf="step === 'database'"
+          class="mix-form__header">Connect to your Database</h3>
+      <p class="mix-form__sub-header"> To continue to using Mixcore CMS </p>
+
+      <ng-container *ngIf="step === 'general'"
+                    [formGroup]="siteForm">
+        <div class="mix-form__row">
+          <label [tuiLabel]="'Site name:'">
+            <tui-input [tuiTextfieldLabelOutside]="true"
+                       tuiTextfieldSize="m"
+                       formControlName="siteName"> </tui-input>
+            <tui-field-error formControlName="siteName"></tui-field-error>
+          </label>
+        </div>
+
+        <div class="mix-form__row">
+          <label [tuiLabel]="'Default language:'">
+            <tui-combo-box [stringify]="cultureStringify"
+                           [tuiTextfieldLabelOutside]="true"
+                           tuiTextfieldSize="m"
+                           formControlName="culture">
+              <tui-data-list-wrapper *tuiDataList
+                                     [itemContent]="cultureStringify | tuiStringifyContent"
+                                     [items]="cultures">
+              </tui-data-list-wrapper>
+            </tui-combo-box>
+            <tui-field-error formControlName="culture"></tui-field-error>
+          </label>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="step === 'database'"
+                    [formGroup]="databaseForm">
+        <div class="mix-form__row">
+          <label [tuiLabel]="'Database:'">
+            <tui-combo-box [stringify]="dbStringify"
+                           [tuiTextfieldLabelOutside]="true"
+                           tuiTextfieldSize="m"
+                           formControlName="databaseProvider">
+              <tui-data-list-wrapper *tuiDataList
+                                     [itemContent]="dbStringify | tuiStringifyContent"
+                                     [items]="databases">
+              </tui-data-list-wrapper>
+            </tui-combo-box>
+          </label>
+        </div>
+
+        <div class="mix-form__row">
+          <label [tuiLabel]="'Connection string:'">
+            <tui-input [tuiTextfieldLabelOutside]="true"
+                       tuiTextfieldSize="m"
+                       formControlName="sqliteDbConnectionString">
+              <input type="text"
+                     tuiTextfield>
+            </tui-input>
+          </label>
+
+        </div>
+      </ng-container>
+
+      <div *ngIf="step === 'general'"
+           class="mix-form__toolbar-right --column margin-t-4">
+        <button class="w-100"
+                [size]="'m'"
+                (click)="nextToDatabaseSetting()"
+                tuiButton>Continue</button>
+      </div>
+
+      <div *ngIf="step === 'database'"
+           class="mix-form__toolbar-right --column margin-t-4">
+        <button class="w-100"
+                [size]="'m'"
+                (click)="submitForm()"
+                tuiButton>Next Step</button>
+        <button [pseudo]="true"
+                (click)="backToSiteSetting()"
+                tuiLink>Previous step</button>
+      </div>
+
+      <p class="margin-t-1">By signing up, you’re agree to our <a style="color: #1DA1D1"> Terms & Conditions </a>
+        and <a style="color: #1DA1D1"> Privacy Policy </a> </p>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <img class="w-100"
+         src="assets/images/init-banner-01.jpg"
+         style="transform: translate(0, -20%);">
+  </div>
+</div>

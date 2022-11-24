@@ -1,0 +1,6 @@
+  <mix-content-detail-container [buttonText]="'Create'"
+                                [editTitle]="false"
+                                (save)="createDatabase()">
+    <mix-database-form *ngIf="databaseModel"
+                       [databaseModel]="databaseModel"></mix-database-form>
+  </mix-content-detail-container>

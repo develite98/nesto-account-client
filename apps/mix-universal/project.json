@@ -1,0 +1,117 @@
+{
+  "name": "mix-universal",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/mix-universal/src",
+  "prefix": "mix",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/mix-universal",
+        "index": "apps/mix-universal/src/index.html",
+        "main": "apps/mix-universal/src/main.ts",
+        "polyfills": "apps/mix-universal/src/polyfills.ts",
+        "tsConfig": "apps/mix-universal/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/mix-universal/src/favicon.ico",
+          {
+            "glob": "**/*",
+            "input": "share-assets",
+            "output": "/assets/"
+          },
+          {
+            "glob": "**/*",
+            "input": "node_modules/@taiga-ui/icons/src",
+            "output": "assets/taiga-ui/icons"
+          },
+          {
+            "glob": "**/*",
+            "input": "node_modules/monaco-editor",
+            "output": "assets/monaco-editor"
+          }
+        ],
+        "styles": [
+          "node_modules/@taiga-ui/core/styles/taiga-ui-global.less",
+          "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
+          "apps/mix-universal/src/styles.scss",
+          "share-styles/_functions.less"
+        ],
+        "stylePreprocessorOptions": {
+          "includePaths": ["share-styles"]
+        },
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "2mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/mix-universal/src/environments/environment.ts",
+              "with": "apps/mix-universal/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "mix-universal:build:production"
+        },
+        "development": {
+          "browserTarget": "mix-universal:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "mix-universal:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/mix-universal/**/*.ts",
+          "apps/mix-universal/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/mix-universal"],
+      "options": {
+        "jestConfig": "apps/mix-universal/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

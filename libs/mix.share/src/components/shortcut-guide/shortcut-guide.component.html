@@ -1,0 +1,27 @@
+<div class="shortcut-guide padding-t-5">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="bolt-header-title margin-b-2">
+          Global
+        </div>
+        <ng-container *ngFor="let shortcut of globalShortcuts">
+          <div class="w-100 d-flex justify-content-between margin-t-2">
+            <div> {{ shortcut.label }} </div>
+            <div class="shortcut-guide__key"> {{ shortcut.key }} </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="col">
+        <div class="bolt-header-title margin-b-2">
+          Local
+        </div>
+      </div>
+      <div class="col">
+        <div class="bolt-header-title margin-b-2">
+          VS Code
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="expand-collapse">
+  <div class="expand-collapse__title bolt-header-title-m"
+       (click)="isExpand = !isExpand">
+    <div>{{ title }}</div>
+    <tui-svg class="expand-collapse__icon"
+             src="tuiIconChevronRight"
+             [ngClass]="{'--isExpand': isExpand}"></tui-svg>
+  </div>
+
+  <div class="expand-collapse__content"
+       [ngClass]="{'--isExpand': isExpand}">
+    <ng-content></ng-content>
+  </div>
+</div>

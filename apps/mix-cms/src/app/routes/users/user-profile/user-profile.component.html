@@ -1,0 +1,81 @@
+<div class="user-profile">
+  <div class="user-profile__wallpaper">
+    <img src="https://digitalsynopsis.com/wp-content/uploads/2017/07/beautiful-color-ui-gradients-backgrounds-piglet.png">
+  </div>
+
+  <div class="user-profile__top-bar">
+    <div class="user-profile__avatar">
+      <tui-avatar [avatarUrl]="user?.userData?.Avatar ?? ''"
+                  [rounded]="true"
+                  new
+                  text="user?.userName ?? ''"
+                  size="xl"></tui-avatar>
+
+      <button class="upload-btn"
+              [icon]="'tuiIconUpload'"
+              [shape]="'rounded'"
+              [size]="'s'"
+              (click)="onUpload()"
+              tuiIconButton> </button>
+
+      <tui-input-files class="d-none"
+                       [formControl]="fileControl"
+                       accept="image/*"></tui-input-files>
+    </div>
+
+    <div class="user-profile__username">
+      <div class="bolt-header-title"> {{ user?.userName ?? '' }}</div>
+      <span class="email"> {{ user?.email ?? '' }} </span>
+    </div>
+
+    <div class="user-profile__action">
+      <button [appearance]="'outline'"
+              [icon]="'tuiIconUndoLarge'"
+              [size]="'m'"
+              tuiButton> Cancel </button>
+      <button [icon]="'tuiIconCheckCircleLarge'"
+              [size]="'m'"
+              (click)="saveUser()"
+              tuiButton> Save </button>
+    </div>
+  </div>
+
+  <div class="user-profile__tab-bar">
+    <tui-tabs class="custom-tabs"
+              [(activeItemIndex)]="activeItemIndex">
+      <button class="custom-tabs__btn"
+              tuiTab>
+        <tui-svg class="margin-r-1"
+                 src="tuiIconUser"></tui-svg>
+        User Info
+      </button>
+      <button class="custom-tabs__btn"
+              tuiTab>
+        <tui-svg class="margin-r-1"
+                 src="tuiIconLink"></tui-svg>
+        User Roles
+      </button>
+      <button class="custom-tabs__btn"
+              tuiTab>
+        <tui-svg class="margin-r-1"
+                 src="tuiIconSettings"></tui-svg>
+        Settings
+      </button>
+      <button class="custom-tabs__btn"
+              tuiTab>
+        <tui-svg class="margin-r-1"
+                 src="tuiIconUndo"></tui-svg>
+        Activities
+      </button>
+    </tui-tabs>
+  </div>
+
+  <div class="user-profile__main-container">
+    <form [formGroup]="userForm">
+      <formly-form [fields]="userFields"
+                   [form]="userForm"
+                   [model]="user">
+      </formly-form>
+    </form>
+  </div>
+</div>

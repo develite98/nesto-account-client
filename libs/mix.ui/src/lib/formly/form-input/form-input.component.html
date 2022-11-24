@@ -1,0 +1,12 @@
+<div class="formly-taiga-control">
+  <label> {{ field.props.label }}: </label>
+  <tui-input [formControl]="formControl"
+             [formlyAttributes]="field"
+             [tuiTextfieldLabelOutside]="true"
+             tuiTextfieldSize="m">
+    <input [type]="field.props.type ?? 'text'"
+           tuiTextfield>
+  </tui-input>
+  <tui-error [error]="[] | tuiFieldError | async"
+             [formControl]="formControl"></tui-error>
+</div>

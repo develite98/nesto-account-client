@@ -1,0 +1,23 @@
+- BE Side / API / Database
+  - Tenants
+    - Languages
+      - Posts (Type: Blog, Product,...)
+      - Pages
+      - Modules
+      - Themes
+      - MixDBs
+- Universal Portal (UI) > Tenant > Language
+  - App-CMS
+    - Manage All Posts / Pages / Modules /Themes / MixDB
+  - App-Blog
+    - Manage Blog Posts
+  - App-eCom
+    - Manage Product Posts
+  - App...
+- Client Side:
+  - Domain / Tenant A > Blog
+    - Show tenant A theme
+      - Filter Blog posts
+  - Domain / Tenant B > eCom
+    - Show tenant B theme
+      - Filter Product posts

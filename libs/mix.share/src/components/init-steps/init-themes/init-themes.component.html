@@ -1,0 +1,92 @@
+<div class="init-themes row">
+  <div class="col-3">
+    <img class="margin-b-2"
+         src="assets/images/mixcore-logo-red-2.svg"
+         width="100px">
+    <div class="mix-form__header">Themes & App</div>
+    <div class="mix-form__sub-header">For your Digital Business Ideas</div>
+  </div>
+
+  <div class="col-9">
+    <div class="row margin-b-5"
+         [formGroup]="filterForm">
+      <div class="col-6">
+        <div class="init-themes__toggle-btn"
+             [collapsed]="true"
+             tuiGroup>
+          <button type="button"
+                  tuiButton
+                  appearance="outline"
+                  size="m">
+            Themes
+          </button>
+          <button type="button"
+                  tuiButton
+                  appearance="outline"
+                  size="m">
+            Apps
+          </button>
+        </div>
+      </div>
+
+      <div class="col-2">
+        <label [tuiLabel]="'Categories'">
+          <tui-select [tuiTextfieldLabelOutside]="true"
+                      formControlName="category"
+                      tuiTextfieldSize="m">
+            <input tuiTextfield
+                   placeholder="Filter categories">
+            <tui-data-list-wrapper *tuiDataList
+                                   [items]="[]"></tui-data-list-wrapper>
+          </tui-select>
+        </label>
+      </div>
+
+      <div class="col-4">
+        <mix-input-labeled [label]="'Search'"
+                           formControlName="search"></mix-input-labeled>
+      </div>
+    </div>
+
+    <div class="row">
+      <ng-container *ngIf="availableThemes">
+        <div *ngFor="let theme of availableThemes.items"
+             class="col-6 item-card">
+          <h2 class="margin-b-2">
+            {{ theme.title }}
+          </h2>
+
+          <div class="item-card__thumbnail">
+            <img class="w-100"
+                 [src]="theme.imageUrl">
+
+            <div class="action">
+              <button class="margin-b-1"
+                      tuiButton
+                      size="m">
+                View
+              </button>
+
+              <button tuiButton
+                      size="m">
+                Install
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="col-12 margin-t-5">
+        <tui-pagination [index]="0"
+                        [length]="1"></tui-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #importTheme
+             let-observer>
+  <mix-theme-import (cancel)="observer.complete()"
+                    (themeSelect)="onThemeChoose($event)"></mix-theme-import>
+</ng-template>

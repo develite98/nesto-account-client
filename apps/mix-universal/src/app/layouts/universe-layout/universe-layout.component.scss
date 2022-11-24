@@ -1,0 +1,40 @@
+.cms-layout {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background-color: var(--mix-body-background);
+
+  &__body {
+    display: flex;
+    height: calc(100vh - var(--mix-header-height));
+    position: relative;
+  }
+
+  &__main-workspace {
+    border-radius: var(--mix-border-radius-02);
+    width: 100%;
+    height: calc(100% - var(--mix-space-2));
+    background-color: #fff;
+    position: relative;
+    margin: 8px;
+    overflow: auto;
+  }
+
+  &__sub-workspace {
+    border-radius: var(--mix-border-radius-02);
+    background-color: #fff;
+    width: 100%;
+    height: calc(100% - var(--mix-space-2));
+    margin: 8px;
+  }
+
+  &__toolbar {
+    height: calc(100% - var(--mix-space-2));
+    margin: 8px;
+    padding-top: 8px;
+    border-radius: var(--mix-border-radius-02);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}

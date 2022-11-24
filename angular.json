@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "projects": {
+    "mix-cms": "apps/mix-cms",
+    "mix-portal": "apps/mix-portal",
+    "mix-universal": "apps/mix-universal",
+    "mix.lib": "libs/mix.lib",
+    "mix.share": "libs/mix.share",
+    "mix.ui": "libs/mix.ui",
+    "nesto-account": "apps/nesto-account",
+    "nesto-account-e2e": "apps/nesto-account-e2e"
+  }
+}

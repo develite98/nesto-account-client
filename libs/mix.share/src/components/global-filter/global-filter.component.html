@@ -1,0 +1,21 @@
+<div [formGroup]="filterForm"
+     class="mix-global-filter">
+  <div class="mix-form__row">
+    <mix-input-labeled [label]="'Status'"
+                       formControlName="type">
+    </mix-input-labeled>
+  </div>
+
+  <div class="mix-form__row">
+    <label> From - To: </label>
+    <tui-input-date-range
+      formControlName="fromTo">
+      Choose dates
+      <input
+        placeholder="From - To"
+        tuiTextfield
+      />
+
+    </tui-input-date-range>
+  </div>
+</div>

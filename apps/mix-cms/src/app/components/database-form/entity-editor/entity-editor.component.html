@@ -1,0 +1,122 @@
+<div class="entity-editor"
+     [ngClass]="{'--focus': isFocus}"
+     [formGroup]="form">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-3">
+        <tui-input class="control"
+                   [tuiTextfieldLabelOutside]="true"
+                   formControlName="displayName"
+                   tuiTextfieldSize="s">
+          Display Name
+          <input tuiTextfield>
+        </tui-input>
+
+        <tui-error [error]="[] | tuiFieldError | async"
+                   formControlName="displayName"></tui-error>
+      </div>
+
+      <div class="col-3">
+        <tui-input class="control"
+                   [tuiTextfieldLabelOutside]="true"
+                   formControlName="systemName"
+                   tuiTextfieldSize="s">
+          System Name
+          <input tuiTextfield>
+        </tui-input>
+
+        <tui-error [error]="[] | tuiFieldError | async"
+                   formControlName="systemName"></tui-error>
+      </div>
+
+      <div class="col-3">
+        <tui-select class="control"
+                    [formControl]="dataType"
+                    [tuiTextfieldLabelOutside]="true"
+                    [valueContent]="content"
+                    tuiTextfieldSize="s">
+          Field type
+          <input tuiTextfield
+                 placeholder="Select field type">
+          <tui-data-list-wrapper *tuiDataList
+                                 [itemContent]="content"
+                                 [items]="dataTypes"></tui-data-list-wrapper>
+          <ng-template #content
+                       let-item>
+            {{ item | splitStringByUppercase }}
+          </ng-template>
+        </tui-select>
+
+        <tui-error [error]="[] | tuiFieldError | async"
+                   formControlName="dataType"></tui-error>
+      </div>
+
+      <div class="col-3 d-flex align-items-center justify-content-end">
+        <button type="button"
+                [size]="'s'"
+                (click)="isShowAdvanced = !isShowAdvanced"
+                icon="tuiIconSettings"
+                tuiIconButton
+                appearance="outline">
+        </button>
+
+        <button class="margin-l-1"
+                type="button"
+                [size]="'s'"
+                (click)="remove()"
+                tuiButton
+                appearance="accent">
+          Remove
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <tui-expand [expanded]="isShowAdvanced">
+    <ng-template tuiExpandContent>
+      <div class="container-fluid margin-t-2"
+           [formGroup]="$any(form.controls['columnConfigurations'])">
+        <tui-checkbox-labeled formControlName="isRequire">
+          Mark this field required
+        </tui-checkbox-labeled>
+
+        <tui-checkbox-labeled class="margin-t-1"
+                              formControlName="isEncrypt">
+          Encrypt value
+        </tui-checkbox-labeled>
+
+        <tui-checkbox-labeled class="margin-t-1"
+                              formControlName="isUnique">
+          Unique value
+        </tui-checkbox-labeled>
+      </div>
+
+      <div class="container-fluid margin-t-2 margin-b-2">
+        <tui-input class="control"
+                   [tuiTextfieldLabelOutside]="true"
+                   formControlName="defaultValue"
+                   tuiTextfieldSize="s">
+          Default value
+          <input tuiTextfield>
+
+          <tui-error [error]="[] | tuiFieldError | async"
+                     formControlName="defaultValue"></tui-error>
+        </tui-input>
+
+        <div class="margin-t-1"
+             [formGroup]="$any(form.controls['columnConfigurations'])">
+          <tui-input class="control"
+                     [tuiTextfieldLabelOutside]="true"
+                     formControlName="maxLength"
+                     tuiTextfieldSize="s">
+            Max length
+            <input tuiTextfield>
+
+            <tui-error [error]="[] | tuiFieldError | async"
+                       formControlName="maxLength"></tui-error>
+          </tui-input>
+        </div>
+      </div>
+    </ng-template>
+  </tui-expand>
+</div>

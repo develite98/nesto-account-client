@@ -1,0 +1,9 @@
+.list-template {
+  position: relative;
+
+  &__save-btn {
+    position: absolute;
+    top: 12px;
+    right: 8px;
+  }
+}

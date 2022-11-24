@@ -1,0 +1,11 @@
+<div class="mix-chat-list-mini">
+  <div *ngFor="let user of onlineUsers"
+       class="mix-chat-list-mini__avatar">
+    <tui-avatar [autoColor]="true"
+                [avatarUrl]="user.avatar ?? ''"
+                [rounded]="true"
+                [size]="'s'"
+                [text]="user.userName ?? ''"
+                [tuiHint]="user.userName ?? ''"></tui-avatar>
+  </div>
+</div>

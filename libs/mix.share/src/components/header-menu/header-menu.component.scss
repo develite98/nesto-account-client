@@ -1,0 +1,115 @@
+.header-menu {
+  width: 100%;
+  display: flex;
+  height: var(--mix-header-height);
+  align-items: center;
+  justify-content: space-between;
+
+  &__sub {
+    width: 340px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    .toggle {
+      width: 72px;
+      height: 100%;
+      background-color: var(--mix-side-menu-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: var(--mix-space-3);
+    }
+
+    &.--mini {
+      width: 292px;
+    }
+  }
+
+  &__main {
+    width: calc(100% - 340px);
+    display: flex;
+    align-items: center;
+    margin-right: var(--mix-space-2);
+    margin-top: 4px;
+
+    &.--mini {
+      width: calc(100% - 292px);
+    }
+  }
+
+  &__right-menu {
+    margin-left: auto;
+    display: flex;
+  }
+
+  &__search {
+    --tui-height-m: 46px !important;
+    width: 400px;
+  }
+
+  &__breadcrumb {
+    padding: 0px 16px 0px 16px;
+    border-radius: var(--mix-border-radius-01);
+    background: var(--mix-main-widget-color);
+    margin-right: var(--mix-space-1);
+    margin-left: var(--mix-space-1);
+    height: 46px;
+  }
+
+  &__user-info {
+    padding: 1rem 1rem 0rem 1rem;
+    display: flex;
+    width: 200px;
+    align-items: center;
+
+    > tui-avatar {
+      margin-right: 15px;
+    }
+
+    > .title {
+      > span {
+        margin-right: 5px;
+      }
+
+      > strong {
+        display: inline-block;
+      }
+
+      > strong:first-letter {
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  &__icon-button {
+    margin-left: 8px;
+    cursor: pointer;
+  }
+
+  &__main-culture-icon {
+    transform: scale(1.5);
+  }
+
+  &__separator {
+    display: block;
+    content: '';
+    height: 0.5px;
+    width: calc(100% - 20px);
+    background-color: var(--tui-base-04);
+    margin: 1rem 10px;
+  }
+
+  &__item {
+    > button[tuiLink] {
+      color: var(--tui-text-01);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      > tui-svg {
+        margin-right: 2rem !important;
+      }
+    }
+  }
+}

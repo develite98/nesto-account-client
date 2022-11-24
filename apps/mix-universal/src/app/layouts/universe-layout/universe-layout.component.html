@@ -1,0 +1,63 @@
+<div class="cms-layout">
+  <div class="cms-layout__header">
+    <mix-header-menu>
+    </mix-header-menu>
+  </div>
+
+  <div class="cms-layout__body">
+    <mix-side-menu [groups]="groupMenus"
+                   (sizeChange)="gridOption.api?.resize()">
+      <div [key]="'applications'"
+           mixSideMenuChildItem>
+        <ng-template #template>
+          <mix-universe-application-menu></mix-universe-application-menu>
+        </ng-template>
+      </div>
+    </mix-side-menu>
+
+    <gridster [options]="gridOption">
+      <gridster-item [item]="mainWorkSpaceGridConfig">
+        <div class="cms-layout__main-workspace"
+             (mousedown)="$event.stopPropagation()"
+             (touchstart)="$event.stopPropagation()">
+          <router-outlet></router-outlet>
+          <ng-container ngProjectAs="tuiOverContent">
+            <mix-portal-sidebar-host></mix-portal-sidebar-host>
+          </ng-container>
+        </div>
+      </gridster-item>
+      <gridster-item *ngIf="isShowSubWorkSpace"
+                     [item]="subWorkSpaceConfig">
+        <div class="cms-layout__sub-workspace"
+             (mousedown)="$event.stopPropagation()"
+             (touchstart)="$event.stopPropagation()">
+          <mix-sub-work-space-container></mix-sub-work-space-container>
+        </div>
+      </gridster-item>
+      <gridster-item *ngIf="true"
+                     [item]="{ cols: 1, rows: 1, y: 0, x: 0, hasContent: true }">
+        <div class="cms-layout__toolbar"
+             (mousedown)="$event.stopPropagation()"
+             (touchstart)="$event.stopPropagation()">
+          <mix-window-toolbar></mix-window-toolbar>
+          <mix-chat-list-mini></mix-chat-list-mini>
+        </div>
+      </gridster-item>
+    </gridster>
+
+    <ng-container ngProjectAs="tuiOverContent">
+      <mix-portal-sidebar-host></mix-portal-sidebar-host>
+    </ng-container>
+  </div>
+</div>
+
+<ng-template [(tuiDialog)]="isShowTab"
+             let-observer>
+  <mix-tab-control-dialog></mix-tab-control-dialog>
+</ng-template>
+
+<ng-template #installAppTpl>
+  <mix-sidebar-container>
+    <mix-install-app></mix-install-app>
+  </mix-sidebar-container>
+</ng-template>

@@ -1,0 +1,32 @@
+<div class="menu">
+  <div class="menu__separator"></div>
+  <tui-accordion class="menu__accordion"
+                 [closeOthers]="false">
+    <tui-accordion-item *ngFor="let item of items"
+                        [borders]="null"
+                        [open]="true"
+                        [size]="'s'">
+      <div class="menu__group">
+        <i-tabler *ngIf="item.icon"
+                  class="icon-m margin-r-1 "
+                  [name]="item.icon"></i-tabler>
+        <div>{{ item.groupName }}</div>
+      </div>
+      <ng-template tuiAccordionItemContent>
+        <div *ngFor="let child of item.child"
+             class="menu__item"
+             (click)="child.action()">
+          <i-tabler *ngIf="child.icon"
+                    [name]="child.icon"></i-tabler>
+          <a>
+            {{ child.title }}
+          </a>
+
+          <div *ngIf="child.showDot"
+               class="dot"
+               [style.background]="child.dotColor"></div>
+        </div>
+      </ng-template>
+    </tui-accordion-item>
+  </tui-accordion>
+</div>

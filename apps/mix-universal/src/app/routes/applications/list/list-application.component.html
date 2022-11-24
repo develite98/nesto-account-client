@@ -1,0 +1,48 @@
+<mix-data-table [fetchDataFn]="fetchDataFn"
+                [searchPlaceholder]="'Find your app'">
+  <div [columnType]="'CHECKBOX'"
+       mixTableColumn></div>
+  <div [header]="'#'"
+       [width]="'70px'"
+       key="id"
+       mixTableColumn></div>
+  <div [header]="'App Name'"
+       key="displayName"
+       mixTableColumn></div>
+  <div [header]="'Route'"
+       key="detailUrl"
+       mixTableColumn>
+    <ng-template let-data
+                 mixColumnCell>
+      <a [routerLink]="data.detailUrl"
+         tuiLink> {{ data.detailUrl }}
+        <i-tabler class="icon-s"
+                  [name]="'external-link'"></i-tabler>
+      </a>
+    </ng-template>
+  </div>
+  <div [columnType]="'DATE'"
+       [header]="'Created Date'"
+       key="createdDateTime"
+       mixTableColumn>
+  </div>
+  <div [header]="'Created By'"
+       key="createdBy"
+       mixTableColumn>
+  </div>
+  <div [columnType]="'ACTION'"
+       [showHeader]="false"
+       [sortable]="false"
+       header="Action"
+       key="Action"
+       mixTableColumn>
+    <ng-template let-data
+                 mixColumnCell>
+      <button type="button"
+              [size]="'s'"
+              tuiButton>
+        Use app
+      </button>
+    </ng-template>
+  </div>
+</mix-data-table>

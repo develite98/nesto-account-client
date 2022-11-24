@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-12 margin-b-2">
+    <img src="assets/images/mixcore-logo-red-2.svg"
+         width="100px">
+  </div>
+
+  <div class="col-12">
+    <h3 class="mix-form__header">Control your Mixcore CMS with</h3>
+    <p class="mix-form__sub-header"> To continue to using Mixcore CMS </p>
+  </div>
+
+  <div class="col-5">
+    <div class="init-mode__card"
+         [ngClass]="{'--active': mode === 'universal'}"
+         (click)="changeMode('universal')">
+      <img src="assets/images/universal-logo.svg">
+      <h2 class="title">Universal Portal</h2>
+      <span class="margin-t-1">The powerful portal that can build your digital dream in seconds!</span>
+      <a href>Learn more</a>
+    </div>
+  </div>
+
+  <div class="col-5">
+    <div class="init-mode__card"
+         [ngClass]="{'--active': mode === 'local'}"
+         (click)="changeMode('local')">
+      <img src="assets/images/local-logo.svg">
+      <h2 class="title">Local Portal</h2>
+      <span class="margin-t-1">The basic portal that run within your server and open source!</span>
+      <a href>Learn more</a>
+    </div>
+  </div>
+
+  <div class="col-5 margin-t-3">
+    <button class="w-100"
+            [size]="'m'"
+            (click)="submitMode()"
+            tuiButton>Continue</button>
+
+    <p class="margin-t-1">By signing up, you’re agree to our <a style="color: #1DA1D1"> Terms & Conditions </a>
+      and <a style="color: #1DA1D1"> Privacy Policy </a> </p>
+  </div>
+</div>

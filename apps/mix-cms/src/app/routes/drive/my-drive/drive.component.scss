@@ -1,0 +1,56 @@
+.drive-page {
+  padding: 16px;
+  box-sizing: border-box;
+
+  &__toolbar {
+    padding-bottom: 8px;
+    border-bottom: 0.5px solid var(--tui-base-03);
+    display: flex;
+    align-items: center;
+  }
+
+  .folder-card {
+    border-radius: 6px;
+    border: 1px solid rgb(218, 220, 224);
+    padding: 16px;
+    cursor: pointer;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    i-tabler {
+      margin-right: 8px;
+    }
+
+    &:hover {
+      background-color: rgb(232, 240, 254);
+    }
+  }
+
+  .file-card {
+    cursor: pointer;
+    position: relative;
+
+    &__copy {
+      position: absolute;
+      right: 50%;
+      top: 50%;
+      transform: translate(50%, -50%);
+      width: 400px;
+    }
+
+    &__toolbar {
+      position: absolute;
+      right: 24px;
+      top: 50%;
+      transform: translate(0, -50%);
+      display: flex;
+      align-items: center;
+
+      button {
+        margin-left: 8px;
+      }
+    }
+  }
+}

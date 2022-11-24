@@ -1,0 +1,31 @@
+.file-card {
+  cursor: pointer;
+  position: relative;
+
+  &__copy {
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    transform: translate(50%, -50%);
+    width: 400px;
+  }
+
+  &__toolbar {
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translate(0, -50%);
+    display: flex;
+    align-items: center;
+
+    button {
+      margin-left: 8px;
+    }
+  }
+
+  &:hover {
+    tui-file {
+      background-color: rgb(232, 240, 254);
+    }
+  }
+}

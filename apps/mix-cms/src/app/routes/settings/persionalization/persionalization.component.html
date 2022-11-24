@@ -1,0 +1,158 @@
+<div class="personalization w-100 h-100">
+  <div class="container-fluid">
+    <h1 class="bolt-header-title-l margin-b-3">
+      Personalization
+    </h1>
+
+    <div class="d-flex">
+      <div>
+        <div class="personalization__preview"
+             [style.background]="mainBg">
+          <div class="preview-menu"
+               [style.background]="menuBg"></div>
+
+          <div class="preview-main">
+            <div class="header">
+              <div class="widget"
+                   [style.background]="subWorkspaceBg">
+              </div>
+
+              <div class="widget"
+                   [style.background]="subWorkspaceBg">
+              </div>
+            </div>
+
+            <div class="workspace">
+              <div class="main-workspace"
+                   [style.background]="mainWorkspaceBg">
+              </div>
+
+              <div class="sub-workspace"
+                   [style.background]="subWorkspaceBg">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex margin-t-1">
+          <button *ngIf="isEditing"
+                  [size]="'s'"
+                  (click)="applyTheme()"
+                  tuiButton> Apply </button>
+        </div>
+      </div>
+
+      <div class="built-in-theme w-100 margin-l-3">
+        <div class="header-title-m">
+          Select a theme to apply
+        </div>
+
+        <div class="built-in-theme__container">
+          <div class="built-in-theme__theme-card"
+               [style.background]="uiThemeControl.defaultTheme['--mix-body-background']"
+               (click)="bgSelectedChange(uiThemeControl.defaultTheme)"></div>
+          <div class="built-in-theme__theme-card"
+               [style.background]="uiThemeControl.purpleTheme['--mix-body-background']"
+               (click)="bgSelectedChange(uiThemeControl.purpleTheme)"></div>
+          <div class="built-in-theme__theme-card"
+               [style.background]="uiThemeControl.aquaTheme['--mix-body-background']"
+               (click)="bgSelectedChange(uiThemeControl.aquaTheme)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="d-flex margin-b-1">
+      <h2 class="bolt-header-title">
+        Customize
+      </h2>
+    </div>
+
+    <tui-accordion class="w-100">
+      <tui-accordion-item>
+        <div class="personalization__card-title">
+          <i-tabler class="icon"
+                    [name]="'palette'"></i-tabler>
+          <div class="title">
+            Background
+            <span> Application background color </span>
+          </div>
+        </div>
+        <ng-template tuiAccordionItemContent>
+          <tui-input-color class="b-form"
+                           [(ngModel)]="editingTheme['--mix-body-background']"
+                           [colors]="palette"
+                           (ngModelChange)="isEditing = true">
+            Background color
+          </tui-input-color>
+        </ng-template>
+      </tui-accordion-item>
+
+      <tui-accordion-item>
+        <div class="personalization__card-title">
+          <i-tabler class="icon"
+                    [name]="'wand'"></i-tabler>
+          <div class="title">
+            Side menu
+            <span> Left menu colors </span>
+          </div>
+        </div>
+        <ng-template tuiAccordionItemContent>
+          <tui-input-color class="b-form"
+                           [(ngModel)]="editingTheme['--mix-side-menu-bg']"
+                           [colors]="palette"
+                           (ngModelChange)="isEditing = true">
+            Background color
+          </tui-input-color>
+
+          <tui-input-color class="margin-t-1"
+                           [(ngModel)]="editingTheme['--mix-side-menu-text-color']"
+                           [colors]="palette"
+                           (ngModelChange)="isEditing = true">
+            Text color
+          </tui-input-color>
+        </ng-template>
+      </tui-accordion-item>
+
+      <tui-accordion-item>
+        <div class="personalization__card-title">
+          <i-tabler class="icon"
+                    [name]="'palette'"></i-tabler>
+          <div class="title">
+            Workspace
+            <span> Your workspace colors </span>
+          </div>
+        </div>
+        <ng-template tuiAccordionItemContent>
+          <tui-input-color [(ngModel)]="editingTheme['--mix-main-workspace-background']"
+                           [colors]="palette"
+                           (ngModelChange)="isEditing = true">
+            Main Workspace Background color
+          </tui-input-color>
+
+          <tui-input-color class="margin-t-1"
+                           [(ngModel)]="editingTheme['--mix-sub-workspace-background']"
+                           [colors]="palette"
+                           (ngModelChange)="isEditing = true">
+            Sub Workspace Background color
+          </tui-input-color>
+        </ng-template>
+      </tui-accordion-item>
+
+      <tui-accordion-item>
+        <div class="personalization__card-title">
+          <i-tabler class="icon"
+                    [name]="'typography'"></i-tabler>
+          <div class="title">
+            Font
+            <span> Install, manage </span>
+          </div>
+        </div>
+        <ng-template tuiAccordionItemContent>
+          Development kit consisting of the low level tools and abstractions used to develop Taiga UI Angular entities
+        </ng-template>
+      </tui-accordion-item>
+    </tui-accordion>
+  </div>
+</div>

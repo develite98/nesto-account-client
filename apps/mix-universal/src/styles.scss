@@ -1,0 +1,76 @@
+@import 'utilities';
+@import 'overwrite';
+@import 'global';
+@import 'variables';
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;200;300;400;500;600;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+html,
+body {
+  height: 100%;
+  font-family: var(--font-family);
+  background-color: f5f8ff;
+}
+
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  display: flex;
+  align-items: center;
+
+  td {
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    background: #fff;
+  }
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.3;
+  width: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+i-tabler {
+  stroke-width: 1 !important;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #e4e4e4;
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+}
+
+gridster-item {
+  background: unset !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+gridster {
+  background: unset !important;
+}

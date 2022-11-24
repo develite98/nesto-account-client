@@ -1,0 +1,59 @@
+<div class="list-template">
+  <tui-tabs class="custom-tabs"
+            [(activeItemIndex)]="activeTabIndex">
+    <button class="custom-tabs__btn"
+            (click)="activeTabIndex = 0"
+            tuiTab>
+      <tui-svg src="tuiIconEdit"></tui-svg>
+      Template's File
+    </button>
+    <button class="custom-tabs__btn"
+            (click)="activeTabIndex = 1"
+            tuiTab>
+      <tui-svg src="tuiIconChartBar"></tui-svg>
+      Settings
+    </button>
+  </tui-tabs>
+
+  <div *ngIf="activeTabIndex === 0"
+       class="container-fluid margin-t-2">
+    <mix-template-folder [folderType]="FOLDER.Masters"
+                         [open]="true"
+                         [themeId]="themeId"
+                         (templateClick)="templateClick($event)"></mix-template-folder>
+    <mix-template-folder [folderType]="FOLDER.Layouts"
+                         [themeId]="themeId"
+                         (templateClick)="templateClick($event)"></mix-template-folder>
+    <mix-template-folder [folderType]="FOLDER.Pages"
+                         [themeId]="themeId"
+                         (templateClick)="templateClick($event)"></mix-template-folder>
+    <mix-template-folder [folderType]="FOLDER.Posts"
+                         [themeId]="themeId"
+                         (templateClick)="templateClick($event)"></mix-template-folder>
+    <mix-template-folder [folderType]="FOLDER.Modules"
+                         [themeId]="themeId"
+                         (templateClick)="templateClick($event)"></mix-template-folder>
+    <mix-template-folder [folderType]="FOLDER.Widgets"
+                         [themeId]="themeId"
+                         (templateClick)="templateClick($event)"></mix-template-folder>
+    <mix-template-folder [folderType]="FOLDER.Edms"
+                         [themeId]="themeId"
+                         (templateClick)="templateClick($event)"></mix-template-folder>
+  </div>
+
+  <div *ngIf="activeTabIndex === 1"
+       class="container-fluid margin-t-2">
+    <form [formGroup]="themeForm"
+          (ngSubmit)="saveTheme()">
+      <formly-form [fields]="themeFields"
+                   [form]="themeForm"
+                   [model]="themeModel">
+      </formly-form>
+
+      <button class="list-template__save-btn"
+              type="submit"
+              [size]="'s'"
+              tuiButton> Save </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+.personalization {
+  padding: 16px;
+
+  &__preview {
+    width: 400px;
+    height: 225px;
+    border: 5px solid rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    display: flex;
+    overflow: hidden;
+    justify-content: space-between;
+
+    .preview {
+      &-menu {
+        height: 100%;
+        width: 10px;
+      }
+
+      &-main {
+        width: 260px;
+        height: 100%;
+        padding: 5px;
+        box-sizing: border-box;
+
+        .header {
+          margin-bottom: 4px;
+          display: flex;
+
+          .widget {
+            width: 30px;
+            height: 12px;
+            border-radius: 4px;
+            margin-right: 2px;
+          }
+        }
+
+        .workspace {
+          width: 100%;
+          height: calc(100% - 16px);
+          display: flex;
+          justify-content: space-between;
+
+          .main-workspace {
+            width: 70%;
+            height: 100%;
+            border-radius: 5px;
+            overflow: hidden;
+          }
+
+          .sub-workspace {
+            width: calc(30% - 5px);
+            height: 100%;
+            border-radius: 5px;
+            overflow: hidden;
+          }
+        }
+      }
+    }
+  }
+
+  &__card-title {
+    display: flex;
+    align-items: center;
+
+    .icon {
+      margin-right: 8px;
+    }
+
+    .title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      span {
+        font-size: 0.7rem;
+        opacity: 0.7;
+        margin-top: -5px;
+      }
+    }
+  }
+
+  .built-in-theme {
+    &__container {
+      display: inline-grid;
+      grid-template-columns: 100px 100px 100px;
+      gap: 8px;
+      padding: 10px;
+    }
+
+    &__theme-card {
+      height: 70px;
+      border-radius: 8px;
+      background-color: beige;
+      border: 1px solid rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  tui-input-color {
+    width: 300px;
+  }
+}

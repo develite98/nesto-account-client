@@ -1,0 +1,71 @@
+- CMS
+
+  - Dashboard (v)
+  - Posts
+    - List (v)
+    - Create (v)
+    - Update (v)
+  - Pages
+    - List (v)
+    - Create (v)
+    - Update (v)
+  - Modules
+    - List (v)
+    - Create (v)
+    - Update (v)
+  - Databases
+
+    - List (v)
+    - Create (v)
+    - Update (v)
+    - Database
+      - List data
+      - Add data
+
+  - Media
+    - List
+    - Create
+    - Update
+  - File
+
+    - List
+    - Create
+    - Update
+
+  - Themes
+    - List (v)
+    - Create
+    - Update
+  - Templates
+    - List (v)
+    - Create
+    - Update
+  - Users
+    - List
+    - Create
+    - Update
+    - Roles
+      - List
+      - Create
+    - Permissions
+      - List
+      - Create
+  - Settings
+    - Global settings
+      - List
+      - Create
+      - Update
+    - Local (tenant) settings
+      - List
+      - Create
+      - Update
+  - Languages
+    - List
+    - Create
+    - Update
+  - Localization
+    - List
+    - Create
+    - Update
+  - Logs
+    - List

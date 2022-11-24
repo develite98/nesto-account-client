@@ -1,0 +1,19 @@
+<tui-hosted-dropdown [(open)]="isShowSubMenuOnHover"
+                     [canOpen]="!!!(sideMenuService.open$ | async) && !!menu.childMenuTpl"
+                     [content]="subMenu"
+                     tuiDropdownHover>
+  <div class="item"
+       [ngClass]="{'--active': currentSelectedItem === menu, '--bottom': menu.position === 'Bottom'}"
+       (click)="selectMenu.emit(menu)">
+    <i-tabler name="{{menu.icon}}"></i-tabler>
+    <p *ngIf="!!!(sideMenuService.miniSize$ | async)"> {{ menu.title }} </p>
+  </div>
+</tui-hosted-dropdown>
+
+<ng-template #subMenu>
+  <div class="sub-menu-on-hover">
+    <ng-container *ngIf="menu.childMenuTpl">
+      <ng-container *ngTemplateOutlet="menu.childMenuTpl"></ng-container>
+    </ng-container>
+  </div>
+</ng-template>

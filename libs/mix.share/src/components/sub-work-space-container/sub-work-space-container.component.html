@@ -1,0 +1,17 @@
+<div *ngIf="(subWorkSpaceController.subWorkSpaceItems | async) as items"
+     class="mix-sub-workspace-container">
+  <div class="margin-1"> Explorer </div>
+
+  <ng-container *ngIf="items && items.length; else emptyContent">
+    <ng-container *ngFor="let item of items">
+      <mix-expand-collapse [isExpand]="!!item.open"
+                           [title]="item.title">
+        <ng-template [cdkPortalOutlet]="item.template"></ng-template>
+      </mix-expand-collapse>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #emptyContent>
+    <mix-empty-content class="margin-t-3"></mix-empty-content>
+  </ng-template>
+</div>

@@ -1,0 +1,21 @@
+<div class="sidebar-container"
+     [@enterAnimation]>
+  <div class="sidebar-container__overlay"></div>
+
+  <div class="sidebar-container__main-frame">
+    <div class="sidebar-container__header">
+      <p class="sidebar-container__title"> {{ title }} </p>
+      <div class="action">
+        <button [appearance]="'outline'"
+                [size]="'s'"
+                (click)="closeSideBar()"
+                tuiButton>
+          Close
+        </button>
+      </div>
+    </div>
+    <div class="sidebar-container__content">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

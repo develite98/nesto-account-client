@@ -1,0 +1,33 @@
+<div class="login-page">
+  <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="col-4">
+        <div class="bolt-header-title-l margin-b-2">Login to your Account</div>
+        <div class="sub-header-title">To continue using system</div>
+
+        <form class="mix-form margin-t-7"
+              [formGroup]="signInForm"
+              (ngSubmit)="submitForm()">
+          <formly-form [fields]="fields"
+                       [form]="signInForm"
+                       [model]="model">
+          </formly-form>
+
+          <div class="margin-t-4">
+            <button class="w-100"
+                    type="submit"
+                    [showLoader]="loading"
+                    [size]="'l'"
+                    tuiButton> Let's go </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-8">
+        <img class="w-100"
+             src="assets/images/init-banner-01.jpg"
+             style="transform: translate(0, -5%);">
+      </div>
+    </div>
+  </div>
+</div>

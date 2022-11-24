@@ -1,0 +1,112 @@
+<div class="cms-layout">
+  <div class="cms-layout__header">
+    <mix-header-menu>
+    </mix-header-menu>
+  </div>
+
+  <div class="cms-layout__body">
+    <mix-side-menu [groups]="groupMenus"
+                   (sizeChange)="gridOption.api?.resize()">
+      <div [key]="'dashboard'"
+           mixSideMenuChildItem>
+        <ng-template #template>
+          <mix-dashboard-menu></mix-dashboard-menu>
+        </ng-template>
+      </div>
+
+      <div [key]="'content'"
+           mixSideMenuChildItem>
+        <ng-template #template>
+          <mix-content-menu></mix-content-menu>
+        </ng-template>
+      </div>
+
+      <div [key]="'template'"
+           mixSideMenuChildItem>
+        <ng-template #template>
+          <mix-template-menu></mix-template-menu>
+        </ng-template>
+      </div>
+
+      <div [key]="'files'"
+           mixSideMenuChildItem>
+        <ng-template #template>
+          <mix-drive-menu></mix-drive-menu>
+        </ng-template>
+      </div>
+
+      <div [key]="'users'"
+           mixSideMenuChildItem>
+        <ng-template #template>
+          <mix-cms-user-menu></mix-cms-user-menu>
+        </ng-template>
+      </div>
+
+      <div [key]="'settings'"
+           mixSideMenuChildItem>
+        <ng-template #template>
+          <mix-setting-menu></mix-setting-menu>
+        </ng-template>
+      </div>
+    </mix-side-menu>
+
+    <gridster [options]="gridOption">
+      <gridster-item [item]="mainWorkSpaceGridConfig">
+        <div class="cms-layout__main-workspace"
+             (mousedown)="$event.stopPropagation()"
+             (touchstart)="$event.stopPropagation()">
+          <router-outlet></router-outlet>
+          <ng-container ngProjectAs="tuiOverContent">
+            <mix-portal-sidebar-host></mix-portal-sidebar-host>
+          </ng-container>
+        </div>
+      </gridster-item>
+      <gridster-item *ngIf="isShowSubWorkSpace"
+                     [item]="subWorkSpaceConfig">
+        <div class="cms-layout__sub-workspace"
+             (mousedown)="$event.stopPropagation()"
+             (touchstart)="$event.stopPropagation()">
+          <mix-sub-work-space-container></mix-sub-work-space-container>
+        </div>
+      </gridster-item>
+    </gridster>
+
+    <div class="cms-layout__toolbar"
+         (mousedown)="$event.stopPropagation()"
+         (touchstart)="$event.stopPropagation()">
+      <mix-window-toolbar></mix-window-toolbar>
+      <mix-chat-list-mini></mix-chat-list-mini>
+    </div>
+
+    <ng-container ngProjectAs="tuiOverContent">
+      <mix-portal-sidebar-host></mix-portal-sidebar-host>
+    </ng-container>
+  </div>
+
+  <div class="cms-layout__chat-zone">
+    <mix-share-messenger></mix-share-messenger>
+  </div>
+
+  <progress *ngIf="isShowNavigationProgress$ | async"
+            class="cms-layout__nav-progress"
+            [size]="'s'"
+            tuiProgressBar
+            max="100"></progress>
+</div>
+
+<ng-template [(tuiDialog)]="isShowTab"
+             let-observer>
+  <mix-tab-control-dialog></mix-tab-control-dialog>
+</ng-template>
+
+<ng-template #creationTemplate>
+  <mix-sidebar-container>
+    <mix-creation [type]="createMode"></mix-creation>
+  </mix-sidebar-container>
+</ng-template>
+
+<ng-template #createThemeTpl>
+  <mix-sidebar-container [title]="'Create theme'">
+    <mix-cms-theme-import></mix-cms-theme-import>
+  </mix-sidebar-container>
+</ng-template>

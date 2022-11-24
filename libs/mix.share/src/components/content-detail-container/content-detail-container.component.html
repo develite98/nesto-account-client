@@ -1,0 +1,42 @@
+<div class="content-detail-container">
+  <div class="content-detail-container__toolbar">
+    <i-tabler *ngIf="editTitle"
+              class="content-detail-container__icon"
+              name="file-analytics"></i-tabler>
+
+    <div *ngIf="editTitle"
+         class="content-detail-container__title">
+      <mix-inline-edit-placeholder *ngIf="contentTitle"
+                                   [formControl]="contentTitle"></mix-inline-edit-placeholder>
+    </div>
+
+    <div class="right-side">
+      <button class="action"
+              [style.width]="'100px'"
+              [icon]="'tuiIconExternal'"
+              [size]="'s'"
+              (click)="onSave()"
+              tuiButton>{{ buttonText }}</button>
+      <tui-hosted-dropdown [content]="dropdown">
+        <button class="margin-l-1"
+                type="button"
+                [size]="'s'"
+                appearance="icon"
+                icon="tuiIconMoreVertLarge"
+                tuiIconButton></button>
+        <ng-template #dropdown>
+          <tui-data-list>
+            <button *ngFor="let item of items"
+                    tuiOption>
+              {{ item.title }}
+            </button>
+          </tui-data-list>
+        </ng-template>
+      </tui-hosted-dropdown>
+    </div>
+  </div>
+
+  <div class="content-detail-container__body">
+    <ng-content></ng-content>
+  </div>
+</div>

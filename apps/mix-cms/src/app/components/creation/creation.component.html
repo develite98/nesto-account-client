@@ -1,0 +1,137 @@
+<div class="creation-dialog"
+     [formGroup]="form">
+  <div class="creation-dialog__content">
+    <div class="creation-dialog__content-left-side">
+      <div class="toolbar">
+        <div> Create new <strong>{{ type }}</strong></div>
+        <button class="action"
+                [icon]="'tuiIconCheckLarge'"
+                [showLoader]="loading"
+                [size]="'s'"
+                (click)="submitForm()"
+                tuiButton>Create</button>
+      </div>
+
+      <div class="workspace">
+        <tui-tabs [(activeItemIndex)]="activeTabIndex">
+          <button (click)="activeTabIndex = 0"
+                  tuiTab>
+            Contents
+          </button>
+          <button *ngIf="canShowSEOConfig"
+                  (click)="activeTabIndex = 1"
+                  tuiTab>
+            Seo
+          </button>
+          <button *ngIf="canShowRelatedModule"
+                  (click)="activeTabIndex = 2"
+                  tuiTab>
+            Related
+          </button>
+        </tui-tabs>
+
+        <!-- Main information -->
+        <ng-container *ngIf="activeTabIndex === 0">
+          <div class="mix-form">
+            <div class="mix-form__row">
+              <label [tuiLabel]="'Title:'">
+                <tui-input [tuiTextfieldLabelOutside]="true"
+                           tuiTextfieldSize="m"
+                           formControlName="title">
+                  <input type="text"
+                         tuiTextfield>
+                </tui-input>
+                <!-- <tui-field-error formControlName="title"></tui-field-error> -->
+              </label>
+            </div>
+
+            <div class="mix-form__row">
+              <label [tuiLabel]="'System name:'">
+                <tui-input [tuiTextfieldLabelOutside]="true"
+                           tuiTextfieldSize="m"
+                           formControlName="systemName">
+                  <input type="text"
+                         tuiTextfield>
+                </tui-input>
+                <!-- <tui-field-error formControlName="systemName"></tui-field-error> -->
+              </label>
+            </div>
+
+            <div class="mix-form__row">
+              <label [tuiLabel]="'Excerpt:'">
+                <tui-text-area [tuiTextfieldLabelOutside]="true"
+                               tuiTextfieldSize="m"
+                               formControlName="excerpt"></tui-text-area>
+              </label>
+            </div>
+          </div>
+        </ng-container>
+
+        <!-- SEO information -->
+        <ng-container *ngIf="activeTabIndex === 1">
+          <div class="mix-form"
+               [formGroup]="form">
+            <div class="mix-form__row">
+              <label [tuiLabel]="'Friendly Title:'">
+                <tui-input [tuiHintContent]="'Google displays the entire title on the search results, which has 63 characters.'"
+                           [tuiTextfieldLabelOutside]="true"
+                           tuiTextfieldSize="m"
+                           formControlName="seoTitle">
+                  <input type="text"
+                         tuiTextfield>
+                </tui-input>
+              </label>
+            </div>
+
+            <div class="mix-form__row">
+              <label [tuiLabel]="'Meta Description:'">
+                <tui-text-area [tuiHintContent]="'Do make sure your most important keywords for the webpage show up in the meta description. Often search engines will highlight in bold where it finds the searchers query in your snippet.'"
+                               [tuiTextfieldLabelOutside]="true"
+                               tuiTextfieldSize="m"
+                               formControlName="seoDescription"></tui-text-area>
+              </label>
+            </div>
+
+            <div class="mix-form__row">
+              <label [tuiLabel]="'Friendly URL:'">
+                <tui-input [tuiHintContent]="seoHint"
+                           [tuiTextfieldLabelOutside]="true"
+                           tuiTextfieldSize="m"
+                           formControlName="seoName">
+                  <input type="text"
+                         tuiTextfield>
+                </tui-input>
+              </label>
+            </div>
+
+            <div class="mix-form__row">
+              <label [tuiLabel]="'Meta Keywords:'">
+                <tui-text-area [tuiHintContent]="'Do make sure your most important keywords for the webpage show up in the meta description. Often search engines will highlight in bold where it finds the searchers query in your snippet.'"
+                               [tuiTextfieldLabelOutside]="true"
+                               tuiTextfieldSize="m"
+                               formControlName="seoKeywords"></tui-text-area>
+              </label>
+            </div>
+          </div>
+        </ng-container>
+
+        <!-- Data information -->
+        <ng-container *ngIf="activeTabIndex === 2">
+          <mix-module-select></mix-module-select>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #seoHint>
+  <div>
+    Easy to read: Users and search engines should be able to understand what is on each page just by looking at the URL. <br> <br>
+
+    Keyword-rich: Keywords still matter and your target queries should be within URLs. Just be wary of overkill; extending URLs just to
+    include more keywords is a bad idea.<br> <br>
+    Consistent: There are multiple ways to create an SEO-friendly URL structure on any site. It’s essential that, whatever logic you choose
+    to follow, it is applied consistently across the site.
+  </div>
+</ng-template>

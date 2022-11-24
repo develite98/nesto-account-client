@@ -1,0 +1,22 @@
+<div class="formly-taiga-control">
+  <label> {{ field.props.label }}: </label>
+  <tui-select [formControl]="formControl"
+              [formlyAttributes]="field"
+              [tuiTextfieldLabelOutside]="true"
+              [valueContent]="optionContent"
+              (ngModelChange)="props.change && props.change(field, $event)"
+              tuiTextfieldSize="m">
+    {{ field.props.description }}
+    <input [placeholder]="field.props.description"
+           tuiTextfield>
+    <tui-data-list-wrapper *tuiDataList
+                           [itemContent]="optionContent"
+                           [items]="props.options | formlySelectOptions: field | async">
+    </tui-data-list-wrapper>
+  </tui-select>
+</div>
+
+<ng-template #optionContent
+             let-item>
+  <span>{{ item.label }}</span>
+</ng-template>

@@ -1,0 +1,20 @@
+<div *ngIf="database && database.items"
+     class="database-tree">
+  <ng-container *ngFor="let table of database.items">
+    <ul class="tui-list">
+      <a class="database-tree__item"
+         tuiLink>
+        {{ table.displayName }}
+      </a>
+    </ul>
+  </ng-container>
+
+  <div class="d-flex justify-content-center align-items-center margin-t-2">
+    <button type="button"
+            [size]="'xs'"
+            tuiButton
+            appearance="outline">
+      More
+    </button>
+  </div>
+</div>

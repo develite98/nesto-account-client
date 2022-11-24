@@ -1,0 +1,95 @@
+<div class="database-form"
+     [formGroup]="form">
+  <tui-tabs class="custom-tabs"
+            [(activeItemIndex)]="activeTabIndex">
+    <button class="custom-tabs__btn"
+            (click)="activeTabIndex = 0"
+            tuiTab>
+      <tui-svg src="tuiIconEdit"></tui-svg>
+      Informations
+    </button>
+    <button class="custom-tabs__btn"
+            (click)="activeTabIndex = 1"
+            tuiTab>
+      <tui-svg src="tuiIconChartBar"></tui-svg>
+      Columns
+    </button>
+    <button class="custom-tabs__btn"
+            (click)="activeTabIndex = 2"
+            tuiTab>
+      <tui-svg src="tuiIconLink"></tui-svg>
+      Data
+    </button>
+  </tui-tabs>
+
+  <div *ngIf="activeTabIndex === 0"
+       class="container-fluid">
+    <div class="margin-b-1 margin-t-2">
+      <div class="mix-form__row">
+        <div class="mix-form__label"> Table display name: </div>
+        <tui-input class="control"
+                   [tuiTextfieldLabelOutside]="true"
+                   formControlName="displayName"
+                   tuiTextfieldSize="m">
+          Table Name
+          <input tuiTextfield>
+        </tui-input>
+
+        <tui-error [error]="[] | tuiFieldError | async"
+                   formControlName="displayName"></tui-error>
+      </div>
+
+      <div class="mix-form__row">
+        <div class="mix-form__label"> System name: </div>
+        <tui-input class="control"
+                   [tuiTextfieldLabelOutside]="true"
+                   formControlName="systemName"
+                   tuiTextfieldSize="m">
+          System Name
+          <input tuiTextfield>
+        </tui-input>
+
+        <tui-error [error]="[] | tuiFieldError | async"
+                   formControlName="systemName"></tui-error>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="activeTabIndex === 1"
+       class="container-fluid">
+    <div class="entities-data margin-b-1 margin-t-2">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-3 bolt-table-title">
+            Display name
+          </div>
+
+          <div class="col-3 bolt-table-title">
+            System name
+          </div>
+
+          <div class="col-3 bolt-table-title">
+            Field type
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-container *ngIf="columns.controls.length > 0; else noColumn">
+      <ng-container *ngFor="let column of columns.controls; let i = index">
+        <mix-entity-editor class="margin-b-1"
+                           [form]="$any(columns.controls[i])"
+                           (removeChange)="removeColumn(i)"></mix-entity-editor>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #noColumn>
+      <mix-empty-content class="margin-t-4">
+        <button [size]="'s'"
+                (click)="addColumn()"
+                tuiButton
+                icon="tuiIconPlus"> Add column </button>
+      </mix-empty-content>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+.expand-collapse {
+  width: 100%;
+
+  &__title {
+    padding: 8px;
+    cursor: pointer;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__icon {
+    &.--isExpand {
+      transform: rotate(90deg);
+    }
+  }
+
+  &__content {
+    padding: 8px;
+    display: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+    &.--isExpand {
+      display: block;
+    }
+  }
+}

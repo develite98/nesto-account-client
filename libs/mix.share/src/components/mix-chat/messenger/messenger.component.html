@@ -1,0 +1,32 @@
+<div class="messenger-box"
+     [ngClass]="{'--mini': minimize}">
+  <div class="messenger-box__header">
+    <span> Portal Chat <span *ngIf="minimize && newMessageCount"
+            class="messenger-box__message-count"> {{ newMessageCount }}</span> </span>
+    <button [appearance]="'outline'"
+            [size]="'s'"
+            (click)="toggleMinimize()"
+            tuiButton>
+      {{ minimize ? 'Show' : 'Close'}}
+    </button>
+  </div>
+
+  <div #messageContainer
+       class="messenger-box__content">
+    <ng-container *ngFor="let message of displayMessages">
+      <mix-messenger-message [fromAnother]="message.fromAnother"
+                             [message]="message"></mix-messenger-message>
+    </ng-container>
+  </div>
+
+  <div class="messenger-box__chat-zone">
+    <tui-text-area [expandable]="false"
+                   [formControl]="message"
+                   [maxLength]="100"
+                   [tuiTextfieldSize]="'m'"
+                   (keydown.enter)="submitMessage($event)">
+      Press enter to send message
+    </tui-text-area>
+    <mix-emoji-picker (emojiSelect)="emojiSelect($event)"></mix-emoji-picker>
+  </div>
+</div>

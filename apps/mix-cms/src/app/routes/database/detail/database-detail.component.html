@@ -1,0 +1,10 @@
+<mix-content-detail-container [editTitle]="false"
+                              (save)="saveDatabase()">
+  <mix-database-form *ngIf="database"
+                     [databaseModel]="database"></mix-database-form>
+</mix-content-detail-container>
+
+
+<ng-template #databaseTree>
+  <mix-database-table-tree></mix-database-table-tree>
+</ng-template>

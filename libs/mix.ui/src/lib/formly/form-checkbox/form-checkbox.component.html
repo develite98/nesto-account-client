@@ -1,0 +1,7 @@
+<div class="formly-taiga-control">
+  <tui-checkbox-labeled [formControl]="formControl">
+    {{ field.props.label }}
+  </tui-checkbox-labeled>
+  <tui-error [error]="[] | tuiFieldError | async"
+             [formControl]="formControl"></tui-error>
+</div>

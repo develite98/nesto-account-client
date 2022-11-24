@@ -1,0 +1,29 @@
+<div class="mix-window-toolbar">
+  <button class="mix-window-toolbar__button"
+          type="button"
+          aria-label="Toggle"
+          [appearance]="(subWPService.showSubWorkspace$ | async) ? 'secondary' : 'outline'"
+          (click)="subWPService.toggleSubWorkspace()"
+          tuiIconButton
+          size="s"
+          shape="rounded"
+          icon="tuiIconMenuLarge"></button>
+
+  <button class="mix-window-toolbar__button"
+          type="button"
+          aria-label="Redo"
+          tuiIconButton
+          size="xs"
+          shape="rounded"
+          appearance="outline"
+          icon="tuiIconRedo"></button>
+
+  <button class="mix-window-toolbar__button"
+          type="button"
+          aria-label="Sound"
+          tuiIconButton
+          size="xs"
+          shape="rounded"
+          appearance="outline"
+          icon="tuiIconSound"></button>
+</div>

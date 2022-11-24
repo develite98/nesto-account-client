@@ -1,0 +1,19 @@
+.entity-editor {
+  padding: 8px 0px;
+  border-radius: 8px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  transition: all 0.1s ease-in;
+
+  &.--focus {
+    border-left: 4px solid var(--tui-primary);
+    background-color: #f3f9fe;
+  }
+}
+
+:host {
+  display: block;
+}

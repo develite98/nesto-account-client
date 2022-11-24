@@ -1,0 +1,129 @@
+<div class="header-menu">
+  <div class="header-menu__sub"
+       [ngClass]="{'--mini': !!(sideMenuService.miniSize$ | async)}">
+    <div class="toggle"
+         [style.width]="!!(sideMenuService.miniSize$ | async) ? '48px' : '72px'">
+      <button type="button"
+              aria-label="Toggle side menu"
+              (click)=" toggleMenu()"
+              tuiIconButton
+              appearance="icon"
+              icon="tuiIconAlignJustifyLarge"></button>
+    </div>
+
+    <img src="assets/images/universal-logo.svg"
+         alt="mixcore-logo"
+         height="28px">
+  </div>
+
+  <div class="header-menu__main"
+       [ngClass]="{'--mini': !!(sideMenuService.miniSize$ | async)}">
+    <mix-location-controller></mix-location-controller>
+
+    <div class="header-menu__breadcrumb">
+      <tui-breadcrumbs [size]="'l'">
+        <a *tuiItem
+           [routerLink]="''"
+           tuiLink>
+          {{ 'Home' }}
+        </a>
+
+        <ng-container *ngFor="let item of breadcrumb">
+          <a *tuiItem
+             [routerLink]="item.routerLink"
+             tuiLink>
+            {{ item.caption }}
+          </a>
+        </ng-container>
+      </tui-breadcrumbs>
+    </div>
+
+    <tui-input class="header-menu__search"
+               [style.--tui-height-m]="'48px'"
+               [formControl]="search"
+               icon="tuiIconSearchLarge"
+               tuiTextfieldSize="m">
+      Universal Search
+      <input tuiTextfield>
+    </tui-input>
+
+    <div class="header-menu__right-menu">
+      <button class="header-menu__icon-button"
+              aria-label="Notifications"
+              [size]="'s'"
+              appearance="icon"
+              tuiIconButton>
+        <i-tabler name="bell"></i-tabler>
+      </button>
+      <button class="header-menu__icon-button"
+              aria-label="Help"
+              [size]="'s'"
+              appearance="icon"
+              tuiIconButton>
+        <i-tabler name="help"></i-tabler>
+      </button>
+      <tui-hosted-dropdown class="header-menu__icon-button"
+                           [content]="cultureTpl">
+        <button aria-label="Toggle culture"
+                [size]="'s'"
+                appearance="icon"
+                tuiIconButton>
+          <span *ngIf="currentCulture"
+                class="flag-icon {{ currentCulture.icon }} header-menu__main-culture-icon"></span>
+        </button>
+        <ng-template #cultureTpl
+                     let-activeZone>
+          <ng-container *ngIf="(cultures$ | async) as cul">
+            <tui-input class="margin-1"
+                       [ngModel]="''"
+                       [tuiActiveZoneParent]="activeZone"
+                       (ngModelChange)="searchCultureText$.next($event)">
+              Type a name
+              <input tuiTextfield>
+            </tui-input>
+
+            <tui-data-list>
+              <button *ngFor="let item of cul"
+                      class="justify-content-start"
+                      aria-label="Culture toggle"
+                      (click)="onCultureSelect(item)"
+                      tuiOption>
+                <span class="flag-icon {{ item.icon }} margin-r-2"></span> <span>{{ item.fullName }}</span>
+              </button>
+            </tui-data-list>
+          </ng-container>
+        </ng-template>
+      </tui-hosted-dropdown>
+
+      <tui-hosted-dropdown [content]="profileTemplate">
+        <tui-avatar class="margin-l-3"
+                    [rounded]="true"
+                    text="Admin"
+                    size="s"></tui-avatar>
+        <ng-template #profileTemplate
+                     let-activeZone>
+          <div *ngIf="user$ | async as user"
+               class="header-menu__user-info">
+            <tui-avatar class="header-menu__avatar"
+                        [avatarUrl]="user.avatar || null"
+                        [rounded]="true"
+                        [text]="user.userName"
+                        size="l"></tui-avatar>
+            <div class="title">
+              <span>Hi</span> <strong>{{ user.userName }}</strong>
+              <button [pseudo]="true"
+                      tuiLink>View your profile</button>
+            </div>
+          </div>
+          <div class="header-menu__separator"></div>
+          <p class="header-menu__item tui-space_vertical-4 tui-space_horizontal-4">
+            <button (click)="logout()"
+                    tuiLink
+                    icon="tuiIconLogoutLarge"
+                    iconAlign="right">Logout</button>
+          </p>
+        </ng-template>
+      </tui-hosted-dropdown>
+    </div>
+  </div>
+</div>

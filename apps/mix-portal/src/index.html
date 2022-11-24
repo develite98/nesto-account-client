@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Universal Studio</title>
+    <script>
+      (function() {
+        var options = window.location.search.slice(1)
+                      .split('&')
+                      .reduce(function _reduce (a, b) {
+                        b = b.split('=');
+                        a[b[0]] = decodeURIComponent(b[1]);
+                        return a;
+                      }, {});
+
+        window['_app_base'] = options['baseHref'];
+        if (options['baseHref']) {
+          document.write("<base href='/" + options['baseHref'] + "/' />");
+        } else {
+          document.write("<base href='/'' />");
+        }
+      })();
+    </script>
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="favicon.ico"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap-grid.min.css"
+    />
+    <link
+      rel="manifest"
+      href="manifest.webmanifest"
+    />
+    <meta
+      name="theme-color"
+      content="#111"
+    />
+  </head>
+
+  <body>
+    <mix-spa-root></mix-spa-root>
+    <noscript
+      >Please enable JavaScript to continue using this application.</noscript
+    >
+  </body>
+</html>
