@@ -26,6 +26,10 @@
   --text-on-white-blur: #a7a9ac;
 }
 
+tui-root {
+  height: 100vh;
+}
+
 .nesto-section {
   padding-top: 3.5rem;
   padding-bottom: 7.5rem;
@@ -318,6 +322,21 @@
   &:hover {
     color: var(--text-on-black);
     background-color: #231f20;
+  }
+
+  &.primary {
+    color: var(--text-on-black);
+    background-color: #231f20;
+
+    &:hover {
+      background-color: unset;
+      color: var(--text-on-white);
+    }
+  }
+
+  &.big {
+    padding: 17px 10px;
+    font-size: 18px;
   }
 }
 
@@ -733,5 +752,15 @@ body.loaded {
     &__description {
       margin-top: 50px;
     }
+  }
+}
+
+.modal-backdrop {
+  display: none;
+}
+
+aside {
+  [tuiactivezone].t-wrapper {
+    width: 598px;
   }
 }

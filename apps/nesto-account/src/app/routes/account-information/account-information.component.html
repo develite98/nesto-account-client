@@ -1,8 +1,12 @@
-<div class="nesto-container">
+<div class="nesto-container account-information">
+  <span class="nesto-breadcrumb">
+    <a href="#">HOME</a> / <a href="#">ACCOUNT</a> / <a href="#">ACCOUNT INFORMATION</a>
+  </span>
   <div class="row justify-content-between">
     <div class="col-3">
       <tui-tabs class="left"
-                vertical="left">
+                [(activeItemIndex)]="activeTabIndex"
+                [vertical]="'left'">
         <button tuiTab
                 underline="false">Thông tin cá nhân</button>
         <button tuiTab>Địa chỉ giao hàng</button>
@@ -13,7 +17,25 @@
     </div>
 
     <div class="col-8">
-      b
+      <ng-container *ngIf="activeTabIndex === 0">
+        <mix-account-main-info></mix-account-main-info>
+      </ng-container>
+
+      <ng-container *ngIf="activeTabIndex === 1">
+        <mix-account-address></mix-account-address>
+      </ng-container>
+
+      <ng-container *ngIf="activeTabIndex === 2">
+        <mix-account-payment-info></mix-account-payment-info>
+      </ng-container>
+
+      <ng-container *ngIf="activeTabIndex === 3">
+        <mix-account-order-manage></mix-account-order-manage>
+      </ng-container>
+
+      <ng-container *ngIf="activeTabIndex === 4">
+        <mix-account-refund-manage></mix-account-refund-manage>
+      </ng-container>
     </div>
   </div>
 </div>

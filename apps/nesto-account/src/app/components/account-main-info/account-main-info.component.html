@@ -1,0 +1,133 @@
+<div class="w-100">
+  <div class="widget-header">
+    <h3>Thông tin cá nhân</h3>
+  </div>
+
+  <div class="row">
+    <div class="col-3">
+      <div class="account-main-info__avatar">
+        <tui-avatar [rounded]="true"
+                    new
+                    text="acb"
+                    size="xl"></tui-avatar>
+
+        <button class="upload-btn"
+                [icon]="'tuiIconUpload'"
+                [shape]="'rounded'"
+                [size]="'s'"
+                tuiIconButton> </button>
+
+        <tui-input-files class="d-none"
+                         accept="image/*"></tui-input-files>
+      </div>
+    </div>
+
+    <div class="col-8"
+         style="--input-font-size: 14px;">
+      <div class="form-item">
+        <p class="label">Họ tên</p>
+
+        <div class="nesto-input input">
+          <input type="text"
+                 required="required"><span class="highlight"></span><span class="bar text-blur"></span>
+          <label class="text-blur">Họ tên</label>
+        </div>
+      </div>
+
+      <div class="form-item">
+        <p class="label">Email</p>
+
+        <div class="nesto-input input">
+          <input type="text"
+                 required="required"><span class="highlight"></span><span class="bar text-blur"></span>
+          <label class="text-blur">Email</label>
+        </div>
+      </div>
+
+      <div class="form-item">
+        <p class="label">Số điện thoại</p>
+
+        <div class="nesto-input input">
+          <input type="text"
+                 required="required"><span class="highlight"></span><span class="bar text-blur"></span>
+          <label class="text-blur">Cập nhật số điện thoại</label>
+        </div>
+      </div>
+
+      <div class="form-item">
+        <p class="label">Mật khẩu</p>
+
+        <div class="d-flex flex-column flex-grow-1">
+          <div class="nesto-input input">
+            <input type="text"
+                   required="required"><span class="highlight"></span><span class="bar text-blur"></span>
+            <label class="text-blur">Nhập mật khẩu mới</label>
+          </div>
+
+          <div class="nesto-input input mt-2">
+            <input type="text"
+                   required="required"><span class="highlight"></span><span class="bar text-blur"></span>
+            <label class="text-blur">Xác nhận mật khẩu mới</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-item">
+        <p class="label">Giới tính</p>
+
+        <div class="d-flex flex-grow-1 align-items-center">
+          <tui-radio-labeled>
+            Nam
+          </tui-radio-labeled>
+          <tui-radio-labeled class="ms-5">
+            Nữ
+          </tui-radio-labeled>
+          <tui-radio-labeled class="ms-5">
+            Khác
+          </tui-radio-labeled>
+        </div>
+      </div>
+
+      <div class="form-item">
+        <p class="label">Ngày sinh</p>
+
+        <div class="d-flex flex-grow-1 align-items-center">
+          <tui-select class="tui-space_vertical-4"
+                      [formControl]="dayControl"
+                      tuiTextfieldSize="m">
+            Ngày
+            <input tuiTextfield>
+            <tui-data-list-wrapper *tuiDataList
+                                   [items]="[1, 2, 3, 4 , 5 , 6]"></tui-data-list-wrapper>
+          </tui-select>
+
+          <tui-select class="ms-5"
+                      [formControl]="dayControl"
+                      tuiTextfieldSize="m">
+            Tháng
+            <input tuiTextfield>
+            <tui-data-list-wrapper *tuiDataList
+                                   [items]="[1, 2, 3, 4 , 5 , 6]"></tui-data-list-wrapper>
+          </tui-select>
+
+          <tui-select class="ms-5"
+                      [formControl]="dayControl"
+                      tuiTextfieldSize="m">
+            Năm
+            <input tuiTextfield>
+            <tui-data-list-wrapper *tuiDataList
+                                   [items]="[1, 2, 3, 4 , 5 , 6]"></tui-data-list-wrapper>
+          </tui-select>
+        </div>
+      </div>
+
+      <div class="form-item mt-80">
+        <p class="label"></p>
+
+        <div class="d-flex flex-grow-1 align-items-center">
+          <button class="nesto-btn w-100 primary big">Cập nhật</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -23,7 +23,7 @@ export class ModalService extends AbstractTuiDialogService<ModalOption> {
     borderShadowColor: this.modalShadowColor.confirm
   } as const;
 
-  public readonly component: PolymorpheusComponent<ModalComponent, object> = new PolymorpheusComponent(ModalComponent);
+  public readonly component: any = new PolymorpheusComponent(ModalComponent);
 
   public show(message: string, title: string): Observable<boolean> {
     const options: ModalOption = { ...this.defaultOptions, heading: title, borderShadowColor: this.modalShadowColor.info };

@@ -1,9 +1,49 @@
 [tuitab][type='button'] {
   background-color: #fff;
   border-top: 1px solid var(--text-on-white);
-  padding: 24px 0px !important;
+  height: 72px !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
 [tuitab][type='button']._active {
   font-weight: 700;
+}
+
+[tuitab][type='button']::after {
+  width: 0px !important;
+}
+
+.account-information {
+  .nesto-breadcrumb {
+    margin-bottom: 120px;
+  }
+}
+
+.widget-header {
+  text-transform: uppercase;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--text-on-white);
+  margin-bottom: 56px;
+
+  h3 {
+    font-size: 24px;
+    font-weight: 100;
+  }
+}
+
+.form-item {
+  display: flex;
+  margin-bottom: 30px;
+
+  .label {
+    width: 160px;
+    margin-top: 15px;
+  }
+
+  .input {
+    flex-grow: 1;
+  }
 }

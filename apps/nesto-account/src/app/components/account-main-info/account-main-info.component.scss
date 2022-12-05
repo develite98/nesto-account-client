@@ -1,0 +1,17 @@
+.account-main-info {
+  &__avatar {
+    position: relative;
+    width: fit-content;
+
+    tui-avatar {
+      width: 140px;
+      height: 140px;
+    }
+
+    .upload-btn {
+      position: absolute;
+      bottom: 10px;
+      right: 5px;
+    }
+  }
+}

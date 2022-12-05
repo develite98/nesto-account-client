@@ -7,7 +7,17 @@
            alt="nesto-logo">
 
       <div class="header__nav">
-        <a class="nav-item"> login </a>
+        <a class="nav-item"
+           (click)="showLogin = !showLogin"
+           (tuiActiveZoneChange)="showLogin = $event"> login
+          <div *tuiSidebar="showLogin; direction: 'right'"
+               class="login-sidebar">
+            <div class="login-sidebar">
+              <mix-login></mix-login>
+            </div>
+          </div>
+
+        </a>
         <a class="nav-item"> cart(0) </a>
         <a class="nav-item"
            data-bs-target="#headerMenu"

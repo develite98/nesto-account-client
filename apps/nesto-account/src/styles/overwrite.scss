@@ -22,7 +22,7 @@ body {
 
 body {
   font-family: Public Sans;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 300;
   line-height: 21px;
   letter-spacing: 0em;
@@ -383,7 +383,7 @@ body {
 }
 
 .mat-icon {
-  font-family: "Material Symbols Outlined";
+  font-family: 'Material Symbols Outlined';
   font-weight: normal;
   font-style: normal;
   font-size: inherit;
@@ -394,7 +394,7 @@ body {
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
-  -webkit-font-feature-settings: "liga";
+  -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
   color: var(--text-on-white);
 }

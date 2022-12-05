@@ -68,7 +68,7 @@ export class InitThemesComponent implements OnInit {
   }
 
   public showDialog(content: PolymorpheusContent<TuiDialogContext>): void {
-    this.dialogs.open(content).subscribe();
+    this.dialogs.open(content as any).subscribe();
   }
 
   public onThemeChoose(value: ThemeModel): void {
