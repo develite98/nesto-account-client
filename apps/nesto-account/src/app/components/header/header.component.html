@@ -7,17 +7,16 @@
            alt="nesto-logo">
 
       <div class="header__nav">
-        <a class="nav-item"
-           (click)="showLogin = !showLogin"
-           (tuiActiveZoneChange)="showLogin = $event"> login
-          <div *tuiSidebar="showLogin; direction: 'right'"
-               class="login-sidebar">
-            <div class="login-sidebar">
-              <mix-login></mix-login>
-            </div>
-          </div>
+        <ng-container *ngIf="currentUser; else login">
+          <a class="nav-item">{{ currentUser.userName }}</a>
+        </ng-container>
 
-        </a>
+        <ng-template #login>
+          <a class="nav-item"
+             (click)="showDialog()"> login
+          </a>
+        </ng-template>
+
         <a class="nav-item"> cart(0) </a>
         <a class="nav-item"
            data-bs-target="#headerMenu"

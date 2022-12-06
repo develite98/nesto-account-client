@@ -7,7 +7,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/mix-universal",
         "index": "apps/mix-universal/src/index.html",
@@ -40,7 +42,9 @@
           "share-styles/_functions.less"
         ],
         "stylePreprocessorOptions": {
-          "includePaths": ["share-styles"]
+          "includePaths": [
+            "share-styles"
+          ]
         },
         "scripts": []
       },
@@ -106,7 +110,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/mix-universal"],
+      "outputs": [
+        "coverage/apps/mix-universal"
+      ],
       "options": {
         "jestConfig": "apps/mix-universal/jest.config.ts",
         "passWithNoTests": true

@@ -8,20 +8,19 @@
     <h3 class="fs-18 fw-300">THANK YOU FOR SIGN UP</h3>
     <p>Please check your Email inbox (hoaivu.kan@gmail.com) for welcoming letter.</p>
     <p class="mt-32">Please log into your account to continue shopping.</p>
+    <mat-form-field class="w-100 mt-50 text-20 ">
+      <mat-label>Enter your email/phone number</mat-label>
+      <input matInput
+             formControlName="userName">
+    </mat-form-field>
 
-    <div class="nesto-input input mt-50">
-      <input type="text"
-             formControlName="userName"
-             required="required"><span class="highlight"></span><span class="bar text-blur"></span>
-      <label class="text-blur">Enter your email/phone number</label>
-    </div>
-
-    <div class="nesto-input input mt-32">
+    <mat-form-field class="w-100 mt-32 text-20 ">
+      <mat-label>Enter password</mat-label>
       <input type="password"
-             formControlName="password"
-             required="required"><span class="highlight"></span><span class="bar text-blur"></span>
-      <label class="text-blur">Enter password</label>
-    </div>
+             matInput
+             formControlName="password">
+    </mat-form-field>
+
 
     <button class="nesto-btn primary big w-100 mt-50"
             (click)="login()">Login</button>

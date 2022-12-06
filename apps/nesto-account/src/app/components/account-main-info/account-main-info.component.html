@@ -6,19 +6,7 @@
   <div class="row">
     <div class="col-3">
       <div class="account-main-info__avatar">
-        <tui-avatar [rounded]="true"
-                    new
-                    text="acb"
-                    size="xl"></tui-avatar>
-
-        <button class="upload-btn"
-                [icon]="'tuiIconUpload'"
-                [shape]="'rounded'"
-                [size]="'s'"
-                tuiIconButton> </button>
-
-        <tui-input-files class="d-none"
-                         accept="image/*"></tui-input-files>
+        avatar
       </div>
     </div>
 
@@ -76,15 +64,7 @@
         <p class="label">Giới tính</p>
 
         <div class="d-flex flex-grow-1 align-items-center">
-          <tui-radio-labeled>
-            Nam
-          </tui-radio-labeled>
-          <tui-radio-labeled class="ms-5">
-            Nữ
-          </tui-radio-labeled>
-          <tui-radio-labeled class="ms-5">
-            Khác
-          </tui-radio-labeled>
+          //
         </div>
       </div>
 
@@ -92,32 +72,7 @@
         <p class="label">Ngày sinh</p>
 
         <div class="d-flex flex-grow-1 align-items-center">
-          <tui-select class="tui-space_vertical-4"
-                      [formControl]="dayControl"
-                      tuiTextfieldSize="m">
-            Ngày
-            <input tuiTextfield>
-            <tui-data-list-wrapper *tuiDataList
-                                   [items]="[1, 2, 3, 4 , 5 , 6]"></tui-data-list-wrapper>
-          </tui-select>
-
-          <tui-select class="ms-5"
-                      [formControl]="dayControl"
-                      tuiTextfieldSize="m">
-            Tháng
-            <input tuiTextfield>
-            <tui-data-list-wrapper *tuiDataList
-                                   [items]="[1, 2, 3, 4 , 5 , 6]"></tui-data-list-wrapper>
-          </tui-select>
-
-          <tui-select class="ms-5"
-                      [formControl]="dayControl"
-                      tuiTextfieldSize="m">
-            Năm
-            <input tuiTextfield>
-            <tui-data-list-wrapper *tuiDataList
-                                   [items]="[1, 2, 3, 4 , 5 , 6]"></tui-data-list-wrapper>
-          </tui-select>
+          //
         </div>
       </div>
 

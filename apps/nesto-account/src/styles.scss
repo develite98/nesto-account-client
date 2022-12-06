@@ -759,8 +759,9 @@ body.loaded {
   display: none;
 }
 
-aside {
-  [tuiactivezone].t-wrapper {
-    width: 598px;
-  }
+.login-dialog {
+  width: 598px;
+  margin-left: auto;
+  height: 100vh;
+  max-width: unset;
 }

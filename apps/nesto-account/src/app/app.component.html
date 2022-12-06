@@ -1,14 +1,11 @@
-<tui-root>
-  <mix-header></mix-header>
+<mix-header></mix-header>
+
+<ng-container *ngIf="(authService.isAuthorized$ | async) as auth; else nologin">
   <router-outlet></router-outlet>
-  <ng-container ngProjectAs="tuiOverContent">
-  </ng-container>
-  <ng-container ngProjectAs="tuiOverDialogs">
-  </ng-container>
-  <ng-container ngProjectAs="tuiOverAlerts">
-  </ng-container>
-  <ng-container ngProjectAs="tuiOverPortals">
-  </ng-container>
-  <ng-container ngProjectAs="tuiOverHints">
-  </ng-container>
-</tui-root>
+</ng-container>
+
+<ng-template #nologin>
+  <div class="nesto-section nesto-container d-flex align-items-center justify-content-center">
+    Please login to use this feature
+  </div>
+</ng-template>

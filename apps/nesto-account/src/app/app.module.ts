@@ -1,26 +1,20 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Route, RouterModule } from '@angular/router';
-import { AppEventService, BASE_URL } from '@mix/mix.share';
-import {TuiSidebarModule} from '@taiga-ui/addon-mobile';
-import {TuiActiveZoneModule} from '@taiga-ui/cdk';
-import { TuiButtonModule, TuiRootModule, TuiSvgModule } from '@taiga-ui/core';
-import {
-  TuiAvatarModule,
-  TuiDataListWrapperModule,
-  TuiInputFilesModule,
-  TuiInputModule,
-  TuiRadioLabeledModule,
-  TuiSelectModule,
-  TuiTabsModule
-} from '@taiga-ui/kit';
+import { AppEventService, AuthInterceptor, BASE_URL } from '@mix/mix.share';
+import { HotToastModule } from '@ngneat/hot-toast';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { AccountAddressComponent } from './components/account-address/account-address.component';
+import { AddressFormComponent } from './components/account-address/address-form/address-form.component';
 import { AccountMainInfoComponent } from './components/account-main-info/account-main-info.component';
 import { AccountOrderManageComponent } from './components/account-order-manage/account-order-manage.component';
 import { AccountPaymentInfoComponent } from './components/account-payment-info/account-payment-info.component';
@@ -61,28 +55,22 @@ export const ROUTES: Route[] = [
     AccountAddressComponent,
     AccountPaymentInfoComponent,
     AccountOrderManageComponent,
-    AccountRefundManageComponent
+    AccountRefundManageComponent,
+    AddressFormComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    TuiRootModule,
     RouterModule.forRoot(ROUTES),
+    MatDialogModule,
     ReactiveFormsModule,
     FormsModule,
-    TuiTabsModule,
-    TuiAvatarModule,
-    TuiInputFilesModule,
-    TuiButtonModule,
-    TuiSvgModule,
-    TuiInputModule,
-    TuiRadioLabeledModule,
-    TuiDataListWrapperModule,
-    TuiSelectModule,
-    TuiSidebarModule,
-    TuiActiveZoneModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSlideToggleModule,
+    HotToastModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   providers: [
     AppEventService,
@@ -90,6 +78,11 @@ export const ROUTES: Route[] = [
       provide: BASE_URL,
       useValue: environment.baseUrl
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

@@ -15,6 +15,7 @@ import { TemplateApiDictionary } from './template-api.dictionary';
 import { TenancyApiDictionary } from './tenancy-api.dictionary';
 import { ThemeApiDictionary } from './theme-api.dictionary';
 import { UsersApiDictionary } from './user-api.dictionary';
+import { MixUserDataApiDict } from './user-data-api.dictionary';
 
 export class MixApiDictionary {
   public PostApi: PostApiDictionary = new PostApiDictionary();
@@ -27,6 +28,7 @@ export class MixApiDictionary {
   public TemplateApi: TemplateApiDictionary = new TemplateApiDictionary();
   public ApplicationApi: ApplicationApiDictionary =
     new ApplicationApiDictionary();
+  public UserDataApi: MixUserDataApiDict = new MixUserDataApiDict();
   // reference table
   public PostPostApi: PostPostApiDictionary = new PostPostApiDictionary();
   public PageModuleApi: PageModuleApiDictionary = new PageModuleApiDictionary();

@@ -11,3 +11,4 @@ export * from './share-api.dictionary';
 export * from './template-api.dictionary';
 export * from './tenancy-api.dictionary';
 export * from './theme-api.dictionary';
+export * from './user-data-api.dictionary'

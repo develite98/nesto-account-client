@@ -7,7 +7,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/mix-cms",
         "index": "apps/mix-cms/src/index.html",
@@ -40,7 +42,9 @@
           "share-styles/_functions.less"
         ],
         "stylePreprocessorOptions": {
-          "includePaths": ["share-styles"]
+          "includePaths": [
+            "share-styles"
+          ]
         },
         "scripts": []
       },
@@ -98,12 +102,17 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/mix-cms/**/*.ts", "apps/mix-cms/**/*.html"]
+        "lintFilePatterns": [
+          "apps/mix-cms/**/*.ts",
+          "apps/mix-cms/**/*.html"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/mix-cms"],
+      "outputs": [
+        "coverage/apps/mix-cms"
+      ],
       "options": {
         "jestConfig": "apps/mix-cms/jest.config.ts",
         "passWithNoTests": true

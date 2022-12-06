@@ -4,16 +4,21 @@
   </span>
   <div class="row justify-content-between">
     <div class="col-3">
-      <tui-tabs class="left"
-                [(activeItemIndex)]="activeTabIndex"
-                [vertical]="'left'">
-        <button tuiTab
-                underline="false">Thông tin cá nhân</button>
-        <button tuiTab>Địa chỉ giao hàng</button>
-        <button tuiTab>Thông tin thanh toán</button>
-        <button tuiTab>Quản lý đơn hàng</button>
-        <button tuiTab>Quản lý đổi trả</button>
-      </tui-tabs>
+      <div class="account-information__accordian"
+           [ngClass]="{'active': activeTabIndex === 0}"
+           (click)="activeTabIndex = 0">Thông tin cá nhân</div>
+      <div class="account-information__accordian"
+           [ngClass]="{'active': activeTabIndex === 1}"
+           (click)="activeTabIndex = 1">Địa chỉ giao hàng</div>
+      <div class="account-information__accordian"
+           [ngClass]="{'active': activeTabIndex === 2}"
+           (click)="activeTabIndex = 2">Thông tin thanh toán</div>
+      <div class="account-information__accordian"
+           [ngClass]="{'active': activeTabIndex === 3}"
+           (click)="activeTabIndex = 3">Quản lý đơn hàng</div>
+      <div class="account-information__accordian"
+           [ngClass]="{'active': activeTabIndex === 4}"
+           (click)="activeTabIndex = 4">Quản lý đổi trả</div>
     </div>
 
     <div class="col-8">

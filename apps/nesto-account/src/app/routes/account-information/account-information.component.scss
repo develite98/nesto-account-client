@@ -1,22 +1,25 @@
-[tuitab][type='button'] {
-  background-color: #fff;
-  border-top: 1px solid var(--text-on-white);
-  height: 72px !important;
-  display: flex !important;
-  align-items: center !important;
-}
-
-[tuitab][type='button']._active {
-  font-weight: 700;
-}
-
-[tuitab][type='button']::after {
-  width: 0px !important;
-}
-
 .account-information {
   .nesto-breadcrumb {
     margin-bottom: 120px;
+  }
+
+  &__accordian {
+    background-color: #fff;
+    border-top: 1px solid var(--text-on-white);
+    height: 72px !important;
+    display: flex !important;
+    align-items: center !important;
+    cursor: pointer;
+    font-weight: 300;
+
+    &:hover {
+      font-weight: 700;
+
+    }
+
+    &.active {
+      font-weight: 700;
+    }
   }
 }
 

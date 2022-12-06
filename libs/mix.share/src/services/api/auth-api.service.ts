@@ -15,6 +15,7 @@ import { BaseApiService } from '../../bases/base-api.service';
 @Injectable({ providedIn: 'root' })
 export class AuthApiService extends BaseApiService {
   public logout$: Subject<void> = new Subject();
+  public isAuthorized$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public user$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(
     null
   );
@@ -41,15 +42,21 @@ export class AuthApiService extends BaseApiService {
       { message: encrypted }
     ).pipe(
       tap((tokenInfo: TokenInfo) => {
-        if (tokenInfo && tokenInfo.info) this.user$.next(tokenInfo.info);
+        if (!tokenInfo || !tokenInfo.info) return;
+
+        this.user$.next(tokenInfo.info);
+        this.isAuthorized$.next(true);
+
         localStorage.setItem(
           LocalStorageKeys.ACCESS_TOKEN,
           tokenInfo.accessToken
         );
+
         localStorage.setItem(
           LocalStorageKeys.REFRESH_TOKEN,
           tokenInfo.refreshToken
         );
+
         localStorage.setItem(LocalStorageKeys.TOKEN_TYPE, tokenInfo.tokenType);
       })
     );
@@ -57,6 +64,10 @@ export class AuthApiService extends BaseApiService {
 
   public fetchUserInfo(): Observable<UserInfo> {
     return this.get<UserInfo>(MixApiDict.ShareApi.getAccountProfileEndpoint);
+  }
+
+  public fetchUserData(): Observable<UserInfo> {
+    return this.get<UserInfo>(MixApiDict.UserDataApi.getUserData);
   }
 
   public get getAccessToken(): string | null {

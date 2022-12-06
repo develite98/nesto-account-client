@@ -398,3 +398,11 @@ body {
   -webkit-font-smoothing: antialiased;
   color: var(--text-on-white);
 }
+
+.mat-mdc-form-field-focus-overlay {
+  background-color: unset !important;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: unset !important;
+}

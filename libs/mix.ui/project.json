@@ -7,17 +7,23 @@
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/libs/mix.ui",
         "main": "libs/mix.ui/src/index.ts",
         "tsConfig": "libs/mix.ui/tsconfig.lib.json",
-        "assets": ["libs/mix.ui/*.md"]
+        "assets": [
+          "libs/mix.ui/*.md"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/mix.ui"],
+      "outputs": [
+        "coverage/libs/mix.ui"
+      ],
       "options": {
         "jestConfig": "libs/mix.ui/jest.config.ts",
         "passWithNoTests": true
@@ -26,7 +32,10 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/mix.ui/**/*.ts", "libs/mix.ui/**/*.html"]
+        "lintFilePatterns": [
+          "libs/mix.ui/**/*.ts",
+          "libs/mix.ui/**/*.html"
+        ]
       }
     }
   },
