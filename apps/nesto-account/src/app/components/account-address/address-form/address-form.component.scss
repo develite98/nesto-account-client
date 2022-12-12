@@ -1,0 +1,24 @@
+.nesto-dialog {
+  min-width: none;
+
+  &__header {
+    padding: 0px 30px;
+    height: 76px;
+    align-items: center;
+    border-bottom: 1px solid var(--text-on-white-blur);
+    justify-content: space-between;
+    display: flex;
+
+    .header-title {
+      font-size: 24px;
+    }
+  }
+
+  &__body {
+    padding: 30px;
+  }
+
+  &__footer {
+    padding: 30px;
+  }
+}

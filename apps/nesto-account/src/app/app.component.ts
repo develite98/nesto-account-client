@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthApiService } from '@mix/mix.share';
 
 @Component({
@@ -6,8 +6,20 @@ import { AuthApiService } from '@mix/mix.share';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'nesto-account';
 
   constructor(public authService: AuthApiService) {}
+
+  ngOnInit(): void {
+    this.authService.fetchUserInfo().subscribe({
+      next: res => {
+        this.authService.user$.next(res);
+        this.authService.isAuthorized$.next(true);
+      },
+      error: () => {
+        //
+      }
+    });
+  }
 }

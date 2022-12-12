@@ -2,10 +2,17 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { TuiAlertService, TuiNotification } from '@taiga-ui/core';
-import { BehaviorSubject, Observable, take } from 'rxjs';
+import { BehaviorSubject, defer, Observable, take, tap } from 'rxjs';
 
 import { HeaderMenuService } from '../components/header-menu/header-menu.service';
 import { ModalService } from '../components/modal/modal.service';
+
+export const enum LoadingState {
+  Error = 'Error',
+  Loading = 'Loading',
+  Success = 'Success',
+  Pending = 'Pending'
+}
 
 export abstract class BaseComponent {
   public alert = inject(TuiAlertService);
@@ -18,6 +25,8 @@ export abstract class BaseComponent {
   public error$ = new BehaviorSubject<boolean>(false);
   public loading$ = new BehaviorSubject<boolean>(true);
   public loading = false;
+  public loadingState$: BehaviorSubject<LoadingState> =
+    new BehaviorSubject<LoadingState>(LoadingState.Pending);
 
   public showSuccess(text: string): void {
     this.alert
@@ -47,5 +56,19 @@ export abstract class BaseComponent {
       success: 'Saved',
       error: 'Error, Could not save.'
     });
+  }
+
+  public observerLoadingState<T>(): (source: Observable<T>) => Observable<T> {
+    return (source: Observable<T>) => {
+      return defer(() => {
+        this.loadingState$.next(LoadingState.Loading);
+        return source.pipe(
+          tap({
+            next: () => this.loadingState$.next(LoadingState.Success),
+            error: () => this.loadingState$.next(LoadingState.Error)
+          })
+        );
+      });
+    };
   }
 }

@@ -99,6 +99,10 @@ body {
   margin-bottom: 5rem !important;
 }
 
+.mb-50 {
+  margin-bottom: 50px !important;
+}
+
 .mb-16 {
   margin-bottom: 16px !important;
 }
@@ -216,6 +220,10 @@ body {
 
 .fw-400 {
   font-weight: 400 !important;
+}
+
+.fw-500 {
+  font-weight: 500 !important;
 }
 
 .fw-700 {
@@ -405,4 +413,16 @@ body {
 
 .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background-color: unset !important;
+}
+
+.mat-dialog-container {
+  padding: unset !important;
+}
+
+.mat-tab-label {
+  width: 100%;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar {
+  background-color: var(--text-on-white) !important;
 }

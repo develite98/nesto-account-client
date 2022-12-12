@@ -1,1 +1,103 @@
-<p>cart works!</p>
+<div *ngIf="(loadingState$ | async) as state"
+     class="nesto-container cart-manage">
+  <span class="nesto-breadcrumb">
+    <a href="#">HOME</a> / <a href="#">CART</a>
+  </span>
+
+  <div class="cart-manage__title">CART({{currentOrder.length}})</div>
+
+  <div *ngIf="state === 'Success'"
+       class="row">
+    <table [dataSource]="dataSource"
+           mat-table>
+      <!-- Position Column -->
+      <ng-container matColumnDef="Products">
+        <th *matHeaderCellDef
+            mat-header-cell> Products </th>
+        <td *matCellDef="let element"
+            class="product-cart-title"
+            mat-cell>
+          <img src="{{element.post?.image}}">
+
+          <div>
+            <p class="text-12 fw-500 reset-margin"> {{element.title}} </p>
+            <span class="text-blur text-uppercase">SKU:</span>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="Category">
+        <th *matHeaderCellDef
+            mat-header-cell> Category </th>
+        <td *matCellDef="let element"
+            mat-cell> N/A </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="Price">
+        <th *matHeaderCellDef
+            mat-header-cell> Price </th>
+        <td *matCellDef="let element"
+            mat-cell> {{element.post?.additionalData?.price | currency:'đ' }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Unit">
+        <th *matHeaderCellDef
+            mat-header-cell> Unit </th>
+        <td *matCellDef="let element"
+            mat-cell> {{ element.post?.additionalData?.unit ?? 'piece' }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Quantity">
+        <th *matHeaderCellDef
+            mat-header-cell> Quantity </th>
+        <td *matCellDef="let element"
+            mat-cell>
+          <mat-form-field appearance="outline"
+                          style="width: 80px;">
+            <input type="number"
+                   [(ngModel)]="element.quantity"
+                   (ngModelChange)="itemQuantityChange(element)"
+                   matNativeControl
+                   matInput>
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Subtotal">
+        <th *matHeaderCellDef
+            mat-header-cell> Subtotal </th>
+        <td *matCellDef="let element"
+            mat-cell> {{ getSubtotal(element) | currency:'đ' }} </td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="displayedColumns"
+          mat-header-row></tr>
+      <tr *matRowDef="let row; columns: displayedColumns;"
+          mat-row></tr>
+    </table>
+  </div>
+
+  <div *ngIf="state === 'Loading'"
+       class="row">
+    <mix-skeleton-loading type="table"></mix-skeleton-loading>
+  </div>
+
+  <div class="row mt-50">
+    <div class="col-8">
+    </div>
+
+    <div class="col-4">
+      <div class="d-flex w-100 justify-content-between">
+        <label class="text-18 fw-400">Subtotal: </label> <label class="text-30 fw-500"> {{ currentSubTotal |
+          currency:'đ'
+          }}</label>
+      </div>
+      <div class="mt-50 w-100">
+        <button class="nesto-btn w-100 secondary big"
+                (click)="checkout()">CHECK OUT</button>
+      </div>
+    </div>
+  </div>
+</div>

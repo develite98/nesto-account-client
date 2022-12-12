@@ -13,3 +13,10 @@ export class MixPostApiService extends BaseMixApiService<MixPostPortalModel> {
     return MixApiDict.PostApi;
   }
 }
+
+@Injectable({ providedIn: 'root' })
+export class MixPostContentApiService extends BaseMixApiService<MixPostPortalModel> {
+  protected get apiDict(): BaseMixApiDictionary {
+    return MixApiDict.PostContentApi;
+  }
+}

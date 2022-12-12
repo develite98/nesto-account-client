@@ -1,0 +1,29 @@
+.address-card {
+  margin-bottom: 24px;
+
+  &__header {
+    border-bottom: 1px solid var(--text-on-white);
+    height: 36px;
+    display: flex;
+    margin-bottom: 30px;
+    justify-content: space-between;
+
+    .title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .toolbar {
+      display: flex;
+    }
+  }
+
+  &__body {
+    font-size: 18px;
+    line-height: 160%;
+
+    span {
+      margin-right: 5px;
+    }
+  }
+}

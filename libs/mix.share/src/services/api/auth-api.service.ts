@@ -66,8 +66,8 @@ export class AuthApiService extends BaseApiService {
     return this.get<UserInfo>(MixApiDict.ShareApi.getAccountProfileEndpoint);
   }
 
-  public fetchUserData(): Observable<UserInfo> {
-    return this.get<UserInfo>(MixApiDict.UserDataApi.getUserData);
+  public fetchUserData(): Observable<UserData> {
+    return this.get<UserData>(MixApiDict.UserDataApi.getUserData);
   }
 
   public get getAccessToken(): string | null {
@@ -77,4 +77,18 @@ export class AuthApiService extends BaseApiService {
   public get getTokenType(): string | null {
     return localStorage.getItem(LocalStorageKeys.TOKEN_TYPE);
   }
+}
+
+export interface UserData {
+  addresses: Address[];
+}
+
+export interface Address {
+  name: string;
+  email: string;
+  phone: string;
+  street: string;
+  district: string;
+  province: string;
+  isDefault: boolean;
 }

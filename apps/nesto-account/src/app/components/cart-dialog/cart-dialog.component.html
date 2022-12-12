@@ -1,0 +1,65 @@
+<div *ngIf="(loadingState$  | async) as loading"
+     class="side-dialog cart-dialog">
+  <div class="side-dialog__header">
+    <div class="title">CART ({{totalOrder}})</div>
+  </div>
+
+  <div class="side-dialog__body">
+    <div *ngIf="loading === 'Success'"
+         class="order-widget">
+      <div *ngFor="let order of currentOrder"
+           class="order-widget__product">
+        <div class="row">
+          <div class="col-auto">
+            <div class="product-image">
+              <img [alt]="order.title"
+                   [src]="order.image">
+            </div>
+          </div>
+          <div class="col-7">
+            <div class="product-title"> {{ order.title }}</div>
+            <span class="text-blur">SKU:{{ $any(order).sku ?? ''}}</span>
+
+            <div class="w-100 d-flex justify-content-between align-items-center text-12 mt-24">
+              <span>Quantity: </span> <span>
+                <mat-form-field appearance="outline"
+                                style="width: 80px; height: 50px;">
+                  <input type="number"
+                         [(ngModel)]="order.quantity"
+                         (ngModelChange)="itemQuantityChange(order)"
+                         matNativeControl
+                         matInput>
+                </mat-form-field></span>
+            </div>
+
+            <div class="w-100 d-flex justify-content-between text-blur text-12">
+              <span>Unit: </span> <span>piece</span>
+            </div>
+
+            <div class="w-100 d-flex justify-content-end text-20 fw-500 mt-24">
+              <span>{{ order.total | currency:'đ' }}</span><span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center justify-content-between mt-32">
+        <span class="text-18 fw-300">Subtotal</span>
+        <span class="text-24 fw-500">{{currentSubTotal | currency:'đ'}}</span>
+      </div>
+
+      <div class="d-flex mt-50 justify-content-center">
+        <a class="nesto-link text-14"
+           style="padding-bottom: 4px;">Go to cart</a>
+      </div>
+
+      <div class="mt-16 w-100">
+        <button class="nesto-btn w-100 secondary big">CHECK OUT</button>
+      </div>
+    </div>
+
+    <div *ngIf="loading === 'Loading'">
+      <mix-skeleton-loading></mix-skeleton-loading>
+    </div>
+  </div>
+</div>

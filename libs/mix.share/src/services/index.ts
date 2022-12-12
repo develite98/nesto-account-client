@@ -1,8 +1,10 @@
 export { ApplicationApiService } from './api/application-api.service';
 export { AuthApiService } from './api/auth-api.service';
+export { CartApiService } from './api/cart-api.service';
 export { DashboardApiService } from './api/dashboard-api.service';
 export { MixFileApiService } from './api/file-api.service';
 export { DatabaseApiService } from './api/mix-database-api.service';
+export { ProvinceApiService } from './api/province-api.service';
 export { RoleApiService } from './api/role-api.service';
 export { ShareApiService } from './api/share-api.service';
 export { TenancyApiService } from './api/tenancy-api.service';
@@ -14,7 +16,10 @@ export { ThemeSignalService } from './signalR/theme-signal.service';
 // Main content
 export { MixPageApiService } from './api//mix-page-api.service';
 export { MixModuleApiService } from './api/mix-module-api.service';
-export { MixPostApiService } from './api/mix-post-api.service';
+export {
+  MixPostApiService,
+  MixPostContentApiService
+} from './api/mix-post-api.service';
 export { MixTemplateApiService } from './api/mix-template-api.service';
 
 // Helper

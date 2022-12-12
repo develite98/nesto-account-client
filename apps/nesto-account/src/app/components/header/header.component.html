@@ -13,11 +13,13 @@
 
         <ng-template #login>
           <a class="nav-item"
-             (click)="showDialog()"> login
+             (click)="showLoginDialog()"> login
           </a>
         </ng-template>
 
-        <a class="nav-item"> cart(0) </a>
+        <a *ngIf="currentUser"
+           class="nav-item"
+           (click)="showCartDialog()"> cart({{currentTotalCart}}) </a>
         <a class="nav-item"
            data-bs-target="#headerMenu"
            data-bs-toggle="modal"> <img src="assets/images/search.svg">

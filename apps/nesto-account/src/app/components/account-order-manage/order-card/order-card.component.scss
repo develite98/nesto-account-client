@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  margin-bottom: 40px;
+}
+
+.order-card {
+  &__header {
+    height: 52px;
+    background: #e6e7e8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0px 24px;
+
+    span {
+      display: block;
+    }
+  }
+
+  &__body {
+    padding: 48px;
+    background: #f6f6f3;
+  }
+}

@@ -1,14 +1,20 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatOptionModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Route, RouterModule } from '@angular/router';
 import { AppEventService, AuthInterceptor, BASE_URL } from '@mix/mix.share';
+import { SkeletonLoadingComponent } from '@mix/mix.ui';
 import { HotToastModule } from '@ngneat/hot-toast';
 
 import { environment } from '../environments/environment';
@@ -17,11 +23,19 @@ import { AccountAddressComponent } from './components/account-address/account-ad
 import { AddressFormComponent } from './components/account-address/address-form/address-form.component';
 import { AccountMainInfoComponent } from './components/account-main-info/account-main-info.component';
 import { AccountOrderManageComponent } from './components/account-order-manage/account-order-manage.component';
+import { OrderCardComponent } from './components/account-order-manage/order-card/order-card.component';
 import { AccountPaymentInfoComponent } from './components/account-payment-info/account-payment-info.component';
 import { AccountRefundManageComponent } from './components/account-refund-manage/account-refund-manage.component';
+import { CartDialogComponent } from './components/cart-dialog/cart-dialog.component';
 import { HeaderComponent } from './components/header/header.component';
+import { AtmIconComponent } from './components/svg-icon/atm.component';
+import { MOMOIconComponent } from './components/svg-icon/momo.component';
+import { NationIconComponent } from './components/svg-icon/nation.component';
+import { VisaIconComponent } from './components/svg-icon/visa.component';
+import { ZalopayIconComponent } from './components/svg-icon/zalopay-icon.component';
 import { AccountInformationComponent } from './routes/account-information/account-information.component';
 import { CartComponent } from './routes/cart/cart.component';
+import { DeliveryPaymentComponent } from './routes/delivery-payment/delivery-payment.component';
 import { LoginComponent } from './routes/login/login.component';
 
 export const ROUTES: Route[] = [
@@ -36,6 +50,10 @@ export const ROUTES: Route[] = [
   {
     path: 'cart',
     component: CartComponent
+  },
+  {
+    path: 'cart/delivery-payment',
+    component: DeliveryPaymentComponent
   },
   {
     path: '',
@@ -56,7 +74,15 @@ export const ROUTES: Route[] = [
     AccountPaymentInfoComponent,
     AccountOrderManageComponent,
     AccountRefundManageComponent,
-    AddressFormComponent
+    AddressFormComponent,
+    VisaIconComponent,
+    OrderCardComponent,
+    DeliveryPaymentComponent,
+    MOMOIconComponent,
+    AtmIconComponent,
+    ZalopayIconComponent,
+    NationIconComponent,
+    CartDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +96,13 @@ export const ROUTES: Route[] = [
     MatSlideToggleModule,
     HotToastModule,
     MatInputModule,
-    MatFormFieldModule
+    MatSelectModule,
+    MatOptionModule,
+    MatFormFieldModule,
+    MatTabsModule,
+    MatTableModule,
+    MatCheckboxModule,
+    SkeletonLoadingComponent
   ],
   providers: [
     AppEventService,

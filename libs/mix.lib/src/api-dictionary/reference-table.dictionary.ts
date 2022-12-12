@@ -2,7 +2,7 @@ import { BaseMixApiDictionary } from './base-dictionary';
 
 export class PostPostApiDictionary extends BaseMixApiDictionary {
   protected get url(): string {
-    return '/mix-portal/mix-post-post/';
+    return '/rest/mix-portal/mix-post-post/';
   }
 
   public get searchEndpoint() {
@@ -12,7 +12,7 @@ export class PostPostApiDictionary extends BaseMixApiDictionary {
 
 export class PageModuleApiDictionary extends BaseMixApiDictionary {
   protected get url(): string {
-    return '/mix-portal/mix-page-module/';
+    return '/rest/mix-portal/mix-page-module/';
   }
 
   public get searchEndpoint() {

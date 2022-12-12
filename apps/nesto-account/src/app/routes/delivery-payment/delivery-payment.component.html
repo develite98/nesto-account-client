@@ -1,0 +1,112 @@
+<div class="nesto-container container-left delivery-payment-manage">
+  <span class="nesto-breadcrumb">
+    <a href="#">HOME</a> / <a href="#">CART</a> / <a href="#">DELIVERY & PAYMENT</a>
+  </span>
+
+  <div class="row justify-content-between">
+    <div class="col-6 ">
+      <div class="d-flex w-100 justify-content-between">
+        <h2 class="text-20 fw-100 text-uppercase">Contact information</h2>
+
+        <a class="nesto-link text-14 fw-300 link-hoverable ">Change</a>
+      </div>
+
+      <div class="d-flex w-100 justify-content-between mt-16">
+        <span class="text-30 fw-500">hoaivu.kan@gmail.com</span>
+
+        <button class="nesto-btn small disabled"> Default</button>
+      </div>
+
+      <div class="separtor mt-32 mb-50"></div>
+
+      <div class="d-flex w-100 justify-content-between">
+        <h2 class="text-20 fw-100 text-uppercase">Delivery information</h2>
+
+        <a class="nesto-link text-14 fw-300 link-hoverable ">Change</a>
+      </div>
+
+      <div *ngIf="selectedAddress"
+           class="position-relative w-100 mt-16">
+        <p class="text-20 fw-500"> {{ selectedAddress.name }} </p>
+        <p class="text-18 fw-300"> {{ selectedAddress.phone }} </p>
+        <p class="text-18 fw-300"> {{ selectedAddress.email }} </p>
+        <p class="text-18 fw-300"> {{ selectedAddress.street }} </p>
+        <button class="nesto-btn small disabled position-absolute top-0 end-0"> Default</button>
+
+      </div>
+
+      <div class="separtor mt-32 mb-50"></div>
+
+      <h2 class="text-20 fw-100  text-uppercase">Payment</h2>
+
+      <div>
+        <mat-checkbox>
+          <div class="checkbox-icon">
+            <mix-momo-icon></mix-momo-icon>
+          </div>
+          Thanh toán bằng ví MoMo
+        </mat-checkbox>
+      </div>
+      <div class="mt-16">
+        <mat-checkbox>
+          <div class="checkbox-icon">
+            <mix-zalopay-icon></mix-zalopay-icon>
+          </div>
+          Thanh toán bằng ví ZaloPay
+        </mat-checkbox>
+      </div>
+      <div class="mt-16">
+        <mat-checkbox>
+          <div class="checkbox-icon">
+            <mix-atm-icon></mix-atm-icon>
+          </div>
+          Thanh toán qua thẻ ATM
+        </mat-checkbox>
+      </div>
+      <div class="mt-16">
+        <mat-checkbox>
+          <div class="checkbox-icon">
+            <mix-nation-icon></mix-nation-icon>
+          </div>
+          Thanh toán bằng thẻ quốc tế
+        </mat-checkbox>
+      </div>
+    </div>
+
+    <div class="col-5">
+      <div class="order-widget">
+        <div *ngFor="let order of currentOrder"
+             class="order-widget__product">
+          <div class="row">
+            <div class="col-auto">
+              <div class="product-image">
+                <img [alt]="order.title"
+                     [src]="order.image">
+              </div>
+            </div>
+            <div class="col-7">
+              <div class="product-title"> {{ order.title }}</div>
+              <span class="text-blur">SKU:{{ $any(order).sku ?? ''}}</span>
+
+              <div class="w-100 d-flex justify-content-between text-12 mt-24">
+                <span>Quantity: </span> <span>{{order.quantity}}</span>
+              </div>
+
+              <div class="w-100 d-flex justify-content-between text-blur text-12">
+                <span>Unit: </span> <span>piece</span>
+              </div>
+
+              <div class="w-100 d-flex justify-content-end text-20 fw-500 mt-24">
+                <span>{{ order.total | currency:' ' }}</span><span>đ</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-50 w-100">
+          <button class="nesto-btn w-100 secondary big">CHECK OUT</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

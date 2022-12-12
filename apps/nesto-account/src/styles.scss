@@ -310,6 +310,14 @@ tui-root {
   }
 }
 
+.icon-btn {
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
 .nesto-btn {
   background-color: unset;
   border-radius: 0px;
@@ -334,9 +342,32 @@ tui-root {
     }
   }
 
+  &.secondary {
+    color: var(--text-on-black);
+    background-color: #b0a9a1;
+    border: 1px solid #b0a9a1;
+
+    &:hover {
+      background-color: unset;
+      color: var(--text-on-white);
+    }
+  }
+
   &.big {
     padding: 17px 10px;
     font-size: 18px;
+  }
+
+  &.small {
+    padding: 1px 2.5px;
+    font-size: 12px;
+    height: fit-content;
+  }
+
+  &.disabled {
+    background: #f3f1ee;
+    pointer-events: none;
+    border: none;
   }
 }
 
@@ -348,6 +379,7 @@ tui-root {
   border-bottom: 1px solid var(--text-on-white);
   padding-bottom: 8px;
   height: fit-content;
+  cursor: pointer;
 }
 
 .nesto-image {
@@ -764,4 +796,28 @@ body.loaded {
   margin-left: auto;
   height: 100vh;
   max-width: unset;
+}
+
+.side-dialog {
+  min-width: 598px;
+  margin-left: auto;
+  height: 100vh;
+  max-width: unset;
+
+  &__header {
+    height: 90px;
+    display: flex;
+    align-items: center;
+    padding: 0px 44px;
+    border-bottom: 1px solid var(--text-on-white);
+    font-size: 18px;
+  }
+
+  &__body {
+    padding: 55px 44px;
+  }
+}
+
+.nesto-dialog {
+  min-width: 100px;
 }

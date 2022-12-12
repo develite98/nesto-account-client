@@ -5,6 +5,36 @@
 
   <div class="row">
     <div class="col-12">
+      <div *ngFor="let address of currentAddress"
+           class="address-card">
+        <div class="address-card__header">
+          <div class="title">{{ address.name }}</div>
+
+          <div class="toolbar">
+            <button class="nesto-btn small">Đặt làm mặc định</button>
+            <button class="nesto-btn small ms-3">Cập nhật</button>
+            <span class="material-symbols-outlined ms-3">
+              delete
+            </span>
+          </div>
+        </div>
+        <div class="address-card__body">
+          <div class="d-flex">
+            <span class="fw-700">Địa chỉ: </span> {{ address.street }}
+          </div>
+
+          <div class="d-flex">
+            <span class="fw-700">Số điện thoại: </span> {{ address.phone }}
+          </div>
+
+          <div class="d-flex">
+            <span class="fw-700">Email: </span> {{ address.email }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 mt-32">
       <button class="nesto-btn big w-100"
               (click)="showDialog()"> Thêm địa chỉ mới</button>
     </div>

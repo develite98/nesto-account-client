@@ -11,13 +11,15 @@
     <mat-form-field class="w-100 mt-50 text-20 ">
       <mat-label>Enter your email/phone number</mat-label>
       <input matInput
+             (keyup.enter)="login()"
              formControlName="userName">
     </mat-form-field>
 
-    <mat-form-field class="w-100 mt-32 text-20 ">
+    <mat-form-field class="w-100 text-20 ">
       <mat-label>Enter password</mat-label>
       <input type="password"
              matInput
+             (keyup.enter)="login()"
              formControlName="password">
     </mat-form-field>
 

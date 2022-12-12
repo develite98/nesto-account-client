@@ -1,1 +1,100 @@
-<p>address-form works!</p>
+<div class="nesto-dialog"
+     [formGroup]="addressForm">
+  <div class="nesto-dialog__header">
+    <div class="header-title">Thêm địa chỉ mới</div>
+  </div>
+
+  <div class="nesto-dialog__body">
+    <mat-form-field class="w-100 text-14">
+      <mat-label>Họ tên</mat-label>
+      <input matInput
+             formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field class="w-100 text-14 ">
+      <mat-label>Số điện thoại</mat-label>
+      <input matInput
+             formControlName="phone">
+    </mat-form-field>
+
+    <mat-form-field class="w-100 text-14 ">
+      <mat-label>Email</mat-label>
+      <input matInput
+             formControlName="email">
+    </mat-form-field>
+
+    <div class="row">
+      <div class="col-8">
+        <mat-form-field class="text-14 w-100">
+          <mat-label>Tỉnh/Thành phố</mat-label>
+          <mat-select formControlName="province">
+            <mat-option *ngFor="let province of allProvinces"
+                        [value]="$any(province).code">
+              {{ $any(province).name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4">
+        <mat-form-field class="text-14 w-100">
+          <mat-label>Quận</mat-label>
+          <mat-select formControlName="district">
+            <mat-option *ngFor="let district of currentDistrict"
+                        [value]="$any(district).code">
+              {{ $any(district).name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-4">
+        <mat-form-field class="text-14 w-100">
+          <mat-label>Phường xã</mat-label>
+          <mat-select formControlName="ward">
+            <mat-option *ngFor="let ward of currentWards"
+                        [value]="$any(ward).code">
+              {{ $any(ward).name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-8">
+        <mat-form-field class="w-100 text-14 ">
+          <mat-label>Địa chỉ cụ thể</mat-label>
+          <input matInput
+                 formControlName="street">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-8">
+        <mat-form-field class="w-100 text-14 ">
+          <mat-label>Note</mat-label>
+          <textarea matInput
+                    formControlName="note"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div class="nesto-dialog__footer">
+    <div class="row">
+      <div class="col-6">
+        <button class="nesto-btn big w-100"
+                (click)="cancel()">CANCEL</button>
+      </div>
+
+      <div class="col-6">
+        <button class="nesto-btn primary big  w-100"
+                (click)="submitAddress()">SUBMIT</button>
+      </div>
+    </div>
+  </div>
+</div>

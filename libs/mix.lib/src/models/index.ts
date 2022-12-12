@@ -6,6 +6,7 @@ export * from './base/pagination-result.model';
 // Feature
 export * from './src/account.model';
 export * from './src/auth.model';
+export * from './src/cart.model';
 export * from './src/cultute.model';
 export * from './src/dashboard-info.model';
 export * from './src/init-tenant.model';
