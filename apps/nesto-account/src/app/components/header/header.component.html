@@ -8,7 +8,14 @@
 
       <div class="header__nav">
         <ng-container *ngIf="currentUser; else login">
-          <a class="nav-item">{{ currentUser.userName }}</a>
+          <a class="nav-item"
+             [matMenuTriggerFor]="menu">{{ currentUser.userName }}</a>
+
+          <mat-menu #menu="matMenu">
+            <button (click)="logOut()"
+                    mat-menu-item>Logout</button>
+            <button mat-menu-item>Account Information</button>
+          </mat-menu>
         </ng-container>
 
         <ng-template #login>

@@ -1,78 +1,98 @@
 <div class="w-100">
   <div class="widget-header">
-    <h3>Thông tin cá nhân</h3>
+    <h3>User Information</h3>
   </div>
 
   <div class="row">
     <div class="col-3">
       <div class="account-main-info__avatar">
-        avatar
+        <mix-user-avatar [avatar]="userAvatar"
+                         (avatarChange)="avatarChange($event)"></mix-user-avatar>
       </div>
     </div>
 
     <div class="col-8"
+         [formGroup]="userForm"
          style="--input-font-size: 14px;">
       <div class="form-item">
-        <p class="label">Họ tên</p>
+        <p class="label">Full name</p>
 
-        <div class="nesto-input input">
+        <mat-form-field class="flex-grow-1 text-14">
+          <mat-label>Full name</mat-label>
           <input type="text"
-                 required="required"><span class="highlight"></span><span class="bar text-blur"></span>
-          <label class="text-blur">Họ tên</label>
-        </div>
+                 formControlName="fullName"
+                 matInput>
+        </mat-form-field>
       </div>
 
       <div class="form-item">
         <p class="label">Email</p>
 
-        <div class="nesto-input input">
-          <input type="text"
-                 required="required"><span class="highlight"></span><span class="bar text-blur"></span>
-          <label class="text-blur">Email</label>
-        </div>
+        <mat-form-field class="flex-grow-1 text-14">
+          <mat-label>Email</mat-label>
+          <input type="email"
+                 formControlName="email"
+                 matInput>
+        </mat-form-field>
       </div>
 
       <div class="form-item">
-        <p class="label">Số điện thoại</p>
+        <p class="label">Phone number</p>
 
-        <div class="nesto-input input">
+        <mat-form-field class="flex-grow-1 text-14">
+          <mat-label>Phone number</mat-label>
           <input type="text"
-                 required="required"><span class="highlight"></span><span class="bar text-blur"></span>
-          <label class="text-blur">Cập nhật số điện thoại</label>
-        </div>
+                 formControlName="phoneNumber"
+                 matInput>
+        </mat-form-field>
       </div>
 
-      <div class="form-item">
-        <p class="label">Mật khẩu</p>
+      <div class="form-item"
+           [formGroup]="passwordForm">
+        <p class="label">Password</p>
 
         <div class="d-flex flex-column flex-grow-1">
-          <div class="nesto-input input">
-            <input type="text"
-                   required="required"><span class="highlight"></span><span class="bar text-blur"></span>
-            <label class="text-blur">Nhập mật khẩu mới</label>
-          </div>
+          <mat-form-field class="w-100 text-14">
+            <mat-label>New password</mat-label>
+            <input type="password"
+                   formControlName="password"
+                   matInput>
+          </mat-form-field>
 
-          <div class="nesto-input input mt-2">
-            <input type="text"
-                   required="required"><span class="highlight"></span><span class="bar text-blur"></span>
-            <label class="text-blur">Xác nhận mật khẩu mới</label>
-          </div>
+          <mat-form-field class="w-100 text-14">
+            <mat-label>Confirm password</mat-label>
+            <input type="password"
+                   formControlName="confirmPassword"
+                   matInput>
+          </mat-form-field>
         </div>
       </div>
 
       <div class="form-item">
-        <p class="label">Giới tính</p>
+        <p class="label">Gender</p>
 
         <div class="d-flex flex-grow-1 align-items-center">
-          //
+          <mat-radio-group class="w-100 d-flex justify-content-between text-14"
+                           aria-label="Select an gender">
+            <mat-radio-button value="Male">Male</mat-radio-button>
+            <mat-radio-button value="Female">Female</mat-radio-button>
+            <mat-radio-button value="Another">Another</mat-radio-button>
+          </mat-radio-group>
         </div>
       </div>
 
       <div class="form-item">
-        <p class="label">Ngày sinh</p>
+        <p class="label">Date of Birth</p>
 
         <div class="d-flex flex-grow-1 align-items-center">
-          //
+          <mat-form-field class="w-100 text-14"
+                          (click)="picker.open()"
+                          appearance="outline">
+            <mat-label>Choose a date</mat-label>
+            <input [matDatepicker]="picker"
+                   matInput>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
         </div>
       </div>
 

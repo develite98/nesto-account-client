@@ -3,10 +3,11 @@
     <div>Welcome to Nesto</div>
   </div>
 
-  <div class="login-sidebar__body"
+  <div *ngIf="mode === 'login'"
+       class="login-sidebar__body"
        [formGroup]="loginForm">
-    <h3 class="fs-18 fw-300">THANK YOU FOR SIGN UP</h3>
-    <p>Please check your Email inbox (hoaivu.kan@gmail.com) for welcoming letter.</p>
+    <h3 class="fs-18 fw-300">SIGN IN</h3>
+    <!-- <p>Please check your Email inbox (hoaivu.kan@gmail.com) for welcoming letter.</p>-->
     <p class="mt-32">Please log into your account to continue shopping.</p>
     <mat-form-field class="w-100 mt-50 text-20 ">
       <mat-label>Enter your email/phone number</mat-label>
@@ -26,5 +27,60 @@
 
     <button class="nesto-btn primary big w-100 mt-50"
             (click)="login()">Login</button>
+
+    <button class="nesto-btn outline big w-100 mt-16"
+            (click)="mode = 'signup'">Sign up</button>
+  </div>
+
+  <div *ngIf="mode === 'signup'"
+       class="login-sidebar__body"
+       [formGroup]="signupForm">
+    <h3 class="fs-18 fw-300">CREATE NEW ACCOUNT</h3>
+    <!-- <p>Please check your Email inbox (hoaivu.kan@gmail.com) for welcoming letter.</p>-->
+    <p class="mt-32">Nesto gives you 200,000 for your first order..</p>
+    <mat-form-field class="w-100 mt-50 text-20 ">
+      <mat-label>Enter your email/phone number</mat-label>
+      <input matInput
+             formControlName="userName">
+    </mat-form-field>
+
+    <mat-form-field class="w-100 text-20 ">
+      <mat-label>Enter password</mat-label>
+      <input type="password"
+             matInput
+             formControlName="password">
+    </mat-form-field>
+
+    <mat-form-field class="w-100 text-20 ">
+      <mat-label>Re-enter password</mat-label>
+      <input type="password"
+             matInput
+             (keyup.enter)="createAccount()"
+             formControlName="confirmPassword">
+    </mat-form-field>
+
+    <button class="nesto-btn primary big w-100 mt-50"
+            (click)="createAccount()">Create</button>
+
+    <button class="nesto-btn outline big w-100 mt-16"
+            (click)="mode = 'login'">Login</button>
+  </div>
+
+  <div *ngIf="mode === 'update-data'"
+       class="login-sidebar__body">
+    <h3 class="fs-18 fw-300">PERSONAL INFORMATION</h3>
+    <div class="d-flex justify-content-between mt-32">
+      <p>Please fill in to complete your account information</p>
+      <a class="nesto-link link-hoverable">Later</a>
+    </div>
+
+    <h3 class="fs-18 fw-300 mt-32">DELIVERY INFORMATION</h3>
+
+    <div class="w-100 mt-32">
+      <mix-address-input></mix-address-input>
+    </div>
+
+    <button class="nesto-btn primary big w-100 mt-50"
+            (click)="submitAddress()">Update</button>
   </div>
 </div>

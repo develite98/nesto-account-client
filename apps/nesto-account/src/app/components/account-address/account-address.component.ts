@@ -26,9 +26,9 @@ export class AccountAddressComponent extends BaseComponent implements OnInit {
       .fetchUserData()
       .pipe(
         this.toast.observe({
-          success: 'Thành công tải địa chỉ',
+          success: 'Loading your address',
           error: '',
-          loading: 'Đang tải địa chỉ'
+          loading: 'Successfully'
         })
       )
       .subscribe(result => {

@@ -6,19 +6,19 @@
     <div class="col-3">
       <div class="account-information__accordian"
            [ngClass]="{'active': activeTabIndex === 0}"
-           (click)="activeTabIndex = 0">Thông tin cá nhân</div>
+           (click)="activeTabIndex = 0">User Information</div>
       <div class="account-information__accordian"
            [ngClass]="{'active': activeTabIndex === 1}"
-           (click)="activeTabIndex = 1">Địa chỉ giao hàng</div>
-      <div class="account-information__accordian"
+           (click)="activeTabIndex = 1">Shipping Address</div>
+      <!-- <div class="account-information__accordian"
            [ngClass]="{'active': activeTabIndex === 2}"
-           (click)="activeTabIndex = 2">Thông tin thanh toán</div>
+           (click)="activeTabIndex = 2">Thông tin thanh toán</div> -->
       <div class="account-information__accordian"
            [ngClass]="{'active': activeTabIndex === 3}"
-           (click)="activeTabIndex = 3">Quản lý đơn hàng</div>
+           (click)="activeTabIndex = 3">Manage Order</div>
       <div class="account-information__accordian"
            [ngClass]="{'active': activeTabIndex === 4}"
-           (click)="activeTabIndex = 4">Quản lý đổi trả</div>
+           (click)="activeTabIndex = 4">Manage Refund</div>
     </div>
 
     <div class="col-8">

@@ -1,5 +1,16 @@
 import { Culture } from './cultute.model';
 
+export interface SignUpModel {
+  userName: string;
+  email: string;
+  phoneNumber?: string;
+  provider?: 'Facebook';
+  providerKey?: string;
+  password: string;
+  confirmPassword: string;
+  data?: Record<string, string>;
+}
+
 export class LoginModel {
   public email: string | undefined;
   public username: string | undefined;
@@ -50,6 +61,7 @@ export class UserInfo {
   public phoneNumber?: string;
   public phoneNumberConfirmed = false;
   public twoFactorEnabled = false;
+  public userData?: Record<string, string>;
 }
 
 export class User {

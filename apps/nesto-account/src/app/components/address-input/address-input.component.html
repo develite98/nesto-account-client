@@ -1,0 +1,69 @@
+<div class="w-100"
+     [formGroup]="addressForm">
+  <mat-form-field class="w-100 text-14">
+    <mat-label>Full name</mat-label>
+    <input matInput
+           formControlName="name">
+  </mat-form-field>
+
+  <mat-form-field class="w-100 text-14">
+    <mat-label>Phone number</mat-label>
+    <input matInput
+           formControlName="phone">
+  </mat-form-field>
+
+  <mat-form-field class="w-100 text-14">
+    <mat-label>Email</mat-label>
+    <input matInput
+           formControlName="email">
+  </mat-form-field>
+
+  <mat-form-field class="text-14 w-100">
+    <mat-label>Province</mat-label>
+    <mat-select formControlName="province">
+      <mat-option *ngFor="let province of allProvinces"
+                  [value]="$any(province).code">
+        {{ $any(province).name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="row">
+    <div class="col-6">
+      <mat-form-field class="text-14 w-100">
+        <mat-label>District</mat-label>
+        <mat-select formControlName="district">
+          <mat-option *ngFor="let district of currentDistrict"
+                      [value]="$any(district).code">
+            {{ $any(district).name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-6">
+      <mat-form-field class="text-14 w-100">
+        <mat-label>Ward</mat-label>
+        <mat-select formControlName="ward">
+          <mat-option *ngFor="let ward of currentWards"
+                      [value]="$any(ward).code">
+            {{ $any(ward).name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <mat-form-field class="w-100 text-14 ">
+    <mat-label>Full address</mat-label>
+    <input matInput
+           formControlName="street">
+  </mat-form-field>
+
+
+  <mat-form-field class="w-100 text-14 ">
+    <mat-label>Note</mat-label>
+    <textarea matInput
+              formControlName="note"></textarea>
+  </mat-form-field>
+</div>

@@ -4,6 +4,7 @@ import {
   LocalStorageKeys,
   LoginModel,
   MixApiDict,
+  SignUpModel,
   TokenInfo,
   User,
   UserInfo
@@ -25,6 +26,7 @@ export class AuthApiService extends BaseApiService {
     localStorage.removeItem(LocalStorageKeys.REFRESH_TOKEN);
     localStorage.removeItem(LocalStorageKeys.TOKEN_TYPE);
     this.logout$.next();
+    this.isAuthorized$.next(false);
     if (callback) callback();
   }
 
@@ -44,9 +46,6 @@ export class AuthApiService extends BaseApiService {
       tap((tokenInfo: TokenInfo) => {
         if (!tokenInfo || !tokenInfo.info) return;
 
-        this.user$.next(tokenInfo.info);
-        this.isAuthorized$.next(true);
-
         localStorage.setItem(
           LocalStorageKeys.ACCESS_TOKEN,
           tokenInfo.accessToken
@@ -58,7 +57,17 @@ export class AuthApiService extends BaseApiService {
         );
 
         localStorage.setItem(LocalStorageKeys.TOKEN_TYPE, tokenInfo.tokenType);
+
+        this.user$.next(tokenInfo.info);
+        this.isAuthorized$.next(true);
       })
+    );
+  }
+
+  public register(userData: SignUpModel): Observable<void> {
+    return this.post<SignUpModel, void>(
+      MixApiDict.ShareApi.signUpEndpoint,
+      userData
     );
   }
 

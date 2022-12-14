@@ -7,8 +7,6 @@ import { AuthApiService } from '@mix/mix.share';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'nesto-account';
-
   constructor(public authService: AuthApiService) {}
 
   ngOnInit(): void {

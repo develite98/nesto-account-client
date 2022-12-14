@@ -48,4 +48,10 @@ export class HeaderComponent {
       autoFocus: false
     });
   }
+
+  public logOut(): void {
+    this.currentUser = null;
+    this.currentTotalCart = 0;
+    this.authSrv.logout();
+  }
 }

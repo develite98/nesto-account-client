@@ -1,0 +1,15 @@
+<div class="user-avatar">
+  <img *ngIf="avatar"
+       [src]="avatar">
+  <a class="user-avatar__add-btn"
+     (click)="onUpload()">
+    <span class="material-symbols-outlined">
+      add
+    </span>
+  </a>
+</div>
+
+<input #upload
+       type="file"
+       (change)="onFileChange($event)"
+       style="display: none">

@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, Observable, of, throwError } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 
 import { AuthApiService } from '../services';
 
@@ -40,7 +40,7 @@ export class AuthInterceptor implements HttpInterceptor {
           this.route.navigateByUrl('/auth/login');
           return throwError(() => requestError);
         } else {
-          return of(requestError);
+          return throwError(() => requestError);
         }
       })
     );

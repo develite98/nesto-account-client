@@ -1,0 +1,38 @@
+.user-avatar {
+  width: 140px;
+  height: 140px;
+  background: #f3f1ee;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+
+  img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  &__add-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: #fff;
+    background: #58595b;
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 1px;
+    right: 23px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
