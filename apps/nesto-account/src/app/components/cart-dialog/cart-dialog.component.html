@@ -50,11 +50,14 @@
 
       <div class="d-flex mt-50 justify-content-center">
         <a class="nesto-link text-14"
+           (click)="cart()"
            style="padding-bottom: 4px;">Go to cart</a>
       </div>
 
       <div class="mt-16 w-100">
-        <button class="nesto-btn w-100 secondary big">CHECK OUT</button>
+        <button class="nesto-btn w-100 secondary big"
+                [ngClass]="{'disabled': !currentOrder.length}"
+                (click)="goToCheckout()">CHECK OUT</button>
       </div>
     </div>
 

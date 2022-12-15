@@ -14,6 +14,20 @@ import { combineLatest, debounceTime, map, Subject, switchMap } from 'rxjs';
   styleUrls: ['./cart-dialog.component.scss']
 })
 export class CartDialogComponent extends BaseComponent implements OnInit {
+  public nestoHost = 'http://nesto.tanconstructions.com.au/';
+  public navigation = {
+    product: this.nestoHost + 'products',
+    collection: this.nestoHost + 'collection',
+    stories: this.nestoHost + 'stories',
+    about: this.nestoHost + 'about-us',
+    career: this.nestoHost + 'career',
+    blogs: this.nestoHost + 'blogs',
+    search: this.nestoHost + 'search',
+    account: this.nestoHost + 'customer-account/account-information',
+    checkout: this.nestoHost + 'customer-account/cart/delivery-payment',
+    cart: this.nestoHost + 'customer-account/cart'
+  };
+
   public currentSubTotal = 0;
   public currentOrder: OrderItem[] = [];
   public totalOrder = 0;
@@ -82,5 +96,13 @@ export class CartDialogComponent extends BaseComponent implements OnInit {
     } else {
       return 0;
     }
+  }
+
+  public goToCheckout(): void {
+    window.open(this.navigation.checkout);
+  }
+
+  public cart(): void {
+    window.open(this.navigation.cart);
   }
 }

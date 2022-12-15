@@ -798,6 +798,12 @@ body.loaded {
   max-width: unset;
 }
 
+.full-dialog {
+  width: 100vw;
+  height: 100vh;
+  max-width: unset !important;
+}
+
 .side-dialog {
   min-width: 598px;
   margin-left: auto;

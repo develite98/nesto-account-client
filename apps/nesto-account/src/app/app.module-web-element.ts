@@ -16,7 +16,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppEventService, AuthInterceptor, BASE_URL } from '@mix/mix.share';
+import { AppEventService, BASE_URL } from '@mix/mix.share';
 import { SkeletonLoadingComponent } from '@mix/mix.ui';
 import { HotToastModule } from '@ngneat/hot-toast';
 
@@ -41,6 +41,7 @@ import { AccountInformationComponent } from './routes/account-information/accoun
 import { CartComponent } from './routes/cart/cart.component';
 import { DeliveryPaymentComponent } from './routes/delivery-payment/delivery-payment.component';
 import { LoginComponent } from './routes/login/login.component';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,6 @@ import { LoginComponent } from './routes/login/login.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    // RouterModule.forRoot(ROUTES),
     MatDialogModule,
     ReactiveFormsModule,
     FormsModule,

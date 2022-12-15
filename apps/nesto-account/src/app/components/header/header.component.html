@@ -12,9 +12,10 @@
              [matMenuTriggerFor]="menu">{{ currentUser.userName }}</a>
 
           <mat-menu #menu="matMenu">
-            <button (click)="logOut()"
-                    mat-menu-item>Logout</button>
-            <button mat-menu-item>Account Information</button>
+            <a (click)="logOut()"
+               mat-menu-item>Logout</a>
+            <a [href]="navigation.account"
+               mat-menu-item>Account Information</a>
           </mat-menu>
         </ng-container>
 
@@ -28,12 +29,10 @@
            class="nav-item"
            (click)="showCartDialog()"> cart({{currentTotalCart}}) </a>
         <a class="nav-item"
-           data-bs-target="#headerMenu"
-           data-bs-toggle="modal"> <img src="/MixContent/StaticFiles/nesto/assets/images/search.svg">
+           (click)="showSearchDialog()"> <img src="/MixContent/StaticFiles/nesto/assets/images/search.svg">
         </a>
         <a class="nav-item"
-           data-bs-target="#headerMenu"
-           data-bs-toggle="modal"> <img src="/MixContent/StaticFiles/nesto/assets/images/burger.svg">
+           (click)="showSearchDialog()"> <img src="/MixContent/StaticFiles/nesto/assets/images/burger.svg">
         </a>
       </div>
     </div>
@@ -41,14 +40,8 @@
 </div>
 
 <!-- Header Menu -->
-<div class="modal fade"
-     id="headerMenu"
-     role="dialog"
-     aria-hidden="true"
-     aria-labelledby="headerMenuLabel"
-     tabindex="-1">
-  <div class="modal-dialog header-menu"
-       role="document">
+<ng-template #searchMenu>
+  <div class="modal-dialog header-menu">
     <div class="modal-content header-menu">
       <div class="header --dark --on-meu">
         <div class="nesto-container">
@@ -63,9 +56,10 @@
                    [matMenuTriggerFor]="menu">{{ currentUser.userName }}</a>
 
                 <mat-menu #menu="matMenu">
-                  <button (click)="logOut()"
-                          mat-menu-item>Logout</button>
-                  <button mat-menu-item>Account Information</button>
+                  <a (click)="logOut()"
+                     mat-menu-item>Logout</a>
+                  <a [href]="navigation.account"
+                     mat-menu-item>Account Information</a>
                 </mat-menu>
               </ng-container>
 
@@ -79,11 +73,7 @@
                  class="nav-item"
                  (click)="showCartDialog()"> cart({{currentTotalCart}}) </a>
               <a class="nav-item"
-                 data-bs-target="#headerMenu"
-                 data-bs-toggle="modal"> <img src="/MixContent/StaticFiles/nesto/assets/images/search.svg">
-              </a>
-              <a class="nav-item"
-                 data-bs-dismiss="modal"> <img src="/MixContent/StaticFiles/nesto/assets/images/close.png"> </a>
+                 (click)="dialog.closeAll()"> <img src="/MixContent/StaticFiles/nesto/assets/images/close.png"> </a>
             </div>
           </div>
         </div>
@@ -151,4 +141,4 @@
       </div>
     </div>
   </div>
-</div>
+</ng-template>

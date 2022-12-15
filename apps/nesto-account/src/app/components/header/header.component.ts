@@ -1,5 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ChangeDetectorRef, Component, NgZone } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  NgZone,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { OrderItem, User } from '@mix/mix.lib';
@@ -23,6 +29,8 @@ import { HeaderService } from './header.service';
   providers: [DestroyService]
 })
 export class HeaderComponent extends BaseComponent {
+  @ViewChild('searchMenu', { static: true }) searchDialog!: TemplateRef<any>;
+
   public nestoHost = 'http://nesto.tanconstructions.com.au/';
   public navigation = {
     product: this.nestoHost + 'products',
@@ -31,7 +39,10 @@ export class HeaderComponent extends BaseComponent {
     about: this.nestoHost + 'about-us',
     career: this.nestoHost + 'career',
     blogs: this.nestoHost + 'blogs',
-    search: this.nestoHost + 'search'
+    search: this.nestoHost + 'search',
+    account: this.nestoHost + 'customer-account/account-information',
+    checkout: this.nestoHost + 'customer-account/cart/delivery-payment',
+    cart: this.nestoHost + 'customer-account/cart'
   };
 
   public currentUser: User | null = null;
@@ -106,6 +117,15 @@ export class HeaderComponent extends BaseComponent {
   public showCartDialog(): void {
     this.dialog.open(CartDialogComponent, {
       panelClass: 'side-dialog',
+      autoFocus: false
+    });
+  }
+
+  public showSearchDialog(): void {
+    this.dialog.closeAll();
+
+    this.dialog.open(this.searchDialog, {
+      panelClass: 'full-dialog',
       autoFocus: false
     });
   }
