@@ -1,5 +1,6 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { DoBootstrap, Injector, NgModule } from '@angular/core';
+import { createCustomElement } from '@angular/elements';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
@@ -15,13 +16,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Route, RouterModule } from '@angular/router';
-import { AppEventService, BASE_URL } from '@mix/mix.share';
+import { AppEventService, AuthInterceptor, BASE_URL } from '@mix/mix.share';
 import { SkeletonLoadingComponent } from '@mix/mix.ui';
 import { HotToastModule } from '@ngneat/hot-toast';
 
 import { environment } from '../environments/environment';
-import { AppComponent } from './app.component';
 import { AccountAddressComponent } from './components/account-address/account-address.component';
 import { AddressFormComponent } from './components/account-address/address-form/address-form.component';
 import { AccountMainInfoComponent } from './components/account-main-info/account-main-info.component';
@@ -42,35 +41,9 @@ import { AccountInformationComponent } from './routes/account-information/accoun
 import { CartComponent } from './routes/cart/cart.component';
 import { DeliveryPaymentComponent } from './routes/delivery-payment/delivery-payment.component';
 import { LoginComponent } from './routes/login/login.component';
-import { AuthInterceptor } from './services/auth.interceptor';
-
-export const ROUTES: Route[] = [
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'account-information',
-    component: AccountInformationComponent
-  },
-  {
-    path: 'cart',
-    component: CartComponent
-  },
-  {
-    path: 'cart/delivery-payment',
-    component: DeliveryPaymentComponent
-  },
-  {
-    path: '',
-    redirectTo: 'account-information',
-    pathMatch: 'full'
-  }
-];
 
 @NgModule({
   declarations: [
-    AppComponent,
     LoginComponent,
     CartComponent,
     AccountInformationComponent,
@@ -95,7 +68,7 @@ export const ROUTES: Route[] = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(ROUTES),
+    // RouterModule.forRoot(ROUTES),
     MatDialogModule,
     ReactiveFormsModule,
     FormsModule,
@@ -128,6 +101,14 @@ export const ROUTES: Route[] = [
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  entryComponents: [HeaderComponent]
 })
-export class AppModule {}
+export class AppModuleWebElement implements DoBootstrap {
+  constructor(private injector: Injector) {
+    const webComponent = createCustomElement(HeaderComponent, { injector });
+    customElements.define('mix-header', webComponent);
+  }
+
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method, @typescript-eslint/no-empty-function
+  ngDoBootstrap() {}
+}

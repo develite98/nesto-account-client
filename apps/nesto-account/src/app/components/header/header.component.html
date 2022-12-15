@@ -3,7 +3,7 @@
   <div class="nesto-container">
     <div class="header__container">
       <img class="header__logo"
-           src="assets/images/logo.svg"
+           src="/MixContent/StaticFiles/nesto/assets/images/logo.svg"
            alt="nesto-logo">
 
       <div class="header__nav">
@@ -29,11 +29,11 @@
            (click)="showCartDialog()"> cart({{currentTotalCart}}) </a>
         <a class="nav-item"
            data-bs-target="#headerMenu"
-           data-bs-toggle="modal"> <img src="assets/images/search.svg">
+           data-bs-toggle="modal"> <img src="/MixContent/StaticFiles/nesto/assets/images/search.svg">
         </a>
         <a class="nav-item"
            data-bs-target="#headerMenu"
-           data-bs-toggle="modal"> <img src="assets/images/burger.svg">
+           data-bs-toggle="modal"> <img src="/MixContent/StaticFiles/nesto/assets/images/burger.svg">
         </a>
       </div>
     </div>
@@ -54,15 +54,36 @@
         <div class="nesto-container">
           <div class="header__container">
             <img class="header__logo"
-                 src="assets/images/logo_on_dark.svg"
+                 src="/MixContent/StaticFiles/nesto/assets/images/logo_on_dark.svg"
                  alt="nesto-logo">
 
             <div class="header__nav">
-              <a class="nav-item"> login </a>
-              <a class="nav-item"> cart(0) </a>
-              <a class="nav-item"> <img src="assets/images/search-white.png"> </a>
+              <ng-container *ngIf="currentUser; else login">
+                <a class="nav-item"
+                   [matMenuTriggerFor]="menu">{{ currentUser.userName }}</a>
+
+                <mat-menu #menu="matMenu">
+                  <button (click)="logOut()"
+                          mat-menu-item>Logout</button>
+                  <button mat-menu-item>Account Information</button>
+                </mat-menu>
+              </ng-container>
+
+              <ng-template #login>
+                <a class="nav-item"
+                   (click)="showLoginDialog()"> login
+                </a>
+              </ng-template>
+
+              <a *ngIf="currentUser"
+                 class="nav-item"
+                 (click)="showCartDialog()"> cart({{currentTotalCart}}) </a>
               <a class="nav-item"
-                 data-bs-dismiss="modal"> <img src="assets/images/close.png"> </a>
+                 data-bs-target="#headerMenu"
+                 data-bs-toggle="modal"> <img src="/MixContent/StaticFiles/nesto/assets/images/search.svg">
+              </a>
+              <a class="nav-item"
+                 data-bs-dismiss="modal"> <img src="/MixContent/StaticFiles/nesto/assets/images/close.png"> </a>
             </div>
           </div>
         </div>
@@ -71,11 +92,11 @@
           <div class="row justify-content-between">
             <div class="col-4">
               <a class="mt-32 reset-link text-60 fw-300 text-uppercase link-hoverable --active"
-                 href="#">products</a>
+                 [href]="navigation.product">products</a>
               <a class="mt-32 reset-link text-60 fw-300 text-uppercase link-hoverable"
-                 href="#">collection</a>
+                 [href]="navigation.collection">collection</a>
               <a class="mt-32 reset-link text-60 fw-300 text-uppercase link-hoverable"
-                 href="#">stories</a>
+                 [href]="navigation.stories">stories</a>
             </div>
             <div class="col-5 d-flex flex-column justify-content-end    ">
               <div class="nesto-input">
@@ -111,15 +132,17 @@
               <div class="row justify-content-end gx-75">
                 <div class="col-auto">
                   <a class="mt-24 text-14 reset-link link-hoverable"
-                     href="#">About</a>
+                     [href]="navigation.about">About</a>
                 </div>
 
                 <div class="col-auto">
-                  <a class="mt-24 text-14 reset-link link-hoverable">CAREERS</a>
+                  <a class="mt-24 text-14 reset-link link-hoverable"
+                     [href]="navigation.career">CAREERS</a>
                 </div>
 
                 <div class="col-auto">
-                  <a class="mt-24 text-14 reset-link link-hoverable">BLOG</a>
+                  <a class="mt-24 text-14 reset-link link-hoverable"
+                     [href]="navigation.blogs">BLOG</a>
                 </div>
               </div>
             </div>

@@ -50,7 +50,7 @@
               "with": "apps/nesto-account/src/environments/environment.prod.ts"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "none"
         },
         "development": {
           "buildOptimizer": false,

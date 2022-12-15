@@ -1,0 +1,46 @@
+import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest
+} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthApiService } from '@mix/mix.share';
+import { catchError, Observable, throwError } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthInterceptor implements HttpInterceptor {
+  constructor(
+    private readonly authService: AuthApiService,
+    private route: Router
+  ) {}
+
+  public intercept(
+    req: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
+    const clonedReq: HttpRequest<unknown> = req.clone({
+      setHeaders: {
+        Authorization: `${this.authService.getTokenType} ${this.authService.getAccessToken}`
+      }
+    });
+
+    return next.handle(clonedReq).pipe(
+      catchError(requestError => {
+        if (
+          requestError instanceof HttpErrorResponse &&
+          requestError.status === 401
+        ) {
+          localStorage.setItem('redirectUrl', window.location.pathname);
+          return throwError(() => requestError);
+        } else {
+          return throwError(() => requestError);
+        }
+      })
+    );
+  }
+}

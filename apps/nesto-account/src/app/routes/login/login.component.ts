@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -6,7 +6,7 @@ import {
   Validators
 } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { GlobalSettings, SignUpModel, User } from '@mix/mix.lib';
+import { GlobalSettings, SignUpModel } from '@mix/mix.lib';
 import { AuthApiService, FormUtils, ShareApiService } from '@mix/mix.share';
 import { HotToastService } from '@ngneat/hot-toast';
 import { switchMap } from 'rxjs';
@@ -21,7 +21,6 @@ import { AddressInputComponent } from '../../components/address-input/address-in
 export class LoginComponent {
   @ViewChild(AddressInputComponent) public addressForm!: AddressInputComponent;
   public mode: 'login' | 'signup' | 'update-data' = 'login';
-  public currentUser: User | null = null;
   public loginForm: FormGroup = new FormGroup({
     userName: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
@@ -50,9 +49,13 @@ export class LoginComponent {
     private shareSetting: ShareApiService,
     private authSrv: AuthApiService,
     public dialogRef: MatDialogRef<LoginComponent>,
-    private toast: HotToastService
-  ) {
-    this.authSrv.user$.subscribe(u => (this.currentUser = u));
+    private toast: HotToastService,
+    private cdr: ChangeDetectorRef
+  ) {}
+
+  public ngOnInit(): void {
+    this.mode = 'login';
+    this.cdr.detectChanges();
   }
 
   public login(callback?: () => void): void {
