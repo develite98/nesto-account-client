@@ -5,10 +5,10 @@
   </span>
 
   <div class="cart-manage__title">CART({{currentOrder.length}})</div>
-
   <div *ngIf="state === 'Success'"
        class="row">
-    <table [dataSource]="dataSource"
+    <table *ngIf="dataSource.length"
+           [dataSource]="dataSource"
            mat-table>
       <!-- Position Column -->
       <ng-container matColumnDef="Products">
@@ -69,7 +69,17 @@
         <th *matHeaderCellDef
             mat-header-cell> Subtotal </th>
         <td *matCellDef="let element"
-            mat-cell> {{ getSubtotal(element) | currency:'đ' }} </td>
+            mat-cell> {{ getSubtotal(element) | currency:'đ':'symbol':'1.0-0' }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Action">
+        <th *matHeaderCellDef
+            mat-header-cell></th>
+        <td *matCellDef="let element"
+            mat-cell>
+          <a class="link-hoverable"
+             (click)="removeItem(element.id)">Remove</a>
+        </td>
       </ng-container>
 
       <tr *matHeaderRowDef="displayedColumns"
@@ -77,6 +87,14 @@
       <tr *matRowDef="let row; columns: displayedColumns;"
           mat-row></tr>
     </table>
+
+    <div *ngIf="!dataSource.length"
+         class="w-100">
+      <h2 class="text-36 fw-100 mt-24">Your cart is empty.</h2>
+
+      <p>Visit our <a class="link-hoverable"
+           href="#">Product</a> page</p>
+    </div>
   </div>
 
   <div *ngIf="state === 'Loading'"
@@ -91,11 +109,12 @@
     <div class="col-4">
       <div class="d-flex w-100 justify-content-between">
         <label class="text-18 fw-400">Subtotal: </label> <label class="text-30 fw-500"> {{ currentSubTotal |
-          currency:'đ'
+          currency:'đ':'symbol':'1.0-0'
           }}</label>
       </div>
       <div class="mt-50 w-100">
         <button class="nesto-btn w-100 secondary big"
+                [ngClass]="{'disabled': !dataSource.length}"
                 (click)="checkout()">CHECK OUT</button>
       </div>
     </div>

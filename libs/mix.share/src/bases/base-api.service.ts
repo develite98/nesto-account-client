@@ -85,11 +85,7 @@ export class BaseApiService {
     params?: HttpParams | IHttpParamObject
   ): Observable<TResult> {
     return this.http
-      .put<TResult>(
-        this.url + path,
-        { data: request },
-        this.getHttpOptions(params)
-      )
+      .put<TResult>(this.url + path, request, this.getHttpOptions(params))
       .pipe(catchError(this.handleError));
   }
 

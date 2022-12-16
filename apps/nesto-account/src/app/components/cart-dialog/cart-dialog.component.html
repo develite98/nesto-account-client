@@ -1,19 +1,30 @@
 <div *ngIf="(loadingState$  | async) as loading"
      class="side-dialog cart-dialog">
-  <div class="side-dialog__header">
+  <div class="side-dialog__header d-flex justify-content-between align-item-center">
     <div class="title">CART ({{totalOrder}})</div>
+
+    <a class="link-hoverable"
+       (click)="dialogRef.close()">
+      <span class="material-symbols-outlined">
+        close
+      </span>
+    </a>
   </div>
 
-  <div class="side-dialog__body">
+  <div #body
+       class="side-dialog__body"
+       (scroll)="onScroll()">
     <div *ngIf="loading === 'Success'"
          class="order-widget">
       <div *ngFor="let order of currentOrder"
            class="order-widget__product">
+        <a class="link-hoverable remove-btn"
+           (click)="remove(order.id)">Remove</a>
         <div class="row">
           <div class="col-auto">
             <div class="product-image">
               <img [alt]="order.title"
-                   [src]="order.image">
+                   [src]="order.post?.image">
             </div>
           </div>
           <div class="col-7">
@@ -43,21 +54,32 @@
         </div>
       </div>
 
-      <div class="d-flex align-items-center justify-content-between mt-32">
-        <span class="text-18 fw-300">Subtotal</span>
-        <span class="text-24 fw-500">{{currentSubTotal | currency:'đ'}}</span>
+      <div *ngIf="!currentOrder.length"
+           class="w-100 mb-2">
+        <h2 class="text-36 fw-100">Your cart is empty.</h2>
+
+        <p>Visit our <a class="link-hoverable"
+             href="#">Product</a> page</p>
       </div>
 
-      <div class="d-flex mt-50 justify-content-center">
-        <a class="nesto-link text-14"
-           (click)="cart()"
-           style="padding-bottom: 4px;">Go to cart</a>
-      </div>
+      <div class="checkout-area"
+           [ngClass]="{'stick': !isStick}">
+        <div class="d-flex align-items-center justify-content-between mt-32">
+          <span class="text-18 fw-300">Subtotal</span>
+          <span class="text-24 fw-500">{{currentSubTotal | currency:'đ':'symbol':'1.0-0'}}</span>
+        </div>
 
-      <div class="mt-16 w-100">
-        <button class="nesto-btn w-100 secondary big"
-                [ngClass]="{'disabled': !currentOrder.length}"
-                (click)="goToCheckout()">CHECK OUT</button>
+        <div class="d-flex mt-50 justify-content-center">
+          <a class="nesto-link text-14"
+             (click)="cart()"
+             style="padding-bottom: 4px;">Go to cart</a>
+        </div>
+
+        <div class="mt-16 w-100">
+          <button class="nesto-btn w-100 secondary big"
+                  [ngClass]="{'disabled': !currentOrder.length}"
+                  (click)="goToCheckout()">CHECK OUT</button>
+        </div>
       </div>
     </div>
 

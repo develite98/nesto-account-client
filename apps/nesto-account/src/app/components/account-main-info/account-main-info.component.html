@@ -41,7 +41,7 @@
 
         <mat-form-field class="flex-grow-1 text-14">
           <mat-label>Phone number</mat-label>
-          <input type="text"
+          <input type="tel"
                  formControlName="phoneNumber"
                  matInput>
         </mat-form-field>
@@ -59,12 +59,18 @@
                    matInput>
           </mat-form-field>
 
-          <mat-form-field class="w-100 text-14">
-            <mat-label>Confirm password</mat-label>
-            <input type="password"
-                   formControlName="confirmPassword"
-                   matInput>
-          </mat-form-field>
+          <div class="d-flex">
+            <mat-form-field class="w-100 text-14">
+              <mat-label>Confirm password</mat-label>
+              <input type="password"
+                     formControlName="confirmPassword"
+                     matInput>
+            </mat-form-field>
+
+            <button class="nesto-btn secondary"
+                    style="height: 70%; margin-left: 16px;">Change</button>
+          </div>
+
         </div>
       </div>
 
@@ -73,7 +79,8 @@
 
         <div class="d-flex flex-grow-1 align-items-center">
           <mat-radio-group class="w-100 d-flex justify-content-between text-14"
-                           aria-label="Select an gender">
+                           aria-label="Select an gender"
+                           formControlName="gender">
             <mat-radio-button value="Male">Male</mat-radio-button>
             <mat-radio-button value="Female">Female</mat-radio-button>
             <mat-radio-button value="Another">Another</mat-radio-button>
@@ -90,6 +97,7 @@
                           appearance="outline">
             <mat-label>Choose a date</mat-label>
             <input [matDatepicker]="picker"
+                   formControlName="dateOfBirth"
                    matInput>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
@@ -100,7 +108,8 @@
         <p class="label"></p>
 
         <div class="d-flex flex-grow-1 align-items-center">
-          <button class="nesto-btn w-100 primary big">Update</button>
+          <button class="nesto-btn w-100 primary big"
+                  (click)="saveUser()">Update</button>
         </div>
       </div>
     </div>

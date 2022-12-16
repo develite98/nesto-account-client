@@ -13,4 +13,8 @@ export class CartApiService extends BaseApiService {
   public addToCart(item: AddToOrder): Observable<void> {
     return this.post<AddToOrder, void>(MixApiDict.CartApi.addToCart, item);
   }
+
+  public removeFromCart(postId: number): Observable<void> {
+    return this.delete<void>(MixApiDict.CartApi.removeFromCart + postId);
+  }
 }

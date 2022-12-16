@@ -1,0 +1,39 @@
+<div class="address-selected-dialog">
+  <div class="address-selected-dialog__header text-uppercase">
+    Your addresses
+  </div>
+
+  <div class="address-selected-dialog__body">
+    <div *ngFor="let selectedAddress of availableAddress "
+         class="w-100 mt-16">
+      <div class="w-100 d-flex">
+        <div class="me-3">
+          <mat-radio-button [checked]="selectedAddressId === selectedAddress.id"
+                            [value]="selectedAddress.id"
+                            (change)="selectedAddressId = selectedAddress.id"></mat-radio-button>
+        </div>
+
+        <div (click)="selectedAddressId = selectedAddress.id">
+          <p class="text-20 fw-500"> {{ selectedAddress.name }} </p>
+          <p class="text-18 fw-300"> +{{ selectedAddress.phone }} </p>
+          <p class="text-18 fw-300"> {{ selectedAddress.email }} </p>
+          <p class="text-18 fw-300"> {{ selectedAddress.street }} </p>
+        </div>
+      </div>
+
+      <div class="address-separator"></div>
+    </div>
+
+    <div class="w-100 mt-50 row">
+      <div class="col-6">
+        <button class="nesto-btn w-100 big"
+                (click)="dialog.close()">CANCEL</button>
+      </div>
+
+      <div class="col-6">
+        <button class="primary nesto-btn w-100 big"
+                (click)="submit()">SUBMIT</button>
+      </div>
+    </div>
+  </div>
+</div>

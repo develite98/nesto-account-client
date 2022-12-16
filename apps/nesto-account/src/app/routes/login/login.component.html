@@ -1,6 +1,13 @@
 <div class="login-sidebar">
-  <div class="login-sidebar__header">
+  <div class="login-sidebar__header d-flex justify-content-between align-item-center">
     <div>Welcome to Nesto</div>
+
+    <a class="link-hoverable"
+       (click)="dialogRef.close()">
+      <span class="material-symbols-outlined">
+        close
+      </span>
+    </a>
   </div>
 
   <div *ngIf="mode === 'login'"

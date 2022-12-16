@@ -7,14 +7,10 @@
     <div class="col-6 ">
       <div class="d-flex w-100 justify-content-between">
         <h2 class="text-20 fw-100 text-uppercase">Contact information</h2>
-
-        <a class="nesto-link text-14 fw-300 link-hoverable ">Change</a>
       </div>
 
       <div class="d-flex w-100 justify-content-between mt-16">
-        <span class="text-30 fw-500">hoaivu.kan@gmail.com</span>
-
-        <button class="nesto-btn small disabled"> Default</button>
+        <span class="text-30 fw-500">{{ selectedAddress?.email ?? '' }}</span>
       </div>
 
       <div class="separtor mt-32 mb-50"></div>
@@ -22,13 +18,14 @@
       <div class="d-flex w-100 justify-content-between">
         <h2 class="text-20 fw-100 text-uppercase">Delivery information</h2>
 
-        <a class="nesto-link text-14 fw-300 link-hoverable ">Change</a>
+        <a class="nesto-link text-14 fw-300 link-hoverable"
+           (click)="changeAddress()">Change</a>
       </div>
 
       <div *ngIf="selectedAddress"
            class="position-relative w-100 mt-16">
         <p class="text-20 fw-500"> {{ selectedAddress.name }} </p>
-        <p class="text-18 fw-300"> {{ selectedAddress.phone }} </p>
+        <p class="text-18 fw-300"> +{{ selectedAddress.phone }} </p>
         <p class="text-18 fw-300"> {{ selectedAddress.email }} </p>
         <p class="text-18 fw-300"> {{ selectedAddress.street }} </p>
         <button class="nesto-btn small disabled position-absolute top-0 end-0"> Default</button>
@@ -39,7 +36,7 @@
 
       <h2 class="text-20 fw-100  text-uppercase">Payment</h2>
 
-      <div>
+      <div class="mt-16">
         <mat-checkbox>
           <div class="checkbox-icon">
             <mix-momo-icon></mix-momo-icon>
@@ -60,17 +57,17 @@
           <div class="checkbox-icon">
             <mix-atm-icon></mix-atm-icon>
           </div>
-          Thanh toán qua thẻ ATM
+          Thanh toán qua thẻ OnePay
         </mat-checkbox>
       </div>
-      <div class="mt-16">
+      <!-- <div class="mt-16">
         <mat-checkbox>
           <div class="checkbox-icon">
             <mix-nation-icon></mix-nation-icon>
           </div>
           Thanh toán bằng thẻ quốc tế
         </mat-checkbox>
-      </div>
+      </div> -->
     </div>
 
     <div class="col-5">
@@ -81,7 +78,7 @@
             <div class="col-auto">
               <div class="product-image">
                 <img [alt]="order.title"
-                     [src]="order.image">
+                     [src]="order.post?.image ?? ''">
               </div>
             </div>
             <div class="col-7">
@@ -97,9 +94,16 @@
               </div>
 
               <div class="w-100 d-flex justify-content-end text-20 fw-500 mt-24">
-                <span>{{ order.total | currency:' ' }}</span><span>đ</span>
+                <span>{{ order.total | currency:'đ':'symbol':'1.0-0' }}</span><span>đ</span>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div class="checkout-area">
+          <div class="d-flex align-items-center justify-content-between mt-32">
+            <span class="text-18 fw-300">Subtotal</span>
+            <span class="text-24 fw-500">{{currentSubTotal | currency:'đ':'symbol':'1.0-0'}}</span>
           </div>
         </div>
 

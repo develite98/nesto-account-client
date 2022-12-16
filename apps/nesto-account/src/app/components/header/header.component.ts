@@ -63,7 +63,24 @@ export class HeaderComponent extends BaseComponent {
     super();
     (window as any)['headerService'] = headerService;
     headerService.addToCart.subscribe(v => this.addToCart(v));
+    this.checkAccount();
     this.fetchUserCart();
+  }
+
+  public checkAccount(): void {
+    const accessToken = localStorage.getItem('access_token');
+    if (accessToken) {
+      this.authSrv.fetchUserInfo().subscribe({
+        next: res => {
+          this.authSrv.user$.next(res);
+          this.authSrv.isAuthorized$.next(true);
+        },
+        error: () => {
+          this.toast.warning('Your session is expired, please login again');
+          this.showLoginDialog();
+        }
+      });
+    }
   }
 
   public fetchUserCart(): void {
@@ -125,8 +142,7 @@ export class HeaderComponent extends BaseComponent {
     this.dialog.closeAll();
 
     this.dialog.open(this.searchDialog, {
-      panelClass: 'full-dialog',
-      autoFocus: false
+      panelClass: 'full-dialog'
     });
   }
 

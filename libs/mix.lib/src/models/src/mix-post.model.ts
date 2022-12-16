@@ -24,4 +24,5 @@ export interface MixPostPortalModel
   moduleNavs?: MixModuleReferenceModel[];
   postNavs?: MixPostReferenceModel[];
   additionalData?: Record<string, string>;
+  image?: string;
 }

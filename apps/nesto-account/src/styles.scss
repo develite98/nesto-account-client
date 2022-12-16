@@ -125,6 +125,7 @@ tui-root {
     width: 127px;
     left: 0px;
     margin-top: 38px;
+    cursor: pointer;
   }
 
   &__container {
@@ -359,7 +360,7 @@ tui-root {
   }
 
   &.small {
-    padding: 1px 2.5px;
+    padding: 1px 10px;
     font-size: 12px;
     height: fit-content;
   }
@@ -368,6 +369,11 @@ tui-root {
     background: #f3f1ee;
     pointer-events: none;
     border: none;
+    cursor: no-drop;
+  }
+
+  &.secondary.disabled {
+    color: var(--text-on-white-blur);
   }
 }
 
@@ -815,15 +821,44 @@ body.loaded {
     display: flex;
     align-items: center;
     padding: 0px 44px;
-    border-bottom: 1px solid var(--text-on-white);
+    border-bottom: 1px solid #a7a9ac;
     font-size: 18px;
   }
 
   &__body {
     padding: 55px 44px;
+    height: calc(100vh - 90px);
+    overflow: auto;
   }
 }
 
 .nesto-dialog {
   min-width: 100px;
+}
+
+.text-white {
+  mat-label {
+    color: #fff !important;
+  }
+
+  .mat-form-field-underline {
+    background-color: #fff !important;
+  }
+
+  .mat-form-field-ripple {
+    background-color: #fff !important;
+  }
+}
+
+.mat-table {
+  font-family: Public Sans !important;
+}
+
+.mat-typography {
+  font: Public Sans !important;
+}
+
+th.mat-header-cell {
+  font-weight: bolder !important;
+  font-size: 16px !important;
 }

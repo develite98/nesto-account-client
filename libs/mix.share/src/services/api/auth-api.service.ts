@@ -79,6 +79,13 @@ export class AuthApiService extends BaseApiService {
     return this.get<UserData>(MixApiDict.UserDataApi.getUserData);
   }
 
+  public updateUserProfile(userData: UserData): Observable<void> {
+    return this.put<UserData, void>(
+      MixApiDict.UserDataApi.updateProfile,
+      userData
+    );
+  }
+
   public get getAccessToken(): string | null {
     return localStorage.getItem(LocalStorageKeys.ACCESS_TOKEN);
   }
@@ -89,10 +96,17 @@ export class AuthApiService extends BaseApiService {
 }
 
 export interface UserData {
-  addresses: Address[];
+  addresses?: Address[];
+  fullname?: string;
+  phoneNumber?: string;
+  avatar?: string;
+  gender?: string;
+  email?: string;
+  dateOfBirth?: Date;
 }
 
 export interface Address {
+  id: number;
   name: string;
   email: string;
   phone: string;

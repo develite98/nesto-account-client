@@ -1,16 +1,18 @@
 .login-sidebar {
   width: 100%;
+  height: 100vh;
 
   &__header {
     height: 90px;
     display: flex;
     align-items: center;
     padding: 0px 44px;
-    border-bottom: 1px solid var(--text-on-white);
+    border-bottom: 1px solid #a7a9ac;
     font-size: 18px;
   }
 
   &__body {
     padding: 55px 44px;
+    height: calc(100vh - 90px);
   }
 }

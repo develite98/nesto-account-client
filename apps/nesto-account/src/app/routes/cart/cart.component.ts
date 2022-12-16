@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { OrderItem } from '@mix/mix.lib';
 import {
@@ -7,6 +8,8 @@ import {
   MixPostContentApiService
 } from '@mix/mix.share';
 import { combineLatest, debounceTime, map, Subject, switchMap } from 'rxjs';
+
+import { ConfirmationDialogComponent } from '../../components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'mix-cart',
@@ -22,7 +25,8 @@ export class CartComponent extends BaseComponent implements OnInit {
     'Price',
     'Unit',
     'Quantity',
-    'Subtotal'
+    'Subtotal',
+    'Action'
   ];
   public dataSource: OrderItem[] = [];
   public quantityChange$: Subject<OrderItem> = new Subject();
@@ -30,7 +34,8 @@ export class CartComponent extends BaseComponent implements OnInit {
   constructor(
     public router: Router,
     public cartApi: CartApiService,
-    public postApi: MixPostContentApiService
+    public postApi: MixPostContentApiService,
+    public dialog: MatDialog
   ) {
     super();
   }
@@ -94,5 +99,29 @@ export class CartComponent extends BaseComponent implements OnInit {
 
   public itemQuantityChange(order: OrderItem): void {
     this.quantityChange$.next(order);
+  }
+
+  public removeItem(id: number): void {
+    this.dialog
+      .open(ConfirmationDialogComponent, {
+        data: `Do you want to delete this item`
+      })
+      .afterClosed()
+      .subscribe((yes: boolean) => {
+        if (yes) {
+          this.cartApi
+            .removeFromCart(id)
+            .pipe(
+              this.toast.observe({
+                success: 'Remove item successfully',
+                loading: 'Removing...',
+                error: 'Something error, please try again'
+              })
+            )
+            .subscribe(() => {
+              this.loadData();
+            });
+        }
+      });
   }
 }

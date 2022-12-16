@@ -1,0 +1,17 @@
+<div class="confirmation-dialog">
+  <h1 class="text-center"
+      mat-dialog-title>Confirmation</h1>
+  <div class="mt-16 text-center">
+    <p>{{message}}</p>
+  </div>
+  <div class="w-100 d-flex justify-content-center mt-32">
+    <button class="nesto-btn outline"
+            (click)="noClick()"
+            style="width: 100px;">No</button>
+    <button class="nesto-btn primary"
+            (click)="yesClick()"
+            style="margin-left: 10px; width: 100px;"
+            cdkFocusInitial>Yes</button>
+  </div>
+
+</div>

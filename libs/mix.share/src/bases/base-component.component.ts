@@ -64,6 +64,7 @@ export abstract class BaseComponent {
         this.loadingState$.next(LoadingState.Loading);
         return source.pipe(
           tap({
+            finalize: () => this.loadingState$.next(LoadingState.Success),
             next: () => this.loadingState$.next(LoadingState.Success),
             error: () => this.loadingState$.next(LoadingState.Error)
           })

@@ -2,9 +2,10 @@
 <div class="header">
   <div class="nesto-container">
     <div class="header__container">
-      <img class="header__logo"
-           src="/MixContent/StaticFiles/nesto/assets/images/logo.svg"
-           alt="nesto-logo">
+      <a href="#"> <img class="header__logo"
+             src="/MixContent/StaticFiles/nesto/assets/images/logo.svg"
+             alt="nesto-logo">
+      </a>
 
       <div class="header__nav">
         <ng-container *ngIf="currentUser; else login">
@@ -89,17 +90,15 @@
                  [href]="navigation.stories">stories</a>
             </div>
             <div class="col-5 d-flex flex-column justify-content-end    ">
-              <div class="nesto-input">
+              <mat-form-field class="w-100 text-20 text-white"
+                              style="color: #fff">
+                <mat-label>Search</mat-label>
                 <input type="text"
-                       required="required"><span class="highlight"></span><span class="bar text-blur"></span>
-                <label class="text-blur">SEARCH</label>
-                <div class="icon">
-                  <span class="mat-icon">search</span>
-                </div>
-                <div class="clear">
-                  <span class="mat-icon">close</span>
-                </div>
-              </div>
+                       matInput>
+                <mat-icon matSuffix><span class="material-symbols-outlined">
+                    search
+                  </span></mat-icon>
+              </mat-form-field>
             </div>
           </div>
         </div>

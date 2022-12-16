@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { OrderItem } from '@mix/mix.lib';
 import {
@@ -14,6 +15,8 @@ import { combineLatest, debounceTime, map, Subject, switchMap } from 'rxjs';
   styleUrls: ['./cart-dialog.component.scss']
 })
 export class CartDialogComponent extends BaseComponent implements OnInit {
+  @ViewChild('body') public cartBody!: ElementRef<HTMLElement>;
+  public isStick = false;
   public nestoHost = 'http://nesto.tanconstructions.com.au/';
   public navigation = {
     product: this.nestoHost + 'products',
@@ -36,9 +39,18 @@ export class CartDialogComponent extends BaseComponent implements OnInit {
   constructor(
     public router: Router,
     public cartApi: CartApiService,
-    public postApi: MixPostContentApiService
+    public postApi: MixPostContentApiService,
+    public dialogRef: MatDialogRef<CartDialogComponent>
   ) {
     super();
+  }
+
+  public onScroll(): void {
+    this.isStick =
+      this.cartBody.nativeElement.scrollHeight -
+        this.cartBody.nativeElement.scrollTop -
+        this.cartBody.nativeElement.clientHeight <
+      1;
   }
 
   ngOnInit(): void {
@@ -68,18 +80,23 @@ export class CartDialogComponent extends BaseComponent implements OnInit {
         })
       )
       .pipe(this.observerLoadingState())
-      .subscribe(v => {
-        this.currentOrder = v.order.orderItems.map(item => {
-          item.post = v.post.find(p => p.id === item.postId);
+      .subscribe({
+        next: v => {
+          this.currentOrder = v.order.orderItems.map(item => {
+            item.post = v.post.find(p => p.id === item.postId);
 
-          return item;
-        });
+            return item;
+          });
 
-        this.totalOrder = this.currentOrder.length;
-        this.currentSubTotal = this.currentOrder.reduce(
-          (a, b) => a + this.getSubtotal(b),
-          0
-        );
+          this.totalOrder = this.currentOrder.length;
+          this.currentSubTotal = this.currentOrder.reduce(
+            (a, b) => a + this.getSubtotal(b),
+            0
+          );
+        },
+        complete: () => {
+          this.onScroll();
+        }
       });
   }
 
@@ -104,5 +121,20 @@ export class CartDialogComponent extends BaseComponent implements OnInit {
 
   public cart(): void {
     window.open(this.navigation.cart);
+  }
+
+  public remove(postId: number): void {
+    this.cartApi
+      .removeFromCart(postId)
+      .pipe(
+        this.toast.observe({
+          success: 'Remove item successfully',
+          loading: 'Removing...',
+          error: 'Something error, please try again'
+        })
+      )
+      .subscribe(() => {
+        this.loadData();
+      });
   }
 }

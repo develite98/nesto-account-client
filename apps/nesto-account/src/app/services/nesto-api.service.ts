@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MixApiDict } from '@mix/mix.lib';
 import { BaseApiService } from '@mix/mix.share';
 import { Observable } from 'rxjs';
 
@@ -6,10 +7,14 @@ import { Observable } from 'rxjs';
 export class NestoUserDataApiService extends BaseApiService {
   public addAddress(address: any): Observable<void> {
     return this.post<any, void>(
-      `/mix-services/userdata/add-address?${new URLSearchParams(
+      `${MixApiDict.UserDataApi.addAddress}?${new URLSearchParams(
         address
       ).toString()}`,
       {}
     );
+  }
+
+  public deleteAddress(id: number): Observable<void> {
+    return this.delete<void>(MixApiDict.UserDataApi.deleteAddress + id);
   }
 }

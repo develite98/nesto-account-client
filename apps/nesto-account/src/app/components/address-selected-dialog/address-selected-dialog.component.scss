@@ -1,0 +1,24 @@
+.address-selected-dialog {
+  height: auto;
+  width: 707px;
+  left: 367px;
+  border-radius: 0px;
+  background-color: #fff;
+
+  .address-separator {
+    margin-top: 16px;
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #a7a9ac;
+  }
+
+  &__header {
+    padding: 35px;
+    border-bottom: 1px solid #a7a9ac;
+  }
+
+  &__body {
+    padding: 35px;
+  }
+}

@@ -3,6 +3,7 @@ export interface UserData {
 }
 
 export interface Address {
+  id: number;
   name: string;
   email: string;
   phone: string;
