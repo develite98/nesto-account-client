@@ -146,6 +146,10 @@ export class HeaderComponent extends BaseComponent {
     });
   }
 
+  public onSearch(): void {
+    window.open(this.navigation.search);
+  }
+
   public logOut(): void {
     this.currentUser = null;
     this.currentTotalCart = 0;

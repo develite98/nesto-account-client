@@ -1,0 +1,5 @@
+<div style="position: relative;">
+  <span [ngStyle]="{'font-size': textSize+'px'}">{{value | currency:' ':'symbol':'1.0-0'}}</span>
+  <span [ngStyle]="{'font-size': currencySize+'px'}"
+        style="position: absolute; margin-top: -5px;">đ</span>
+</div>

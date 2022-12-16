@@ -17,7 +17,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppEventService, BASE_URL } from '@mix/mix.share';
-import { SkeletonLoadingComponent } from '@mix/mix.ui';
+import { EmptyContentComponent, SkeletonLoadingComponent } from '@mix/mix.ui';
 import { HotToastModule } from '@ngneat/hot-toast';
 
 import { environment } from '../environments/environment';
@@ -30,8 +30,11 @@ import { OrderCardComponent } from './components/account-order-manage/order-card
 import { AccountPaymentInfoComponent } from './components/account-payment-info/account-payment-info.component';
 import { AccountRefundManageComponent } from './components/account-refund-manage/account-refund-manage.component';
 import { AddressInputComponent } from './components/address-input/address-input.component';
+import { AddressSelectedDialogComponent } from './components/address-selected-dialog/address-selected-dialog.component';
 import { CartDialogComponent } from './components/cart-dialog/cart-dialog.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { HeaderComponent } from './components/header/header.component';
+import { MoneyDisplayComponent } from './components/money-display/money-display.component';
 import { AtmIconComponent } from './components/svg-icon/atm.component';
 import { MOMOIconComponent } from './components/svg-icon/momo.component';
 import { NationIconComponent } from './components/svg-icon/nation.component';
@@ -64,7 +67,10 @@ import { AuthInterceptor } from './services/auth.interceptor';
     NationIconComponent,
     CartDialogComponent,
     UserAvatarComponent,
-    AddressInputComponent
+    AddressInputComponent,
+    ConfirmationDialogComponent,
+    AddressSelectedDialogComponent,
+    MoneyDisplayComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +93,8 @@ import { AuthInterceptor } from './services/auth.interceptor';
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatMenuModule
+    MatMenuModule,
+    EmptyContentComponent
   ],
   providers: [
     AppEventService,

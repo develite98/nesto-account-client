@@ -1,6 +1,6 @@
 <div class="nesto-container container-left delivery-payment-manage">
   <span class="nesto-breadcrumb">
-    <a href="#">HOME</a> / <a href="#">CART</a> / <a href="#">DELIVERY & PAYMENT</a>
+    <a href="/">HOME</a> / <a href="#">DELIVERY & PAYMENT</a>
   </span>
 
   <div class="row justify-content-between">
@@ -94,7 +94,10 @@
               </div>
 
               <div class="w-100 d-flex justify-content-end text-20 fw-500 mt-24">
-                <span>{{ order.total | currency:'đ':'symbol':'1.0-0' }}</span><span>đ</span>
+
+                <mix-money-display [currencySize]="16"
+                                   [textSize]="20"
+                                   [value]="order.total"></mix-money-display>
               </div>
             </div>
           </div>
@@ -103,12 +106,19 @@
         <div class="checkout-area">
           <div class="d-flex align-items-center justify-content-between mt-32">
             <span class="text-18 fw-300">Subtotal</span>
-            <span class="text-24 fw-500">{{currentSubTotal | currency:'đ':'symbol':'1.0-0'}}</span>
+            <span class="text-24 fw-500">
+              <mix-money-display [currencySize]="20"
+                                 [textSize]="24"
+                                 [value]="currentSubTotal"></mix-money-display>
+            </span>
           </div>
         </div>
 
-        <div class="mt-50 w-100">
+        <div class="mt-50 w-100 d-flex flex-column align-items-center">
           <button class="nesto-btn w-100 secondary big">CHECK OUT</button>
+
+          <a class="link-hoverable mt-24 d-block"
+             [href]="navigation.cart">Back to cart</a>
         </div>
       </div>
     </div>

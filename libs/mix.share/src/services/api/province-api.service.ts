@@ -7,6 +7,8 @@ export class ProvinceApiService {
   constructor(private httpClient: HttpClient) {}
 
   public getProvince(): Observable<any> {
-    return this.httpClient.get('assets/datas/province.json');
+    return this.httpClient.get(
+      '/MixContent/StaticFiles/nesto/assets/datas/province.json'
+    );
   }
 }

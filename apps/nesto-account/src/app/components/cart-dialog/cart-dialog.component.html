@@ -47,8 +47,10 @@
               <span>Unit: </span> <span>piece</span>
             </div>
 
-            <div class="w-100 d-flex justify-content-end text-20 fw-500 mt-24">
-              <span>{{ order.total | currency:'đ' }}</span><span></span>
+            <div class="w-100 d-flex justify-content-end fw-500 mt-24">
+              <mix-money-display [currencySize]="14"
+                                 [textSize]="20"
+                                 [value]="order.total"></mix-money-display>
             </div>
           </div>
         </div>
@@ -66,7 +68,11 @@
            [ngClass]="{'stick': !isStick}">
         <div class="d-flex align-items-center justify-content-between mt-32">
           <span class="text-18 fw-300">Subtotal</span>
-          <span class="text-24 fw-500">{{currentSubTotal | currency:'đ':'symbol':'1.0-0'}}</span>
+          <span class="text-24 fw-500">
+            <mix-money-display [currencySize]="18"
+                               [textSize]="24"
+                               [value]="currentSubTotal"></mix-money-display>
+          </span>
         </div>
 
         <div class="d-flex mt-50 justify-content-center">

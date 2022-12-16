@@ -2,7 +2,7 @@
 <div class="header">
   <div class="nesto-container">
     <div class="header__container">
-      <a href="#"> <img class="header__logo"
+      <a href="/"> <img class="header__logo"
              src="/MixContent/StaticFiles/nesto/assets/images/logo.svg"
              alt="nesto-logo">
       </a>
@@ -94,6 +94,7 @@
                               style="color: #fff">
                 <mat-label>Search</mat-label>
                 <input type="text"
+                       (keyup.enter)="onSearch()"
                        matInput>
                 <mat-icon matSuffix><span class="material-symbols-outlined">
                     search

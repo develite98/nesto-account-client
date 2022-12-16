@@ -1,7 +1,7 @@
 <div *ngIf="(loadingState$ | async) as state"
      class="nesto-container cart-manage">
   <span class="nesto-breadcrumb">
-    <a href="#">HOME</a> / <a href="#">CART</a>
+    <a href="/">HOME</a> / <a href="#">CART</a>
   </span>
 
   <div class="cart-manage__title">CART({{currentOrder.length}})</div>
@@ -39,7 +39,11 @@
         <th *matHeaderCellDef
             mat-header-cell> Price </th>
         <td *matCellDef="let element"
-            mat-cell> {{element.post?.additionalData?.price | currency:'đ' }} </td>
+            mat-cell>
+          <mix-money-display [currencySize]="12"
+                             [textSize]="14"
+                             [value]="element.post?.additionalData?.price ?? 0"></mix-money-display>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="Unit">
@@ -69,7 +73,11 @@
         <th *matHeaderCellDef
             mat-header-cell> Subtotal </th>
         <td *matCellDef="let element"
-            mat-cell> {{ getSubtotal(element) | currency:'đ':'symbol':'1.0-0' }} </td>
+            mat-cell>
+          <mix-money-display [currencySize]="12"
+                             [textSize]="14"
+                             [value]="getSubtotal(element)"></mix-money-display>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="Action">
@@ -108,9 +116,10 @@
 
     <div class="col-4">
       <div class="d-flex w-100 justify-content-between">
-        <label class="text-18 fw-400">Subtotal: </label> <label class="text-30 fw-500"> {{ currentSubTotal |
-          currency:'đ':'symbol':'1.0-0'
-          }}</label>
+        <label class="text-18 fw-400">Subtotal: </label> <label class="text-30 fw-500">
+          <mix-money-display [currencySize]="14"
+                             [textSize]="18"
+                             [value]="currentSubTotal"></mix-money-display></label>
       </div>
       <div class="mt-50 w-100">
         <button class="nesto-btn w-100 secondary big"

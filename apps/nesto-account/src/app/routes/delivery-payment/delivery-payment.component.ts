@@ -22,6 +22,19 @@ export class DeliveryPaymentComponent extends BaseComponent implements OnInit {
   public currentOrder: OrderItem[] = [];
   public selectedAddress?: Address;
   public currentSubTotal = 0;
+  public nestoHost = 'http://nesto.tanconstructions.com.au/';
+  public navigation = {
+    product: this.nestoHost + 'products',
+    collection: this.nestoHost + 'collection',
+    stories: this.nestoHost + 'stories',
+    about: this.nestoHost + 'about-us',
+    career: this.nestoHost + 'career',
+    blogs: this.nestoHost + 'blogs',
+    search: this.nestoHost + 'search',
+    account: this.nestoHost + 'customer-account/account-information',
+    checkout: this.nestoHost + 'customer-account/cart/delivery-payment',
+    cart: this.nestoHost + 'customer-account/cart'
+  };
 
   constructor(
     public dialog: MatDialog,
@@ -41,9 +54,9 @@ export class DeliveryPaymentComponent extends BaseComponent implements OnInit {
       .fetchUserData()
       .pipe(
         this.toast.observe({
-          success: 'Thành công tải địa chỉ',
+          success: 'Successfully load your shipping address',
           error: '',
-          loading: 'Đang tải địa chỉ'
+          loading: 'Loading shipping address'
         })
       )
       .subscribe(result => {

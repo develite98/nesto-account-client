@@ -35,6 +35,7 @@ import { AddressSelectedDialogComponent } from './components/address-selected-di
 import { CartDialogComponent } from './components/cart-dialog/cart-dialog.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { HeaderComponent } from './components/header/header.component';
+import { MoneyDisplayComponent } from './components/money-display/money-display.component';
 import { AtmIconComponent } from './components/svg-icon/atm.component';
 import { MOMOIconComponent } from './components/svg-icon/momo.component';
 import { NationIconComponent } from './components/svg-icon/nation.component';
@@ -94,7 +95,8 @@ export const ROUTES: Route[] = [
     UserAvatarComponent,
     AddressInputComponent,
     ConfirmationDialogComponent,
-    AddressSelectedDialogComponent
+    AddressSelectedDialogComponent,
+    MoneyDisplayComponent
   ],
   imports: [
     BrowserModule,
