@@ -5,4 +5,5 @@ import { Subject } from 'rxjs';
 @Injectable({ providedIn: 'platform' })
 export class HeaderService {
   public addToCart: Subject<OrderItem> = new Subject<OrderItem>();
+  public login: Subject<void> = new Subject();
 }

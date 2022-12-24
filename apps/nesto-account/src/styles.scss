@@ -9,7 +9,6 @@
   --text-on-white: #231f20;
   --text-on-white-blur: #bcbec0;
   --text-grey: #bcbec0;
-  --container-padding: 4.5rem;
   --bg: #ffffff;
   --black-bg: #414042;
   --text-on-black: #ffffff;
@@ -507,6 +506,7 @@ tui-root {
     font-style: thin;
     margin-bottom: 12px;
     display: block;
+    color: var(--text-on-black);
   }
 
   .payment-list {
@@ -861,4 +861,74 @@ body.loaded {
 th.mat-header-cell {
   font-weight: bolder !important;
   font-size: 16px !important;
+}
+
+.main-carousel-img {
+  height: auto;
+  object-fit: cover;
+}
+
+.main-carousel-sub-img {
+  object-fit: cover;
+  height: 50%;
+}
+
+@media only screen and (max-width: 800px) {
+  :root {
+    --container-padding: 16px !important;
+  }
+
+  .container-right {
+    margin-left: var(--container-padding) !important;
+  }
+
+  .container-left {
+    margin-right: var(--container-padding) !important;
+  }
+
+  .header__logo {
+    height: 40px !important;
+    width: 64px !important;
+  }
+
+  .nesto-footer {
+    padding-top: 66px !important;
+    padding-bottom: 66px !important;
+  }
+
+  .text-60 {
+    font-size: 30px !important;
+    line-height: 30px !important;
+  }
+
+  .header.--on-meu {
+    .header__container {
+      height: 20px !important;
+      border-bottom: unset;
+    }
+  }
+
+  .mt-lg-18 {
+    margin-top: 18px !important;
+  }
+
+  .mb-lg-80 {
+    margin-bottom: 80px !important;
+  }
+
+  .text-xs-white {
+    color: var(--text-on-white) !important;
+  }
+
+  .product-card__title {
+    margin-top: 1rem !important;
+  }
+
+  .main-carousel-img {
+    height: 257px !important;
+  }
+
+  .main-carousel-sub-img {
+    height: 160px !important;
+  }
 }

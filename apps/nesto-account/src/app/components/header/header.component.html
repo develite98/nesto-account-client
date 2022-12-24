@@ -47,13 +47,13 @@
       <div class="header --dark --on-meu">
         <div class="nesto-container">
           <div class="header__container">
-            <img class="header__logo"
+            <img class="header__logo d-none d-md-block"
                  src="/MixContent/StaticFiles/nesto/assets/images/logo_on_dark.svg"
                  alt="nesto-logo">
 
             <div class="header__nav">
               <ng-container *ngIf="currentUser; else login">
-                <a class="nav-item"
+                <a class="nav-item d-none d-md-block"
                    [matMenuTriggerFor]="menu">{{ currentUser.userName }}</a>
 
                 <mat-menu #menu="matMenu">
@@ -65,7 +65,7 @@
               </ng-container>
 
               <ng-template #login>
-                <a class="nav-item"
+                <a class="nav-item d-none d-md-block"
                    (click)="showLoginDialog()"> login
                 </a>
               </ng-template>
@@ -79,17 +79,17 @@
           </div>
         </div>
 
-        <div class="nesto-container mt-50">
-          <div class="row justify-content-between">
-            <div class="col-4">
-              <a class="mt-32 reset-link text-60 fw-300 text-uppercase link-hoverable --active"
+        <div class="nesto-container mt-50 flex-grow-1">
+          <div class="row justify-content-between h-100">
+            <div class="col-12 col-md-4 d-flex flex-column">
+              <a class="mt-32 mt-lg-18 reset-link text-60 fw-300 text-uppercase link-hoverable --active"
                  [href]="navigation.product">products</a>
-              <a class="mt-32 reset-link text-60 fw-300 text-uppercase link-hoverable"
+              <a class="mt-32 mt-lg-18 reset-link text-60 fw-300 text-uppercase link-hoverable"
                  [href]="navigation.collection">collection</a>
-              <a class="mt-32 reset-link text-60 fw-300 text-uppercase link-hoverable"
+              <a class="mt-32 mt-lg-18 reset-link text-60 fw-300 text-uppercase link-hoverable"
                  [href]="navigation.stories">stories</a>
             </div>
-            <div class="col-5 d-flex flex-column justify-content-end    ">
+            <div class="col-12 col-md-5 d-flex flex-column justify-content-end mt-auto">
               <mat-form-field class="w-100 text-20 text-white"
                               style="color: #fff">
                 <mat-label>Search</mat-label>
@@ -104,22 +104,22 @@
           </div>
         </div>
 
-        <div class="nesto-container mb-100 mt-auto">
+        <div class="nesto-container mb-100 mb-lg-80 mt-auto">
           <div class="row">
-            <div class="col-1">
-              <a class="mt-24 text-12 reset-link link-hoverable d-flex align-items-center">Facebook
+            <div class="col-12 col-md-1 d-flex d-md-block">
+              <a class="mt-24 me-3 text-12 reset-link link-hoverable text-xs-white d-flex align-items-center">Facebook
                 <span class="material-symbols-outlined text-12 icon ms-1">arrow_outward</span>
               </a>
-              <a class="mt-24 text-12 reset-link link-hoverable d-flex align-items-center">Instagram
+              <a class="mt-24 me-3 text-12 reset-link link-hoverable text-xs-white d-flex align-items-center">Instagram
                 <span class="material-symbols-outlined text-12 icon ms-1">arrow_outward</span>
               </a>
-              <a class="mt-24 text-12 reset-link link-hoverable d-flex align-items-center">Twitter
+              <a class="mt-24 me-3 text-12 reset-link link-hoverable text-xs-white d-flex align-items-center">Twitter
                 <span class="material-symbols-outlined text-12 icon ms-1">arrow_outward</span>
               </a>
             </div>
 
-            <div class="col d-flex flex-column justify-content-end">
-              <div class="row justify-content-end gx-75">
+            <div class="col d-flex flex-column justify-content-md-end">
+              <div class="row justify-content-md-end">
                 <div class="col-auto">
                   <a class="mt-24 text-14 reset-link link-hoverable"
                      [href]="navigation.about">About</a>

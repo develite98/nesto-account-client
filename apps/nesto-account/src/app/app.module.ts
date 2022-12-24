@@ -36,6 +36,7 @@ import { CartDialogComponent } from './components/cart-dialog/cart-dialog.compon
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MoneyDisplayComponent } from './components/money-display/money-display.component';
+import { NestoFooterComponent } from './components/nesto-footer/nesto-footer.component';
 import { AtmIconComponent } from './components/svg-icon/atm.component';
 import { MOMOIconComponent } from './components/svg-icon/momo.component';
 import { NationIconComponent } from './components/svg-icon/nation.component';
@@ -96,7 +97,8 @@ export const ROUTES: Route[] = [
     AddressInputComponent,
     ConfirmationDialogComponent,
     AddressSelectedDialogComponent,
-    MoneyDisplayComponent
+    MoneyDisplayComponent,
+    NestoFooterComponent
   ],
   imports: [
     BrowserModule,

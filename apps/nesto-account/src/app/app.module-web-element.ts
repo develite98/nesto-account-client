@@ -35,6 +35,7 @@ import { CartDialogComponent } from './components/cart-dialog/cart-dialog.compon
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MoneyDisplayComponent } from './components/money-display/money-display.component';
+import { NestoFooterComponent } from './components/nesto-footer/nesto-footer.component';
 import { AtmIconComponent } from './components/svg-icon/atm.component';
 import { MOMOIconComponent } from './components/svg-icon/momo.component';
 import { NationIconComponent } from './components/svg-icon/nation.component';
@@ -70,7 +71,8 @@ import { AuthInterceptor } from './services/auth.interceptor';
     AddressInputComponent,
     ConfirmationDialogComponent,
     AddressSelectedDialogComponent,
-    MoneyDisplayComponent
+    MoneyDisplayComponent,
+    NestoFooterComponent
   ],
   imports: [
     BrowserModule,
@@ -114,6 +116,11 @@ export class AppModuleWebElement implements DoBootstrap {
   constructor(private injector: Injector) {
     const webComponent = createCustomElement(HeaderComponent, { injector });
     customElements.define('mix-header', webComponent);
+
+    const footerComponent = createCustomElement(NestoFooterComponent, {
+      injector
+    });
+    customElements.define('mix-footer', footerComponent);
   }
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method, @typescript-eslint/no-empty-function

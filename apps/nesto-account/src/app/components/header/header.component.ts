@@ -63,6 +63,11 @@ export class HeaderComponent extends BaseComponent {
     super();
     (window as any)['headerService'] = headerService;
     headerService.addToCart.subscribe(v => this.addToCart(v));
+    headerService.login.subscribe(v => {
+      this.zone.run(() => {
+        this.showLoginDialog();
+      });
+    });
     this.checkAccount();
     this.fetchUserCart();
   }

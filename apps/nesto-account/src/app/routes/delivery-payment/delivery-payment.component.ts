@@ -5,7 +5,7 @@ import {
   AuthApiService,
   BaseComponent,
   CartApiService,
-  MixPostApiService
+  MixPostContentApiService
 } from '@mix/mix.share';
 import { combineLatest, map, switchMap } from 'rxjs';
 
@@ -40,7 +40,7 @@ export class DeliveryPaymentComponent extends BaseComponent implements OnInit {
     public dialog: MatDialog,
     private authApi: AuthApiService,
     public cartApi: CartApiService,
-    public postApi: MixPostApiService
+    public postApi: MixPostContentApiService
   ) {
     super();
   }
@@ -61,9 +61,7 @@ export class DeliveryPaymentComponent extends BaseComponent implements OnInit {
       )
       .subscribe(result => {
         this.currentAddress = result.addresses ?? [];
-        this.selectedAddress = this.currentAddress.find(
-          f => f.isDefault === true
-        );
+        this.selectedAddress = this.currentAddress[0];
       });
 
     this.cartApi

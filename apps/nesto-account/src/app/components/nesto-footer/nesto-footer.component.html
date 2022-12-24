@@ -1,0 +1,104 @@
+<footer class="nesto-footer">
+  <div class="nesto-container">
+    <div class="row gx-3">
+      <div class="col-12 col-md-3 d-flex flex-column justify-content-between">
+        <a href="/"> <img class="footer-logo w-fit"
+               src="/MixContent/StaticFiles/nesto/assets/images/logo_on_dark.svg"
+               alt="dark-logo">
+        </a>
+
+        <nav class="nav-item mt-3 mt-md-0">hello@nesto.vn </nav>
+
+        <nav class="nav-item mt-3 mt-md-0">©2022, Nesto. All rights reserved. </nav>
+      </div>
+
+      <div class="mt-5 mt-md-0 col-12 col-md-6">
+        <div class="row">
+          <div class="col-5">
+            <span class="nesto-footer__nav-title">CUSTOMER CARE</span>
+
+            <a class="nav-item reset-link"
+               [href]="navigation.faq">FAQ & Support</a>
+            <a class="nav-item reset-link"
+               [href]="navigation.ordering">Ordering & Shipping</a>
+            <a class="nav-item reset-link"
+               [href]="navigation.return">Returns & Exchanges</a>
+            <a class="nav-item reset-link"
+               [href]="navigation.partner">Partnership</a>
+          </div>
+
+          <div class="col-4">
+            <span class="nesto-footer__nav-title">ABOUT</span>
+
+            <a class="nav-item reset-link"
+               [href]="navigation.about">About</a>
+            <a class="nav-item reset-link"
+               [href]="navigation.career">Careers</a>
+            <a class="nav-item reset-link"
+               [href]="navigation.blogs">Blog</a>
+            <a class="nav-item reset-link"
+               [href]="navigation.contact">Contact</a>
+          </div>
+
+          <div class="col-3">
+            <span class="nesto-footer__nav-title">CONNECT</span>
+
+            <nav class="nav-item">Facebook</nav>
+            <nav class="nav-item">Instagram</nav>
+            <nav class="nav-item">Youtube</nav>
+          </div>
+
+          <div class="col-12 payment-list">
+            <a><img src="/MixContent/StaticFiles/nesto/assets/images/visa.svg"></a>
+            <a><img src="/MixContent/StaticFiles/nesto/assets/images/master-card.svg"></a>
+            <a><img src="/MixContent/StaticFiles/nesto/assets/images/jcb.svg"></a>
+            <a><img src="/MixContent/StaticFiles/nesto/assets/images/paypal.svg"></a>
+            <a><img src="/MixContent/StaticFiles/nesto/assets/images/momo.svg"></a>
+            <a><img src="/MixContent/StaticFiles/nesto/assets/images/zalopay.svg"></a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mt-5 mt-md-0 col-12 col-md-3"
+           [formGroup]="signupForm">
+        <span class="nesto-footer__nav-title">Sign up FOR 200,000 OFF YOUR FIRST ORDER.</span>
+
+        <mat-form-field class="w-100 text-12 text-white">
+          <mat-label>Enter your email/phone number</mat-label>
+          <input matInput
+                 formControlName="userName">
+        </mat-form-field>
+
+        <mat-form-field class="w-100 text-12 text-white">
+          <mat-label>Enter password</mat-label>
+          <input type="password"
+                 matInput
+                 formControlName="password">
+        </mat-form-field>
+
+        <mat-form-field class="w-100 text-12 text-white">
+          <mat-label>Re-enter password</mat-label>
+          <input type="password"
+                 matInput
+                 formControlName="confirmPassword">
+        </mat-form-field>
+
+        <div class="mt-3 row align-items-center justify-content-between">
+          <div class="col-6">
+            <mat-form-field class="w-100 text-12 text-white">
+              <mat-label>Or signup with Facebook</mat-label>
+              <input type="text"
+                     matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-5">
+            <button class="nesto-btn w-100"
+                    (click)="createAccount()">SIGN UP</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
