@@ -11,4 +11,6 @@ export interface Address {
   district: string;
   province: string;
   isDefault: boolean;
+  note: string;
+  ward: string;
 }

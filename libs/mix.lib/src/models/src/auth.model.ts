@@ -93,6 +93,8 @@ export class User {
   public phoneNumber?: string;
   public phoneNumberConfirmed = false;
   public twoFactorEnabled = false;
+  public fullname?: string;
+  public userData?: Record<string, string>;
 }
 
 export interface IAuthorizationData {

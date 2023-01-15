@@ -1,5 +1,33 @@
+@media only screen and (max-width: 800px) {
+  .delivery-payment-manage {
+    padding-top: 25px !important;
+  }
+
+  .order-widget-container {
+    margin-top: 40px;
+  }
+
+  .contact-email {
+    font-size: 20px !important;
+    line-height: 21px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+  }
+
+  .delivery-info {
+    font-size: 16px !important;
+  }
+}
+
 .delivery-payment-manage {
   padding-bottom: 100px;
+  padding-top: 50px;
+
+  &__main-container {
+    margin-top: 56px;
+    --bs-gutter-x: 148px;
+  }
 
   .separtor {
     display: block;
@@ -12,34 +40,98 @@
     width: 100%;
     padding: 28px;
     background: #f6f6f3;
+  }
 
-    &__product {
-      margin-bottom: 16px;
-      padding-bottom: 50px;
-      border-bottom: 1px solid #a7a9ac;
-
-      .product-image {
-        width: 150px;
-        height: 136px;
-
-        img {
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-      .product-title {
-        font-weight: 300;
-        font-size: 18px;
-        line-height: 21px;
-        text-transform: uppercase;
-      }
-    }
+  .shipping-area {
+    border-bottom: 1px solid #a7a9ac;
+    padding-bottom: 16px;
   }
 
   .checkbox-icon {
-    width: 100px;
+    width: 90px;
     display: inline-flex;
     justify-content: center;
+  }
+
+  .contact-email {
+    font-size: 30px;
+    line-height: 30px;
+    font-weight: 500;
+  }
+
+  .delivery-info {
+    font-size: 18px;
+  }
+}
+
+.order-widget {
+  width: 100%;
+  padding: 28px;
+
+  &__product {
+    margin-bottom: 24px;
+    padding-bottom: 50px;
+    padding-top: 30px;
+    border-bottom: 1px solid #a7a9ac;
+    position: relative;
+
+    .remove-btn {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      font-size: 12px;
+    }
+
+    .product-image {
+      width: 150px;
+      height: 150px;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+
+    .product-title {
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 21px;
+      text-transform: uppercase;
+    }
+
+    .product-checkbox {
+      border-radius: 5px;
+      overflow: hidden;
+      margin-right: 16px;
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .order-widget {
+    padding: 8px;
+
+    .product-image {
+      margin-bottom: 24px;
+      width: 110px;
+      height: 110px;
+    }
+
+    .product-title {
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 18px;
+    }
+
+    .product-sku {
+      font-size: 12px;
+    }
+  }
+
+  .order-widget__product {
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 }

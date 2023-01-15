@@ -5,3 +5,9 @@
   flex-direction: column;
   justify-content: center;
 }
+
+@media only screen and (max-width: 800px) {
+  .confirmation-dialog {
+    width: unset;
+  }
+}

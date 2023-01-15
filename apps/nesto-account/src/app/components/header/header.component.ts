@@ -6,17 +6,19 @@ import {
   TemplateRef,
   ViewChild
 } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { OrderItem, User } from '@mix/mix.lib';
+import { ActivationEnd } from '@angular/router';
+import { Order, OrderItem, User } from '@mix/mix.lib';
 import {
+  AppEvent,
+  AppEventService,
   AuthApiService,
   BaseComponent,
   CartApiService,
   DestroyService,
-  ShareApiService
+  LoadingState
 } from '@mix/mix.share';
-import { takeUntil } from 'rxjs';
+import { filter, takeUntil } from 'rxjs';
 
 import { LoginComponent } from '../../routes/login/login.component';
 import { CartDialogComponent } from '../cart-dialog/cart-dialog.component';
@@ -42,23 +44,26 @@ export class HeaderComponent extends BaseComponent {
     search: this.nestoHost + 'search',
     account: this.nestoHost + 'customer-account/account-information',
     checkout: this.nestoHost + 'customer-account/cart/delivery-payment',
-    cart: this.nestoHost + 'customer-account/cart'
+    cart: this.nestoHost + 'customer-account/cart',
+    contact: this.nestoHost + 'contact-us',
+    partner: this.nestoHost + 'partner-ship'
   };
+  public currentRoute = '';
 
   public currentUser: User | null = null;
   public currentTotalCart = 0;
+  public currentOrderItems: OrderItem[] = [];
   public showLogin = false;
 
   constructor(
-    private fb: FormBuilder,
-    private shareSetting: ShareApiService,
     private authSrv: AuthApiService,
     private cartSrv: CartApiService,
     public dialog: MatDialog,
     public headerService: HeaderService,
     public cdr: ChangeDetectorRef,
     private readonly zone: NgZone,
-    public destroy: DestroyService
+    public destroy: DestroyService,
+    public appEvent: AppEventService
   ) {
     super();
     (window as any)['headerService'] = headerService;
@@ -70,21 +75,37 @@ export class HeaderComponent extends BaseComponent {
     });
     this.checkAccount();
     this.fetchUserCart();
+
+    this.currentRoute = window.location.pathname;
+    this.route.events
+    .pipe(filter(event => event instanceof ActivationEnd))
+    .subscribe(() => {
+      this.currentRoute = this.route.url;
+    })
+    this.appEvent.getEvent(AppEvent.CartUpdate).pipe(takeUntil(this.destroy)).subscribe((event) => {
+      this.currentTotalCart = event.data?.orderItems?.length ?? 0;
+    })
   }
 
   public checkAccount(): void {
+    this.loadingState$.next(LoadingState.Loading);
     const accessToken = localStorage.getItem('access_token');
     if (accessToken) {
-      this.authSrv.fetchUserInfo().subscribe({
-        next: res => {
-          this.authSrv.user$.next(res);
-          this.authSrv.isAuthorized$.next(true);
-        },
-        error: () => {
-          this.toast.warning('Your session is expired, please login again');
-          this.showLoginDialog();
-        }
-      });
+      this.authSrv
+        .fetchUserInfo()
+        .pipe(this.observerLoadingState())
+        .subscribe({
+          next: res => {
+            this.authSrv.user$.next(res);
+            this.authSrv.isAuthorized$.next(true);
+          },
+          error: () => {
+            this.toast.warning('Your session is expired, please login again');
+            localStorage.removeItem('access_token');
+          }
+        });
+    } else {
+      this.loadingState$.next(LoadingState.Success);
     }
   }
 
@@ -100,19 +121,21 @@ export class HeaderComponent extends BaseComponent {
   public addToCart(post: OrderItem): void {
     this.cartSrv
       .addToCart({
+        sku: post.sku,
         title: post.title,
         quantity: post.quantity,
         postId: post.postId,
         description: post.description ?? '',
         image: post.image ?? '',
-        referenceUrl: ''
+        referenceUrl: '',
+        isActive: true
       })
       .subscribe({
-        next: () => {
+        next: v => {
           this.zone.run(() => {
             this.toast.success('Add to cart successfully');
-            this.fetchUserCart();
-            this.showCartDialog();
+            this.currentTotalCart = v.orderItems.length;
+            this.showCartDialog(v);
             this.cdr.detectChanges();
           });
         },
@@ -132,14 +155,18 @@ export class HeaderComponent extends BaseComponent {
 
   public showLoginDialog(): void {
     this.dialog.open(LoginComponent, {
-      panelClass: 'login-dialog'
+      panelClass: 'login-dialog',
+      autoFocus: false
     });
   }
 
-  public showCartDialog(): void {
+  public showCartDialog(data?: Order): void {
     this.dialog.open(CartDialogComponent, {
       panelClass: 'side-dialog',
-      autoFocus: false
+      autoFocus: false,
+      data: data ? {
+        order: data
+      } : undefined
     });
   }
 

@@ -2,7 +2,7 @@
   // Editor Options
   // When opening a file, `editor.tabSize` and `editor.insertSpaces` will NOT be detected based on the file contents.
   "editor.detectIndentation": false,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "editor.fontLigatures": true,
   // Controls if the editor will insert spaces for tabs.
   "editor.insertSpaces": true,

@@ -2,6 +2,7 @@ export { ApplicationApiService } from './api/application-api.service';
 export { AuthApiService } from './api/auth-api.service';
 export { CartApiService } from './api/cart-api.service';
 export { DashboardApiService } from './api/dashboard-api.service';
+export { DynamicDbApiService } from './api/dynamic-db-api.service';
 export { MixFileApiService } from './api/file-api.service';
 export { DatabaseApiService } from './api/mix-database-api.service';
 export { ProvinceApiService } from './api/province-api.service';

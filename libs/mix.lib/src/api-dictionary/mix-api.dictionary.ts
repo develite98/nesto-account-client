@@ -2,6 +2,7 @@ import { ApplicationApiDictionary } from './application-api.dictionary';
 import { CartApiDictionary } from './cart-api.dictionary';
 import { FileApiDictionary } from './file-api.dictionary';
 import { DatabaseApiDictionary } from './mix-database.dictionary';
+import { MixDynamicDbDictionary } from './mix-dynamic-db.dictionary';
 import { UploadFileApiDictionary } from './mix-upload-api.dictionary';
 import { ModuleApiDictionary } from './module-api.dictionary';
 import { PageApiDictionary } from './page-api.dictionary';
@@ -36,12 +37,14 @@ export class MixApiDictionary {
     new ApplicationApiDictionary();
   public UserDataApi: MixUserDataApiDict = new MixUserDataApiDict();
   public CartApi: CartApiDictionary = new CartApiDictionary();
+  public DynamicDbApi: MixDynamicDbDictionary = new MixDynamicDbDictionary();
 
   // reference table
   public PostPostApi: PostPostApiDictionary = new PostPostApiDictionary();
   public PageModuleApi: PageModuleApiDictionary = new PageModuleApiDictionary();
   public UserApi: UsersApiDictionary = new UsersApiDictionary();
   public RoleApi: RolesApiDictionary = new RolesApiDictionary();
+
   // File
   public UploadApi: UploadFileApiDictionary = new UploadFileApiDictionary();
   public FileApi: FileApiDictionary = new FileApiDictionary();

@@ -1,39 +1,94 @@
 <div class="address-selected-dialog">
   <div class="address-selected-dialog__header text-uppercase">
-    Your addresses
+    <div class="header-title text-uppercase">
+      <ng-container *ngIf="mode === 'select'">
+        Your Address
+      </ng-container>
+
+      <ng-container *ngIf="mode === 'create'">
+        Create new
+      </ng-container>
+
+      <ng-container *ngIf="mode === 'update'">
+        Update Address
+      </ng-container>
+    </div>
+
+    <a class="link-hoverable d-flex align-item-center"
+       (click)="close()">
+      <span class="material-symbols-outlined">
+        close
+      </span>
+    </a>
   </div>
 
   <div class="address-selected-dialog__body">
-    <div *ngFor="let selectedAddress of availableAddress "
-         class="w-100 mt-16">
-      <div class="w-100 d-flex">
-        <div class="me-3">
-          <mat-radio-button [checked]="selectedAddressId === selectedAddress.id"
-                            [value]="selectedAddress.id"
-                            (change)="selectedAddressId = selectedAddress.id"></mat-radio-button>
+    <ng-container *ngIf="mode === 'select'">
+      <div *ngFor="let selectedAddress of availableAddress "
+           class="w-100 mt-16">
+        <div class="w-100 d-flex">
+          <div class="me-3">
+            <mat-radio-button [checked]="selectedAddressId === selectedAddress.id"
+                              [value]="selectedAddress.id"
+                              (change)="selectedAddressId = selectedAddress.id"></mat-radio-button>
+          </div>
+
+          <div class="w-100"
+               (click)="selectedAddressId = selectedAddress.id">
+            <p class="address-title fw-400"> {{ selectedAddress.name }}
+              <a class="nesto-link text-14 ms-auto"
+                 (click)="updateAddress(selectedAddress)">
+                <span class="material-symbols-outlined">
+                  edit
+                </span>
+              </a>
+            </p>
+            <p class="description fw-300"> +{{ selectedAddress.phone }} </p>
+            <p class="description fw-300"> {{ selectedAddress.email }} </p>
+            <p class="description fw-300"> {{ selectedAddress.street }} </p>
+          </div>
         </div>
 
-        <div (click)="selectedAddressId = selectedAddress.id">
-          <p class="text-20 fw-500"> {{ selectedAddress.name }} </p>
-          <p class="text-18 fw-300"> +{{ selectedAddress.phone }} </p>
-          <p class="text-18 fw-300"> {{ selectedAddress.email }} </p>
-          <p class="text-18 fw-300"> {{ selectedAddress.street }} </p>
-        </div>
+        <div class="address-separator"></div>
       </div>
 
-      <div class="address-separator"></div>
-    </div>
+      <a class="link-hoverable mt-16 d-flex align-items-center"
+         (click)="mode = 'create'">Add new address <span class="material-symbols-outlined">
+          add
+        </span></a>
+    </ng-container>
 
-    <div class="w-100 mt-50 row">
-      <div class="col-6">
-        <button class="nesto-btn w-100 big"
-                (click)="dialog.close()">CANCEL</button>
+    <ng-container *ngIf="mode === 'create'">
+      <a class="link-hoverable mb-16 d-flex align-items-center"
+         (click)="mode = 'select'"><span class="material-symbols-outlined">
+          arrow_back
+        </span> Back</a>
+      <mix-address-input #createForm></mix-address-input>
+    </ng-container>
+
+    <ng-container *ngIf="mode === 'update'  && currentUpdateAddress">
+      <a class="link-hoverable mb-16 d-flex align-items-center"
+         (click)="mode = 'select'"><span class="material-symbols-outlined">
+          arrow_back
+        </span> Back</a>
+      <mix-address-input #updateForm
+                         [address]="currentUpdateAddress"
+                         [mode]="'update'"></mix-address-input>
+    </ng-container>
+  </div>
+
+  <div class="address-selected-dialog__action">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <button class="nesto-btn w-100 big mb-3 mb-md-0"
+                (click)="close()">CANCEL</button>
       </div>
 
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <button class="primary nesto-btn w-100 big"
                 (click)="submit()">SUBMIT</button>
       </div>
     </div>
+
   </div>
 </div>

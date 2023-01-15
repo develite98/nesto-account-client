@@ -32,10 +32,14 @@ import { AccountRefundManageComponent } from './components/account-refund-manage
 import { AddressInputComponent } from './components/address-input/address-input.component';
 import { AddressSelectedDialogComponent } from './components/address-selected-dialog/address-selected-dialog.component';
 import { CartDialogComponent } from './components/cart-dialog/cart-dialog.component';
+import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { GetInTouchFormComponent } from './components/get-in-touch-form/get-in-touch-form.component';
+import { GetInvitationFormComponent } from './components/get-invitation-form/get-invitation-form.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MoneyDisplayComponent } from './components/money-display/money-display.component';
 import { NestoFooterComponent } from './components/nesto-footer/nesto-footer.component';
+import { NumberInputComponent } from './components/number-input/number-input.component';
 import { AtmIconComponent } from './components/svg-icon/atm.component';
 import { MOMOIconComponent } from './components/svg-icon/momo.component';
 import { NationIconComponent } from './components/svg-icon/nation.component';
@@ -72,7 +76,11 @@ import { AuthInterceptor } from './services/auth.interceptor';
     ConfirmationDialogComponent,
     AddressSelectedDialogComponent,
     MoneyDisplayComponent,
-    NestoFooterComponent
+    NestoFooterComponent,
+    NumberInputComponent,
+    CartItemComponent,
+    GetInTouchFormComponent,
+    GetInvitationFormComponent
   ],
   imports: [
     BrowserModule,
@@ -109,18 +117,37 @@ import { AuthInterceptor } from './services/auth.interceptor';
       useClass: AuthInterceptor,
       multi: true
     }
-  ],
-  entryComponents: [HeaderComponent]
+  ]
 })
 export class AppModuleWebElement implements DoBootstrap {
   constructor(private injector: Injector) {
+    // header
     const webComponent = createCustomElement(HeaderComponent, { injector });
     customElements.define('mix-header', webComponent);
 
+    // footer
     const footerComponent = createCustomElement(NestoFooterComponent, {
       injector
     });
     customElements.define('mix-footer', footerComponent);
+
+    // number input
+    const numberInputComponent = createCustomElement(NumberInputComponent, {
+      injector
+    });
+    customElements.define('mix-number-input', numberInputComponent);
+
+    // get in touch form
+    const getInTouchForm = createCustomElement(GetInTouchFormComponent, {
+      injector
+    });
+    customElements.define('mix-ng-get-in-touch-form', getInTouchForm);
+
+    // get invitation form
+    const getInvitationForm = createCustomElement(GetInvitationFormComponent, {
+      injector
+    });
+    customElements.define('mix-ng-get-invitation-form', getInvitationForm);
   }
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method, @typescript-eslint/no-empty-function

@@ -57,6 +57,7 @@
     "ngx-monaco-editor": "^12.0.0",
     "panzoom": "^9.4.3",
     "rxjs": "~7.5.7",
+    "smooth-scrollbar": "^8.8.1",
     "tslib": "^2.4.0",
     "yargs-parser": "^21.1.1",
     "zone.js": "~0.11.8"

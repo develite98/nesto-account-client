@@ -13,7 +13,8 @@ export enum AppEvent {
   UniversalSearch = 'UniversalSearch',
   ThemeSelected = 'ThemeSelected',
   Refresh = 'Refresh',
-  InstallApp = 'InstallApp'
+  InstallApp = 'InstallApp',
+  CartUpdate = 'CartUpdate'
 }
 
 export interface AppEventModel {

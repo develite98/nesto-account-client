@@ -1,6 +1,7 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import {
   AuthApiService,
   BaseComponent,
@@ -10,38 +11,52 @@ import {
 import { UserData } from 'libs/mix.share/src/services/api/auth-api.service';
 import { switchMap, takeUntil } from 'rxjs';
 
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+
 @Component({
   selector: 'mix-account-main-info',
   templateUrl: './account-main-info.component.html',
   styleUrls: ['./account-main-info.component.scss'],
-  providers: [DestroyService]
+  providers: [DestroyService],
+  encapsulation: ViewEncapsulation.None
 })
 export class AccountMainInfoComponent extends BaseComponent implements OnInit {
-  public dayControl = new FormControl();
-  public monthControl = new FormControl();
-  public yearControl = new FormControl();
-  public samplePassword = 'ABCDEFGHIKLMN';
-
   public userForm = new FormGroup({
-    email: new FormControl('', Validators.required),
+    email: new FormControl(''),
     phoneNumber: new FormControl(''),
     fullName: new FormControl(''),
     avatar: new FormControl(''),
     dateOfBirth: new FormControl<Date | null>(null),
     gender: new FormControl('')
   });
-
-  public passwordForm = new FormGroup({
-    password: new FormControl('', Validators.required),
-    confirmPassword: new FormControl('', Validators.required)
-  });
-
   public userModel!: UserData;
   public userAvatar = '';
 
+  public confirmationValidator = (
+    control: FormControl
+  ): { [s: string]: boolean } => {
+    if (!control.value) {
+      return { required: true };
+    } else if (control.value !== this.passwordForm.controls['password'].value) {
+      return { confirm: true, error: true };
+    }
+    return {};
+  };
+
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  public passwordForm = new FormGroup({
+    currentPassword: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+    confirmPassword: new FormControl('', [
+      Validators.required,
+      this.confirmationValidator
+    ])
+  });
+
   constructor(
     public authService: AuthApiService,
-    public destroy$: DestroyService
+    public destroy$: DestroyService,
+    public dialog: MatDialog
   ) {
     super();
   }
@@ -51,12 +66,9 @@ export class AccountMainInfoComponent extends BaseComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe(isAuthorized => {
         if (isAuthorized) {
-          this.authService.fetchUserInfo().subscribe(u => {
-            this.userForm.controls.email.patchValue(u.email ?? '');
-          });
-
           this.authService.fetchUserData().subscribe(u => {
             this.userModel = u;
+            this.userForm.controls.email.patchValue(u.email ?? '');
             this.userForm.controls.fullName.patchValue(u.fullname ?? '');
             this.userForm.controls.gender.patchValue(u.gender ?? '');
             this.userForm.controls.phoneNumber.patchValue(u.phoneNumber ?? '');
@@ -87,7 +99,8 @@ export class AccountMainInfoComponent extends BaseComponent implements OnInit {
               fullname: this.userForm.value.fullName ?? '',
               gender: this.userForm.value.gender ?? '',
               avatar: this.userForm.value.avatar ?? '',
-              dateOfBirth: this.userForm.value.dateOfBirth ?? undefined
+              dateOfBirth: this.userForm.value.dateOfBirth ?? undefined,
+              email: this.userForm.value.email ?? ''
             })
           )
         )
@@ -99,6 +112,38 @@ export class AccountMainInfoComponent extends BaseComponent implements OnInit {
           })
         )
         .subscribe();
+    }
+  }
+
+  public changePassword(): void {
+    if (FormUtils.validateForm(this.passwordForm)) {
+      this.dialog
+        .open(ConfirmationDialogComponent, {
+          data: `Are you sure to change your password?`
+        })
+        .afterClosed()
+        .subscribe((yes: boolean) => {
+          if (yes) {
+            this.authService
+              .changePassword({
+                currentPassword: this.passwordForm.value.currentPassword || '',
+                newPassword: this.passwordForm.value.password || '',
+                confirmPassword: this.passwordForm.value.confirmPassword || ''
+              })
+              .pipe(
+                this.toast.observe({
+                  success: 'Updating your password',
+                  error: 'Error, please try again',
+                  loading: 'Successfully'
+                })
+              )
+              .subscribe(() => {
+                this.passwordForm.reset();
+              });
+          } else {
+            return;
+          }
+        });
     }
   }
 }

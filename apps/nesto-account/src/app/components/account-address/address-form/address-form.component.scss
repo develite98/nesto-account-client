@@ -1,13 +1,52 @@
-.nesto-dialog {
-  min-width: none;
+
+@media only screen and (max-width: 800px) {
+  .address-form-dialog {
+    height: 100vh !important;
+    width: 100vw !important;
+    min-width: unset !important;
+    left: 0;
+    overflow-x: hidden;
+
+    &__header {
+      padding: 18px !important;
+
+      .header-title {
+        font-size: 16px !important;
+      }
+    }
+
+    &__body {
+      padding: 18px !important;
+      height: calc(100vh - 130px - 80px);
+      overflow: auto;
+    }
+
+    &__footer {
+      padding: 18px !important;
+
+      .nesto-btn.big {
+        height: 40px !important;
+      }
+    }
+  }
+}
+
+.address-form-dialog {
+  min-width: 636px;
+
+  .error-message {
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 0px !important;
+  }
 
   &__header {
     padding: 0px 30px;
     height: 76px;
+    display: flex;
     align-items: center;
     border-bottom: 1px solid var(--text-on-white-blur);
     justify-content: space-between;
-    display: flex;
 
     .header-title {
       font-size: 24px;
@@ -15,10 +54,14 @@
   }
 
   &__body {
-    padding: 30px;
+    padding: 34px 30px;
   }
 
   &__footer {
-    padding: 30px;
+    position: sticky;
+    background-color: #fff;
+    padding: 34px 30px;
+    bottom: 0;
   }
 }
+

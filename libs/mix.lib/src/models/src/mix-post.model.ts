@@ -23,6 +23,6 @@ export interface MixPostPortalModel
   templateId?: number;
   moduleNavs?: MixModuleReferenceModel[];
   postNavs?: MixPostReferenceModel[];
-  additionalData?: Record<string, string>;
+  additionalData?: Record<string, string | string[] | object[]>;
   image?: string;
 }

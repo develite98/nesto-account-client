@@ -1,28 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { OrderItem } from '@mix/mix.lib';
+import { CheckoutType, MixPostPortalModel, Order, OrderItem } from '@mix/mix.lib';
 import {
   AuthApiService,
   BaseComponent,
   CartApiService,
   MixPostContentApiService
 } from '@mix/mix.share';
-import { combineLatest, map, switchMap } from 'rxjs';
+import { environment } from 'apps/nesto-account/src/environments/environment';
+import { combineLatest, map,switchMap } from 'rxjs';
 
+import { AddressFormComponent } from '../../components/account-address/address-form/address-form.component';
 import { AddressSelectedDialogComponent } from '../../components/address-selected-dialog/address-selected-dialog.component';
-import { Address } from '../../models/user-data.model';
+import { updateOrderVariant } from '../../helper/order.helper';
+import { Address, UserData } from '../../models/user-data.model';
 
 @Component({
   selector: 'mix-delivery-payment',
   templateUrl: './delivery-payment.component.html',
-  styleUrls: ['./delivery-payment.component.scss']
+  styleUrls: ['./delivery-payment.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DeliveryPaymentComponent extends BaseComponent implements OnInit {
   public currentAddress: Address[] = [];
-  public currentOrder: OrderItem[] = [];
+  public currentOrderItems: OrderItem[] = [];
+  public currentOrder!: Order;
   public selectedAddress?: Address;
   public currentSubTotal = 0;
-  public nestoHost = 'http://nesto.tanconstructions.com.au/';
+  public currentPosts: MixPostPortalModel[] = [];
+  public nestoHost = environment.nestoDomain;
   public navigation = {
     product: this.nestoHost + 'products',
     collection: this.nestoHost + 'collection',
@@ -36,6 +42,9 @@ export class DeliveryPaymentComponent extends BaseComponent implements OnInit {
     cart: this.nestoHost + 'customer-account/cart'
   };
 
+  public currentPaymentType: CheckoutType | undefined = CheckoutType.Onepay;
+  public checkoutType = CheckoutType;
+
   constructor(
     public dialog: MatDialog,
     private authApi: AuthApiService,
@@ -47,6 +56,16 @@ export class DeliveryPaymentComponent extends BaseComponent implements OnInit {
 
   public ngOnInit(): void {
     this.loadData();
+  }
+
+  public get canCheckout(): boolean {
+    return (
+      this.currentOrderItems &&
+      this.currentOrderItems.filter(or => or.isActive).length >= 1 &&
+      !!this.selectedAddress &&
+      this.currentPaymentType !== undefined &&
+      !this.currentOrderItems.some(or => this.isOverStock(or) || this.isSoldOut(or))
+    );
   }
 
   public loadData(): void {
@@ -76,12 +95,10 @@ export class DeliveryPaymentComponent extends BaseComponent implements OnInit {
       .pipe(this.observerLoadingState())
       .subscribe({
         next: v => {
-          this.currentOrder = v.order.orderItems.map(item => {
-            item.post = v.post.find(p => p.id === item.postId);
-
-            return item;
-          });
-
+          this.currentPosts = v.post;
+          v.order = updateOrderVariant(v.order, this.currentPosts);
+          this.currentOrder = v.order;
+          this.currentOrderItems = v.order.orderItems.filter(order => order.isActive);
           this.currentSubTotal = v.order.total;
         }
       });
@@ -94,12 +111,14 @@ export class DeliveryPaymentComponent extends BaseComponent implements OnInit {
           addresses: this.currentAddress,
           selectedAddress: this.selectedAddress?.id
         },
-        autoFocus: false
+        autoFocus: false,
+        panelClass: 'nesto-dialog'
       })
       .afterClosed()
       .subscribe(r => {
-        if (r.selectedAddress) {
+        if (r && r.selectedAddress) {
           this.selectedAddress = r.selectedAddress;
+          this.currentAddress = r.availableAddress;
         }
       });
   }
@@ -113,5 +132,45 @@ export class DeliveryPaymentComponent extends BaseComponent implements OnInit {
     } else {
       return 0;
     }
+  }
+
+  public showInputAddress(): void {
+    const dialogRef = this.dialog.open(AddressFormComponent, {
+      panelClass: 'nesto-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe((v: UserData) => {
+      if (v && v.addresses) {
+        const newAddress = v.addresses[v.addresses.length - 1]
+        this.currentAddress.push(newAddress);
+        this.selectedAddress = newAddress;
+      }
+    });
+  }
+
+  public onCheckout(): void {
+    if (this.currentPaymentType && this.selectedAddress) {
+      this.cartApi
+        .checkout(
+          {
+            ...this.currentOrder,
+            address: this.selectedAddress,
+            email: this.selectedAddress?.email
+          },
+          this.currentPaymentType
+        )
+        .pipe(this.observerLoadingState())
+        .subscribe(link => {
+          window.open(link.url, '_self');
+        });
+    }
+  }
+
+  public isOverStock(orderItem: OrderItem): boolean {
+    return !!orderItem.inventory && orderItem.inventory !== 0 && orderItem.inventory < orderItem.quantity;
+  }
+
+  public isSoldOut(orderItem: OrderItem): boolean {
+    return  orderItem.inventory === 0;
   }
 }

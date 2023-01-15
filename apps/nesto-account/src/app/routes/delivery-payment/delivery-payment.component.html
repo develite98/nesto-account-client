@@ -1,109 +1,108 @@
-<div class="nesto-container container-left delivery-payment-manage">
+<div class="nesto-container delivery-payment-manage">
   <span class="nesto-breadcrumb">
     <a href="/">HOME</a> / <a href="#">DELIVERY & PAYMENT</a>
   </span>
 
-  <div class="row justify-content-between">
-    <div class="col-6 ">
+  <div class="row justify-content-between delivery-payment-manage__main-container">
+    <div class="col-12 col-md-6">
       <div class="d-flex w-100 justify-content-between">
         <h2 class="text-20 fw-100 text-uppercase">Contact information</h2>
       </div>
 
       <div class="d-flex w-100 justify-content-between mt-16">
-        <span class="text-30 fw-500">{{ selectedAddress?.email ?? '' }}</span>
+        <span class="contact-email">{{ selectedAddress?.email ?? '' }}</span>
       </div>
 
-      <div class="separtor mt-32 mb-50"></div>
+      <div class="separtor mt-32 mb-50 mb-xs-30"></div>
 
-      <div class="d-flex w-100 justify-content-between">
+      <div class="d-flex w-100 justify-content-start">
         <h2 class="text-20 fw-100 text-uppercase">Delivery information</h2>
 
-        <a class="nesto-link text-14 fw-300 link-hoverable"
+        <a class="nesto-link ms-auto text-12 fw-300 link-hoverable reset-padding"
            (click)="changeAddress()">Change</a>
       </div>
 
       <div *ngIf="selectedAddress"
            class="position-relative w-100 mt-16">
         <p class="text-20 fw-500"> {{ selectedAddress.name }} </p>
-        <p class="text-18 fw-300"> +{{ selectedAddress.phone }} </p>
-        <p class="text-18 fw-300"> {{ selectedAddress.email }} </p>
-        <p class="text-18 fw-300"> {{ selectedAddress.street }} </p>
+        <p class="delivery-info"> +{{ selectedAddress.phone }} </p>
+        <p class="delivery-info"> {{ selectedAddress.email }} </p>
+        <p class="delivery-info">
+          {{ selectedAddress.street }} {{ selectedAddress.ward }}, {{ selectedAddress.district }}, {{ selectedAddress.province}}
+        </p>
         <button class="nesto-btn small disabled position-absolute top-0 end-0"> Default</button>
 
       </div>
 
-      <div class="separtor mt-32 mb-50"></div>
+      <div *ngIf="!selectedAddress">
+        <p class="text-18 fw-300"> Please <a class="link-hoverable"
+             (click)="showInputAddress()">Click here</a> add
+          shipping address.</p>
+      </div>
+
+      <div class="separtor mt-50 mt-xs-30 mb-50 mb-xs-30"></div>
 
       <h2 class="text-20 fw-100  text-uppercase">Payment</h2>
 
-      <div class="mt-16">
-        <mat-checkbox>
-          <div class="checkbox-icon">
-            <mix-momo-icon></mix-momo-icon>
-          </div>
-          Thanh toán bằng ví MoMo
-        </mat-checkbox>
-      </div>
-      <div class="mt-16">
-        <mat-checkbox>
-          <div class="checkbox-icon">
-            <mix-zalopay-icon></mix-zalopay-icon>
-          </div>
-          Thanh toán bằng ví ZaloPay
-        </mat-checkbox>
-      </div>
-      <div class="mt-16">
-        <mat-checkbox>
+      <div class="mt-24">
+        <mat-checkbox [checked]="currentPaymentType === 'Onepay'"
+                      (change)="$event.checked ? currentPaymentType = checkoutType.Onepay : currentPaymentType = undefined">
           <div class="checkbox-icon">
             <mix-atm-icon></mix-atm-icon>
           </div>
-          Thanh toán qua thẻ OnePay
+          Pay with Onepay
         </mat-checkbox>
       </div>
-      <!-- <div class="mt-16">
-        <mat-checkbox>
-          <div class="checkbox-icon">
-            <mix-nation-icon></mix-nation-icon>
-          </div>
-          Thanh toán bằng thẻ quốc tế
-        </mat-checkbox>
-      </div> -->
     </div>
 
-    <div class="col-5">
+    <div class="col-12 col-md-6 order-widget-container delivery-cart">
       <div class="order-widget">
-        <div *ngFor="let order of currentOrder"
-             class="order-widget__product">
-          <div class="row">
-            <div class="col-auto">
-              <div class="product-image">
-                <img [alt]="order.title"
-                     [src]="order.post?.image ?? ''">
-              </div>
-            </div>
-            <div class="col-7">
-              <div class="product-title"> {{ order.title }}</div>
-              <span class="text-blur">SKU:{{ $any(order).sku ?? ''}}</span>
+        <div *ngFor="let order of currentOrderItems">
+          <mix-cart-item [order]="order"
+                         [type]="'view'"></mix-cart-item>
+        </div>
 
-              <div class="w-100 d-flex justify-content-between text-12 mt-24">
-                <span>Quantity: </span> <span>{{order.quantity}}</span>
-              </div>
+        <div *ngIf="currentOrderItems.length"
+             class="shipping-area">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <span class="text-14 fw-300">Shipping fee</span>
+            <span class="text-16 fw-300">
+              <mix-money-display [currencySize]="14"
+                                 [textSize]="16"
+                                 [value]="0"></mix-money-display>
+            </span>
+          </div>
 
-              <div class="w-100 d-flex justify-content-between text-blur text-12">
-                <span>Unit: </span> <span>piece</span>
-              </div>
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <span class="text-14 fw-300">Estimated shipping time
+              <br>
+              <a class="text-12 link-hoverable">Refer to shipping policy</a>
+            </span>
+            <span class="text-14 fw-300">
+              3 days
+            </span>
+          </div>
 
-              <div class="w-100 d-flex justify-content-end text-20 fw-500 mt-24">
-
-                <mix-money-display [currencySize]="16"
-                                   [textSize]="20"
-                                   [value]="order.total"></mix-money-display>
-              </div>
-            </div>
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <span class="text-14 fw-300">Discount</span>
+            <span class="text-16 fw-300">
+              <mix-money-display [currencySize]="14"
+                                 [textSize]="16"
+                                 [value]="0"></mix-money-display>
+            </span>
           </div>
         </div>
 
-        <div class="checkout-area">
+        <div *ngIf="!currentOrderItems.length"
+             class="w-100">
+          <h2 class="text-36 fw-100 mt-24 mt-xs-unset">Your cart is empty.</h2>
+
+          <p>Visit our <a class="link-hoverable"
+               href="#">Product</a> page</p>
+        </div>
+
+        <div *ngIf="currentOrderItems.length"
+             class="checkout-area">
           <div class="d-flex align-items-center justify-content-between mt-32">
             <span class="text-18 fw-300">Subtotal</span>
             <span class="text-24 fw-500">
@@ -114,10 +113,14 @@
           </div>
         </div>
 
-        <div class="mt-50 w-100 d-flex flex-column align-items-center">
-          <button class="nesto-btn w-100 secondary big">CHECK OUT</button>
+        <div *ngIf="loadingState$ | async as state"
+             class="mt-50 w-100 d-flex flex-column align-items-center">
+          <button class="nesto-btn w-100 secondary big"
+                  [ngClass]="{ 'disabled': !canCheckout, 'loading': state === 'Loading' }"
+                  (click)="onCheckout()">CHECK
+            OUT</button>
 
-          <a class="link-hoverable mt-24 d-block"
+          <a class="link-hoverable t-white text-14 mt-24 d-block --border"
              [href]="navigation.cart">Back to cart</a>
         </div>
       </div>

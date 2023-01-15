@@ -1,0 +1,29 @@
+<div *ngIf="loadingState$ | async as loading"
+     class="w-100 get-in-touch-form get-invitation-form">
+  <div class="row justify-content-end">
+    <div class="col-12"
+         [formGroup]="getInvitationForm">
+      <mat-form-field class="w-100 text-14">
+        <mat-label>Email</mat-label>
+        <input type="text"
+               formControlName="email"
+               matInput>
+      </mat-form-field>
+      <p *ngIf="getError(getInvitationForm, 'email','required')"
+         class="text-danger error-message">This field is
+        required
+      </p>
+
+      <p *ngIf="getError(getInvitationForm, 'email','email')"
+         class="text-danger error-message">Invalid email
+      </p>
+    </div>
+
+    <div class="col-auto">
+      <button class="nesto-btn"
+              [ngClass]="{'loading': loading === 'Loading'}"
+              (click)="submitGetInvitation()"
+              style="margin-bottom: 18px;">GET INVITATION</button>
+    </div>
+  </div>
+</div>

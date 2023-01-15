@@ -1,0 +1,109 @@
+<div class="nesto-container payment-result">
+  <span class="nesto-breadcrumb">
+    <a href="/">HOME</a> / <a href="#">DELIVERY & PAYMENT</a> / <a> PAYMENT</a>
+  </span>
+
+  <ng-container *ngIf="currentOrderResult">
+    <div *ngIf="currentOrderResult.paymentStatus && currentOrderResult.paymentStatus === paymentStatus.SENT"
+         class="payment-result__title">
+      WAITING TO PAY
+    </div>
+
+    <div *ngIf="currentOrderResult.paymentStatus && currentOrderResult.paymentStatus === paymentStatus.SUCCESS"
+         class="payment-result__title">
+      ORDER SUCCESSFULLY
+    </div>
+
+    <div *ngIf="currentOrderResult.paymentStatus && currentOrderResult.paymentStatus === paymentStatus.FAILED"
+         class="payment-result__title">
+      ORDER FAILED !
+    </div>
+
+    <div class="payment-result__toolbar ">
+      <div class="pay-id">
+        Order ID: #{{ currentOrderResult.id }}
+      </div>
+
+      <a class="link-hoverable"
+         (click)="viewOrderStatus()">View order status</a>
+    </div>
+
+    <div class="w-100">
+      <div class="row w-100">
+        <div class="col-12 col-md-6 payment-result__order-items">
+          <ng-container *ngFor="let order of currentOrderResult.orderItems">
+            <mix-cart-item type="view"
+                           [order]="order"></mix-cart-item>
+          </ng-container>
+
+          <div class="fee-area">
+            <div class="d-flex align-items-center justify-content-between mb-custom">
+              <span class="text-14 fw-300">Shipping fee</span>
+              <span class="text-16 fw-500">
+                <mix-money-display [currencySize]="16"
+                                   [textSize]="20"
+                                   [value]="0"></mix-money-display>
+              </span>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-between mb-custom">
+              <span class="text-14 fw-300">Discount</span>
+              <span class="text-16 fw-500">
+                <mix-money-display [currencySize]="16"
+                                   [textSize]="20"
+                                   [value]="0"></mix-money-display>
+              </span>
+            </div>
+
+            <div class="separator mb-custom"></div>
+
+            <div class="d-flex align-items-center justify-content-between mb-custom">
+              <span class="text-14 fw-300">Total</span>
+              <span class="text-16 fw-500">
+                <mix-money-display [currencySize]="16"
+                                   [textSize]="20"
+                                   [value]="currentOrderResult.total"></mix-money-display>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 payment-result__fee">
+          <div class="d-flex align-items-center justify-content-between mb-custom fee-item">
+            <span class="text-14 fw-300">Payment gateway
+            </span>
+            <span class="text-14 fw-300">
+              <ng-container *ngIf="currentOrderResult.paymentGateway === checkoutType.Onepay">
+                <mix-atm-icon></mix-atm-icon>
+              </ng-container>
+            </span>
+          </div>
+
+          <div class="d-flex align-items-center justify-content-between mb-custom fee-item">
+            <span class="text-14 fw-300">Estimated shipping time
+              <br>
+              <a class="text-12 link-hoverable">Refer to shipping policy</a>
+            </span>
+            <span class="text-14 fw-300">
+              3 days
+            </span>
+          </div>
+
+          <div class="separator mb-custom"></div>
+
+          <div class="mb-custom fee-item">Order details have been sent to email: {{currentOrderResult.email}}.</div>
+
+          <div class="separator mb-custom"></div>
+
+          <div class="mb-custom fee-item">Follow your order at: <a class="link-hoverable">Manage orders</a></div>
+
+          <div class="separator mb-custom"></div>
+
+          <div class="mb-custom justify-content-between d-flex">
+            <div>Thank you</div> <a class="link-hoverable">Back to product</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+</div>

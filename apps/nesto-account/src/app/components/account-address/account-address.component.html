@@ -1,5 +1,5 @@
 <div *ngIf="loadingState$ | async as state"
-     class="container-fluid">
+     class="nesto-container">
   <div class="widget-header">
     <h3>Shipping Address</h3>
   </div>
@@ -12,8 +12,13 @@
         <div class="address-card__header">
           <div class="title">{{ address.name }}</div>
 
-          <div class="toolbar">
-            <button class="nesto-btn small ms-3">Update</button>
+          <div class="toolbar d-none d-md-flex">
+            <a *ngIf="!address.isDefault"
+               class="address-card__setdefault link-hoverable">Set as default</a>
+            <div *ngIf="address.isDefault"
+                 class="address-card__isdefault">default address</div>
+            <button class="nesto-btn small ms-3"
+                    (click)="updateAddress(address)">Update</button>
 
             <a class="link-hoverable"
                (click)="delete(address.id)">
@@ -25,7 +30,8 @@
         </div>
         <div class="address-card__body">
           <div class="d-flex">
-            <span class="fw-600">Address: </span> {{ address.street }}
+            <span class="fw-600">Address: </span> {{ address.street }} {{ address.ward }}, {{ address.district }},
+            {{ address.province}}
           </div>
 
           <div class="d-flex">
@@ -36,6 +42,21 @@
             <span class="fw-600">Email: </span> {{ address.email }}
           </div>
         </div>
+
+        <div class="w-100 mt-4 d-flex justify-content-end d-md-none">
+          <a *ngIf="!address.isDefault"
+             class="address-card__setdefault link-hoverable">Set as default</a>
+          <div *ngIf="address.isDefault"
+               class="address-card__isdefault">default address</div>
+          <a class="address-card__setdefault link-hoverable ms-3"
+             (click)="updateAddress(address)">Update</a>
+          <a class="link-hoverable"
+             (click)="delete(address.id)">
+            <span class="material-symbols-outlined ms-3">
+              delete
+            </span>
+          </a>
+        </div>
       </div>
     </div>
 
@@ -45,8 +66,9 @@
     </div>
 
     <div class="col-12 mt-32">
-      <button class="nesto-btn primary big w-100"
-              (click)="showDialog()"> Add New Shipping Address </button>
+      <button class="nesto-btn primary text-uppercase big w-100"
+              (click)="showDialog()"> Add New Shipping Address
+      </button>
     </div>
   </div>
 </div>

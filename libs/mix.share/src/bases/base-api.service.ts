@@ -72,10 +72,15 @@ export class BaseApiService {
   public post<TRequest, TResult>(
     path: string,
     request: TRequest,
-    params?: HttpParams | IHttpParamObject
+    params?: HttpParams | IHttpParamObject,
+    isRepsonseText?: boolean
   ): Observable<TResult> {
     return this.http
-      .post<TResult>(this.url + path, request, this.getHttpOptions(params))
+      .post<TResult>(
+        this.url + path,
+        request,
+        this.getHttpOptions(params, isRepsonseText)
+      )
       .pipe(catchError(this.handleError));
   }
 
@@ -99,7 +104,8 @@ export class BaseApiService {
   }
 
   private getHttpOptions(
-    customParams?: HttpParams | IHttpParamObject
+    customParams?: HttpParams | IHttpParamObject,
+    isText?: boolean
   ): IHttpOptions {
     let params: HttpParams = new HttpParams();
 
@@ -109,7 +115,10 @@ export class BaseApiService {
       });
     }
 
-    return { params, headers: { 'Content-Type': 'application/json' } };
+    return {
+      params,
+      headers: { 'Content-Type': isText ? 'text/plain' : 'application/json' }
+    };
   }
 
   private handleError(error: Error) {

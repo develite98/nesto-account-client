@@ -1,8 +1,20 @@
 import { Injectable } from '@angular/core';
-import { AddToOrder, MixApiDict, Order } from '@mix/mix.lib';
+import {
+  AddToOrder,
+  CheckoutType,
+  MixApiDict,
+  Order,
+  OrderStatus,
+  PaginationRequestModel,
+  PaginationResultModel
+} from '@mix/mix.lib';
 import { Observable } from 'rxjs';
 
-import { BaseApiService } from '../../bases';
+import { BaseApiService, IHttpParamObject } from '../../bases';
+
+export interface GetOrderQuery extends PaginationRequestModel {
+  statuses?: OrderStatus[];
+}
 
 @Injectable({ providedIn: 'root' })
 export class CartApiService extends BaseApiService {
@@ -10,11 +22,36 @@ export class CartApiService extends BaseApiService {
     return this.get(MixApiDict.CartApi.getMyCart);
   }
 
-  public addToCart(item: AddToOrder): Observable<void> {
-    return this.post<AddToOrder, void>(MixApiDict.CartApi.addToCart, item);
+  public getOrders(
+    request: GetOrderQuery
+  ): Observable<PaginationResultModel<Order>> {
+    return this.get<PaginationResultModel<Order>>(
+      MixApiDict.CartApi.getOrders,
+      <IHttpParamObject>(<any>request)
+    );
+  }
+  public addToCart(item: AddToOrder): Observable<Order> {
+    return this.post<AddToOrder, Order>(MixApiDict.CartApi.addToCart, item);
   }
 
-  public removeFromCart(postId: number): Observable<void> {
-    return this.delete<void>(MixApiDict.CartApi.removeFromCart + postId);
+  public checkout(
+    item: Order,
+    type: CheckoutType
+  ): Observable<{ url: string }> {
+    return this.post<Order, { url: string }>(
+      MixApiDict.CartApi.checkout + '/' + type,
+      item
+    );
+  }
+
+  public changeSelectedCart(item: AddToOrder): Observable<Order> {
+    return this.post<AddToOrder, Order>(
+      MixApiDict.CartApi.changeSelectedCart,
+      item
+    );
+  }
+
+  public removeFromCart(postId: number): Observable<Order> {
+    return this.delete<Order>(MixApiDict.CartApi.removeFromCart + postId);
   }
 }

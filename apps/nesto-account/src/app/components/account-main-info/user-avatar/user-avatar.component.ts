@@ -24,6 +24,7 @@ export class UserAvatarComponent extends BaseComponent implements OnInit {
   public uploadBtn!: ElementRef<HTMLInputElement>;
   public fileForm = new FormControl();
 
+  public allowedFileTypes = ['image/png', 'image/jpeg'];
   constructor(public uploadApi: UploadApiService) {
     super();
   }
@@ -39,12 +40,17 @@ export class UserAvatarComponent extends BaseComponent implements OnInit {
   public onFileChange(event: Event): void {
     const file = (event.target as unknown as any).files[0];
     if (file) {
+      if (!this.allowedFileTypes.includes(file.type)) {
+        this.toast.error('File type not supported, support only PNG / JPEG.');
+        return;
+      }
+
       const formData = new FormData();
       formData.append('file', file);
       formData.append('folder', 'MixContent/StaticFiles/');
 
       this.uploadApi
-        .uploadFile(formData)
+        .customerUploadFile(formData)
         .pipe(
           this.toast.observe({
             loading: 'Uploading',
@@ -54,10 +60,18 @@ export class UserAvatarComponent extends BaseComponent implements OnInit {
         )
         .subscribe({
           next: filePath => {
-            this.avatar = filePath;
+            this.updateAvatar(file);
             this.avatarChange.emit(filePath);
           }
         });
     }
+  }
+
+  public updateAvatar(file: File): void {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      if (reader.result) this.avatar = reader.result?.toString();
+    };
   }
 }

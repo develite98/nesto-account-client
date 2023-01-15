@@ -1,17 +1,17 @@
 <div class="w-100">
-  <div class="widget-header">
+  <div class="widget-header d-none d-md-block">
     <h3>User Information</h3>
   </div>
 
   <div class="row">
-    <div class="col-3">
+    <div class="col-12 col-xl-3">
       <div class="account-main-info__avatar">
         <mix-user-avatar [avatar]="userAvatar"
                          (avatarChange)="avatarChange($event)"></mix-user-avatar>
       </div>
     </div>
 
-    <div class="col-8"
+    <div class="col-12 col-xl-8"
          [formGroup]="userForm"
          style="--input-font-size: 14px;">
       <div class="form-item">
@@ -47,11 +47,18 @@
         </mat-form-field>
       </div>
 
-      <div class="form-item"
+      <div class="form-item --password"
            [formGroup]="passwordForm">
         <p class="label">Password</p>
 
         <div class="d-flex flex-column flex-grow-1">
+          <mat-form-field class="w-100 text-14">
+            <mat-label>Current password</mat-label>
+            <input type="password"
+                   formControlName="currentPassword"
+                   matInput>
+          </mat-form-field>
+
           <mat-form-field class="w-100 text-14">
             <mat-label>New password</mat-label>
             <input type="password"
@@ -67,10 +74,15 @@
                      matInput>
             </mat-form-field>
 
-            <button class="nesto-btn secondary"
+            <button class="nesto-btn small secondary-2"
+                    (click)="changePassword()"
                     style="height: 70%; margin-left: 16px;">Change</button>
           </div>
 
+          <p *ngIf="getError(passwordForm, 'confirmPassword','confirm')"
+             class="text-danger error-message">Invalid
+            confirmation
+            password</p>
         </div>
       </div>
 
@@ -83,7 +95,7 @@
                            formControlName="gender">
             <mat-radio-button value="Male">Male</mat-radio-button>
             <mat-radio-button value="Female">Female</mat-radio-button>
-            <mat-radio-button value="Another">Another</mat-radio-button>
+            <mat-radio-button value="Other">Other</mat-radio-button>
           </mat-radio-group>
         </div>
       </div>
@@ -104,12 +116,12 @@
         </div>
       </div>
 
-      <div class="form-item mt-80">
+      <div class="form-item mt-50">
         <p class="label"></p>
 
         <div class="d-flex flex-grow-1 align-items-center">
           <button class="nesto-btn w-100 primary big"
-                  (click)="saveUser()">Update</button>
+                  (click)="saveUser()">UPDATE</button>
         </div>
       </div>
     </div>

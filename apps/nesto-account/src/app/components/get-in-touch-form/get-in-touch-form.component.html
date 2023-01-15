@@ -1,0 +1,64 @@
+<div *ngIf="loadingState$ | async as loading"
+     class="w-100 get-in-touch-form">
+  <div class="row align-items-end">
+    <div class="col-12 col-md-9"
+         [formGroup]="getInTouchForm">
+      <mat-form-field class="w-100 text-14">
+        <mat-label>Name</mat-label>
+        <input type="text"
+               formControlName="name"
+               matInput>
+      </mat-form-field>
+      <p *ngIf="getError(getInTouchForm, 'name','required')"
+         class="text-danger error-message">This field is required
+      </p>
+
+
+
+      <mat-form-field class="w-100 text-14">
+        <mat-label>Phone number</mat-label>
+        <input type="text"
+               formControlName="phonenumber"
+               matInput>
+      </mat-form-field>
+      <p *ngIf="getError(getInTouchForm, 'phonenumber','required')"
+         class="text-danger error-message">This field is
+        required</p>
+
+      <p *ngIf="getError(getInTouchForm, 'phonenumber','phoneNumber')"
+         class="text-danger error-message">Invalid phone
+        number
+      </p>
+
+
+
+      <mat-form-field class="w-100 text-14">
+        <mat-label>Email</mat-label>
+        <input type="text"
+               formControlName="email"
+               matInput>
+      </mat-form-field>
+      <p *ngIf="getError(getInTouchForm, 'email','required')"
+         class="text-danger error-message">This field is required
+      </p>
+
+      <p *ngIf="getError(getInTouchForm, 'email','email')"
+         class="text-danger error-message">Invalid email
+      </p>
+
+      <mat-form-field class="w-100 text-14 ">
+        <mat-label>Message</mat-label>
+        <textarea matInput
+                  rows="5"
+                  formControlName="message"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="col-12 col-md-3 d-flex justify-content-end justify-content-md-start">
+      <button class="nesto-btn primary submit-btn"
+              [ngClass]="{'loading': loading === 'Loading'}"
+              (click)="submitGetInTouch()"
+              style="margin-bottom: 18px;"> SUBMIT </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+.nesto-account-app-shell {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.nesto-account-main-workspace {
+  flex-grow: 1;
+}

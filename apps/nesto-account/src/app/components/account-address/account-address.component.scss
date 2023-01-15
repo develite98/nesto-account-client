@@ -1,5 +1,19 @@
 .address-card {
-  margin-bottom: 32px;
+  margin-bottom: 40px;
+
+  &__isdefault {
+    padding: 2px 4px;
+    background: #f1f2f2;
+    font-weight: 300;
+    font-size: 12px;
+    height: fit-content;
+  }
+
+  &__setdefault {
+    font-weight: 300;
+    font-size: 12px;
+    margin-right: 5px;
+  }
 
   &__header {
     border-bottom: 1px solid #231f20;
@@ -20,10 +34,18 @@
 
   &__body {
     font-size: 16px;
-    line-height: 160%;
+    line-height: 175%;
 
     span {
-      margin-right: 5px;
+      margin-right: 10px;
     }
+  }
+}
+
+
+@media only screen and (max-width: 800px) {
+  .address-card__body {
+    font-size: 14px;
+    line-height: 25px;
   }
 }

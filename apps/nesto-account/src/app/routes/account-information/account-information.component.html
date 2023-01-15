@@ -1,27 +1,38 @@
 <div class="nesto-container account-information">
-  <span class="nesto-breadcrumb">
-    <a href="/">HOME</a> / <a href="#">ACCOUNT INFORMATION</a>
-  </span>
+  <div class="breadcrumb-section d-none d-md-block">
+    <span class="nesto-breadcrumb">
+      <a href="/">HOME</a> / <a href="#">ACCOUNT INFORMATION</a>
+    </span>
+  </div>
+
   <div class="row justify-content-between">
-    <div class="col-3">
+    <div class="col-3 d-none d-md-block">
       <div class="account-information__accordian"
            [ngClass]="{'active': activeTabIndex === 0}"
            (click)="activeTabIndex = 0">User Information</div>
       <div class="account-information__accordian"
            [ngClass]="{'active': activeTabIndex === 1}"
            (click)="activeTabIndex = 1">Shipping Address</div>
-      <!-- <div class="account-information__accordian"
+      <div class="account-information__accordian"
            [ngClass]="{'active': activeTabIndex === 2}"
-           (click)="activeTabIndex = 2">Thông tin thanh toán</div> -->
+           (click)="activeTabIndex = 2">Manage Order</div>
       <div class="account-information__accordian"
            [ngClass]="{'active': activeTabIndex === 3}"
-           (click)="activeTabIndex = 3">Manage Order</div>
-      <div class="account-information__accordian"
-           [ngClass]="{'active': activeTabIndex === 4}"
-           (click)="activeTabIndex = 4">Manage Refund</div>
+           (click)="activeTabIndex = 3">Manage Refund</div>
     </div>
 
-    <div class="col-8">
+    <div class="col-12 d-block d-md-none">
+      <mat-tab-group class="w-100 mb-34"
+                     (selectedIndexChange)="activeTabIndex = $event">
+        <mat-tab label="User Information"></mat-tab>
+        <mat-tab label="Shipping Address"></mat-tab>
+        <mat-tab label="Manage Order"></mat-tab>
+        <mat-tab label="Manage Refund"></mat-tab>
+      </mat-tab-group>
+
+    </div>
+
+    <div class="col-12 col-md-8">
       <ng-container *ngIf="activeTabIndex === 0">
         <mix-account-main-info></mix-account-main-info>
       </ng-container>
@@ -30,17 +41,32 @@
         <mix-account-address></mix-account-address>
       </ng-container>
 
-      <ng-container *ngIf="activeTabIndex === 2">
+      <!-- <ng-container *ngIf="activeTabIndex === 2">
         <mix-account-payment-info></mix-account-payment-info>
-      </ng-container>
+      </ng-container> -->
 
-      <ng-container *ngIf="activeTabIndex === 3">
+      <ng-container *ngIf="activeTabIndex === 2">
         <mix-account-order-manage></mix-account-order-manage>
       </ng-container>
 
-      <ng-container *ngIf="activeTabIndex === 4">
+      <ng-container *ngIf="activeTabIndex === 3">
         <mix-account-refund-manage></mix-account-refund-manage>
       </ng-container>
     </div>
   </div>
 </div>
+
+<!--
+<div class="mt-100 nesto-container">
+  <div class="row">
+    <div class="col-4">
+      <h1>ABC</h1>
+    </div>
+
+    <div class="col-6">
+      <mix-get-in-touch-form></mix-get-in-touch-form>
+    </div>
+  </div>
+</div>
+
+<div class="mt-100"></div> -->

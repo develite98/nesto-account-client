@@ -79,6 +79,14 @@ export class AuthApiService extends BaseApiService {
     return this.get<UserData>(MixApiDict.UserDataApi.getUserData);
   }
 
+  public changePassword(request: {
+    currentPassword: string;
+    newPassword: string;
+    confirmPassword: string;
+  }): Observable<void> {
+    return this.post(MixApiDict.ShareApi.changePassword, request);
+  }
+
   public updateUserProfile(userData: UserData): Observable<void> {
     return this.put<UserData, void>(
       MixApiDict.UserDataApi.updateProfile,
@@ -114,4 +122,6 @@ export interface Address {
   district: string;
   province: string;
   isDefault: boolean;
+  note: string;
+  ward: string;
 }

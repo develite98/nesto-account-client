@@ -1,4 +1,5 @@
 import { inject } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { TuiAlertService, TuiNotification } from '@taiga-ui/core';
@@ -23,6 +24,7 @@ export abstract class BaseComponent {
 
   public disabled$ = new BehaviorSubject<boolean>(false);
   public error$ = new BehaviorSubject<boolean>(false);
+  public globalError$ = new BehaviorSubject<string | null>(null);
   public loading$ = new BehaviorSubject<boolean>(true);
   public loading = false;
   public loadingState$: BehaviorSubject<LoadingState> =
@@ -56,6 +58,18 @@ export abstract class BaseComponent {
       success: 'Saved',
       error: 'Error, Could not save.'
     });
+  }
+
+  public getError(
+    form: FormGroup | FormControl,
+    control: string,
+    errorKey: string
+  ): boolean {
+    return (
+      (!!form.get(control)?.touched || !!form.get(control)?.dirty) &&
+      !!form.get(control)?.errors &&
+      !!form.get(control)?.hasError(errorKey)
+    );
   }
 
   public observerLoadingState<T>(): (source: Observable<T>) => Observable<T> {

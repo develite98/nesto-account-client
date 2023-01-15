@@ -1,0 +1,20 @@
+<div class="number-input"
+     [ngClass]="{'disabled': disabled}">
+  <div class="number-input__btn"
+       (click)="decrease()">
+    <span class="material-symbols-outlined">
+      remove
+    </span>
+  </div>
+
+  <div>
+    {{ getDisplay }}
+  </div>
+
+  <div class="number-input__btn"
+       (click)="increase()">
+    <span class="material-symbols-outlined">
+      add
+    </span>
+  </div>
+</div>

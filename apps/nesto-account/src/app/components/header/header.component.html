@@ -1,5 +1,6 @@
 <!-- HEADER -->
-<div class="header">
+<div *ngIf="loadingState$ | async as state"
+     class="header">
   <div class="nesto-container">
     <div class="header__container">
       <a href="/"> <img class="header__logo"
@@ -10,18 +11,25 @@
       <div class="header__nav">
         <ng-container *ngIf="currentUser; else login">
           <a class="nav-item"
-             [matMenuTriggerFor]="menu">{{ currentUser.userName }}</a>
+             [matMenuTriggerFor]="menu333">{{ currentUser.userData ? currentUser.userData['fullname']
+            || currentUser.userName : currentUser.userName
+            }}</a>
 
-          <mat-menu #menu="matMenu">
+          <mat-menu #menu333="matMenu">
             <a (click)="logOut()"
                mat-menu-item>Logout</a>
             <a [href]="navigation.account"
                mat-menu-item>Account Information</a>
+            <a [href]="navigation.cart"
+               mat-menu-item>My Order</a>
           </mat-menu>
         </ng-container>
 
         <ng-template #login>
-          <a class="nav-item"
+          <div *ngIf="state === 'Loading'"
+               class="mini-loader"></div>
+          <a *ngIf="state !== 'Loading'"
+             class="nav-item"
              (click)="showLoginDialog()"> login
           </a>
         </ng-template>
@@ -70,28 +78,32 @@
                 </a>
               </ng-template>
 
-              <a *ngIf="currentUser"
-                 class="nav-item"
-                 (click)="showCartDialog()"> cart({{currentTotalCart}}) </a>
               <a class="nav-item"
-                 (click)="dialog.closeAll()"> <img src="/MixContent/StaticFiles/nesto/assets/images/close.png"> </a>
+                 (click)="dialog.closeAll()"
+                 style="display: flex; z-index: 5;">
+                <span class="material-symbols-outlined">
+                  close
+                </span>
+              </a>
             </div>
           </div>
         </div>
 
-        <div class="nesto-container mt-50 flex-grow-1">
+        <div class="nesto-container f-grow-1 f-grow-xs-unset">
           <div class="row justify-content-between h-100">
-            <div class="col-12 col-md-4 d-flex flex-column">
-              <a class="mt-32 mt-lg-18 reset-link text-60 fw-300 text-uppercase link-hoverable --active"
+            <div class="col-12 col-md-4 d-flex flex-column pb-xs-100">
+              <a class="header__main-navigation mt-32 mt-lg-18 reset-link"
+                 [ngClass]="{'--active': currentRoute === '/products'}"
                  [href]="navigation.product">products</a>
-              <a class="mt-32 mt-lg-18 reset-link text-60 fw-300 text-uppercase link-hoverable"
+              <a class="header__main-navigation mt-32 mt-lg-18 reset-link"
+                 [ngClass]="{'--active': currentRoute === '/collection'}"
                  [href]="navigation.collection">collection</a>
-              <a class="mt-32 mt-lg-18 reset-link text-60 fw-300 text-uppercase link-hoverable"
+              <a class="header__main-navigation mt-32 mt-lg-18 reset-link"
+                 [ngClass]="{'--active': currentRoute === '/stories'}"
                  [href]="navigation.stories">stories</a>
             </div>
             <div class="col-12 col-md-5 d-flex flex-column justify-content-end mt-auto">
-              <mat-form-field class="w-100 text-20 text-white"
-                              style="color: #fff">
+              <mat-form-field class="w-100 header__search-input">
                 <mat-label>Search</mat-label>
                 <input type="text"
                        (keyup.enter)="onSearch()"
@@ -104,7 +116,7 @@
           </div>
         </div>
 
-        <div class="nesto-container mb-100 mb-lg-80 mt-auto">
+        <div class="nesto-container mb-100 mb-lg-80 mt-auto mt-xs-unset">
           <div class="row">
             <div class="col-12 col-md-1 d-flex d-md-block">
               <a class="mt-24 me-3 text-12 reset-link link-hoverable text-xs-white d-flex align-items-center">Facebook
@@ -113,26 +125,46 @@
               <a class="mt-24 me-3 text-12 reset-link link-hoverable text-xs-white d-flex align-items-center">Instagram
                 <span class="material-symbols-outlined text-12 icon ms-1">arrow_outward</span>
               </a>
-              <a class="mt-24 me-3 text-12 reset-link link-hoverable text-xs-white d-flex align-items-center">Twitter
+              <a class="mt-24 me-3 text-12 reset-link link-hoverable text-xs-white d-flex align-items-center">Youtube
                 <span class="material-symbols-outlined text-12 icon ms-1">arrow_outward</span>
               </a>
             </div>
 
             <div class="col d-flex flex-column justify-content-md-end">
-              <div class="row justify-content-md-end">
+              <div class="row justify-content-between justify-content-md-end">
                 <div class="col-auto">
-                  <a class="mt-24 text-14 reset-link link-hoverable"
-                     [href]="navigation.about">About</a>
+                  <a class="mt-24 text-14 text-xs-12 reset-link link-hoverable"
+                     [ngClass]="{'--active': currentRoute === '/about-us'}"
+                     [href]="navigation.about">ABOUT</a>
                 </div>
 
                 <div class="col-auto">
-                  <a class="mt-24 text-14 reset-link link-hoverable"
-                     [href]="navigation.career">CAREERS</a>
+                  <a class="mt-24 text-14 text-xs-12 reset-link link-hoverable"
+                     [ngClass]="{'--active': currentRoute === '/career'}"
+                     [href]="navigation.career">CAREER</a>
                 </div>
 
                 <div class="col-auto">
-                  <a class="mt-24 text-14 reset-link link-hoverable"
+                  <a class="mt-24 text-14 text-xs-12 reset-link link-hoverable"
+                     [ngClass]="{'--active': currentRoute === '/blogs'}"
                      [href]="navigation.blogs">BLOG</a>
+                </div>
+
+                <div class="col-auto">
+                  <a class="mt-24 text-14 text-xs-12 reset-link link-hoverable"
+                     [ngClass]="{'--active': currentRoute === '/partner-ship'}"
+                     [href]="navigation.partner">PARTNERSHIP</a>
+                </div>
+
+                <div class="col-auto">
+                  <a class="mt-24 text-14 text-xs-12 reset-link link-hoverable"
+                     [ngClass]="{'--active': currentRoute === '/contact-us'}"
+                     [href]="navigation.contact">CONTACT</a>
+                </div>
+
+                <div class="col-auto ms-xs-auto">
+                  <a class="mt-24 text-14 reset-link link-hoverable"
+                     [href]="navigation.blogs"><span class="text-white">Eng</span>/Viet</a>
                 </div>
               </div>
             </div>

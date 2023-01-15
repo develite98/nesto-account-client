@@ -4,12 +4,18 @@ table {
 
 .cart-manage {
   padding-bottom: 100px;
+  padding-top: 50px;
 
   &__title {
     font-size: 36px;
     font-weight: 100;
     text-transform: uppercase;
     margin: 50px 0px;
+  }
+
+  .table-container {
+    width: 100%;
+    overflow: auto;
   }
 }
 
@@ -21,6 +27,105 @@ table {
   img {
     width: 84px;
     height: 75px;
-    margin-right: 16px;
+    margin-right: 32px;
+  }
+
+  .checkbox {
+    margin-right: 24px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .cart-manage {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0px;
+    padding-top: 25px;
+
+    &__title {
+      font-size: 42px;
+      font-weight: 100;
+      text-transform: uppercase;
+      margin: 20px 0px;
+    }
+
+    .cart-checkout-btn-area {
+      margin-top: auto !important;
+      padding: 24px 16px 16px 16px;
+      background-color: #f3f1ee;
+      --bs-gutter-x: 40px;
+      position: sticky;
+      bottom: 0;
+    }
+  }
+}
+
+.order-widget {
+  width: 100%;
+  padding: 28px;
+
+  &__product {
+    margin-bottom: 24px;
+    padding-bottom: 50px;
+    padding-top: 30px;
+    border-bottom: 1px solid #a7a9ac;
+    position: relative;
+
+    .remove-btn {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      font-size: 12px;
+    }
+
+    .product-image {
+      width: 110px;
+      height: 110px;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .product-title {
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 21px;
+      text-transform: uppercase;
+    }
+
+    .product-checkbox {
+      border-radius: 5px;
+      overflow: hidden;
+      margin-right: 16px;
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .order-widget {
+    padding: 8px;
+
+    .product-image {
+      margin-bottom: 24px;
+    }
+
+    .product-title {
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 18px;
+    }
+
+    .product-sku {
+      font-size: 12px;
+    }
+  }
+
+  .order-widget__product {
+    padding-top: 48px;
+    padding-bottom: 48px;
   }
 }

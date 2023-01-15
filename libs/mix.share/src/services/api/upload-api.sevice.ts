@@ -14,6 +14,14 @@ export class UploadApiService extends BaseApiService {
     );
   }
 
+  public customerUploadFile(formData: FormData): Observable<string> {
+    return this.http.post(
+      this.url + MixApiDict.UploadApi.customerUploadEndpoint,
+      formData,
+      { responseType: 'text' }
+    );
+  }
+
   public deleteFile(filePath: string): Observable<void> {
     const params: IHttpParamObject = {
       fullPath: filePath

@@ -12,7 +12,11 @@
   }
 
   &__body {
-    padding: 55px 44px;
+    padding: 44px;
     height: calc(100vh - 90px);
+  }
+
+  .error-message {
+    margin-top: -15px;
   }
 }

@@ -1,0 +1,69 @@
+<div class="order-widget__product">
+  <a *ngIf="(type ==='view' && (isSoldOut || isOverStock)) || type !== 'view'"
+     class="link-hoverable remove-btn --border"
+     (click)="remove.emit()">Remove</a>
+  <div *ngIf="order"
+       class="row">
+    <div class="col-6 col-md-5 d-flex align-items-center">
+      <mat-checkbox *ngIf="type !== 'view'"
+                    class="product-checkbox"
+                    [checked]="order.isActive"
+                    (change)="checkedChange.emit($event)">
+      </mat-checkbox>
+      <div class="product-image">
+        <img class="w-100"
+             [alt]="order.title"
+             [src]="order.image"
+             style="object-fit: cover">
+      </div>
+    </div>
+    <div class="col-6 col-md-7">
+      <div class="product-title"> {{ order.title }}</div>
+      <span class="text-blur product-sku text-12 mt-8 d-block">SKU: {{ $any(order).sku ?? ''}}</span>
+
+      <div *ngIf="order.variantColor"
+           class="mt-12">{{ order.variantColor }}</div>
+      <div *ngIf="order.variantSize"
+           class="mt-1">{{ order.variantSize }}
+      </div>
+    </div>
+
+    <div class="col-md-7"
+         style="margin-left: auto">
+      <div class="w-100 d-flex justify-content-between align-items-center product-quantity">
+        <span>Quantity: </span>
+
+        <span *ngIf="type === 'view'"> {{ order.quantity }}</span>
+        <mix-input-number *ngIf="type !== 'view'"
+                          [(value)]="order.quantity"
+                          [disabled]="isSoldOut"
+                          (valueChange)="quantityChange.emit($event)"></mix-input-number>
+      </div>
+
+      <div class="w-100 d-flex justify-content-between mt-12">
+        <span>Unit: </span> <span>piece</span>
+      </div>
+
+      <div class="w-100 d-flex justify-content-between fw-500 mt-12">
+        <span>Price: </span>
+        <mix-money-display [currencySize]="14"
+                           [textSize]="20"
+                           [value]="order.total"></mix-money-display>
+      </div>
+      <div class="w-100 d-flex justify-content-end mt-12">
+        <a class="link-hoverable d-block w-fit text-12"
+           (click)="gotoPost()">View category</a>
+      </div>
+
+      <div class="w-100 d-flex justify-content-end mt-12">
+        <ng-container *ngIf="isSoldOut">
+          <span class="text-danger">SOLD OUT</span>
+        </ng-container>
+
+        <ng-container *ngIf="isOverStock">
+          <span class="text-danger">Over quantity in stock</span>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

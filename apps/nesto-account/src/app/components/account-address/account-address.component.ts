@@ -33,9 +33,9 @@ export class AccountAddressComponent extends BaseComponent implements OnInit {
       .pipe(
         this.observerLoadingState(),
         this.toast.observe({
-          success: 'Loading your address',
+          success: 'Successfully load your address',
           error: '',
-          loading: 'Successfully'
+          loading: 'Loading your address'
         })
       )
       .subscribe(result => {
@@ -46,6 +46,20 @@ export class AccountAddressComponent extends BaseComponent implements OnInit {
   public showDialog(): void {
     const dialogRef = this.dialog.open(AddressFormComponent, {
       panelClass: 'nesto-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe(v => {
+      if (v) this.loadData();
+    });
+  }
+
+  public updateAddress(address: Address): void {
+    const dialogRef = this.dialog.open(AddressFormComponent, {
+      panelClass: 'nesto-dialog',
+      data: {
+        address: address,
+        mode: 'update'
+      }
     });
 
     dialogRef.afterClosed().subscribe(v => {
@@ -65,9 +79,9 @@ export class AccountAddressComponent extends BaseComponent implements OnInit {
             .deleteAddress(id)
             .pipe(
               this.toast.observe({
-                success: 'Deleting your address',
+                success: 'Successfully',
                 error: '',
-                loading: 'Successfully'
+                loading: 'Deleting your address '
               })
             )
             .subscribe(() => this.loadData());

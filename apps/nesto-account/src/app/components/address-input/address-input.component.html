@@ -1,22 +1,28 @@
-<div class="w-100"
+<div class="w-100 address-input"
      [formGroup]="addressForm">
   <mat-form-field class="w-100 text-14">
     <mat-label>Full name</mat-label>
     <input matInput
            formControlName="name">
   </mat-form-field>
+  <p *ngIf="getError(addressForm, 'name','required')"
+     class="text-danger error-message">This field is required</p>
 
   <mat-form-field class="w-100 text-14">
     <mat-label>Phone number</mat-label>
     <input matInput
            formControlName="phone">
   </mat-form-field>
+  <p *ngIf="getError(addressForm, 'phone','required')"
+     class="text-danger error-message">This field is required</p>
 
   <mat-form-field class="w-100 text-14">
     <mat-label>Email</mat-label>
     <input matInput
            formControlName="email">
   </mat-form-field>
+  <p *ngIf="getError(addressForm, 'email','required')"
+     class="text-danger error-message">This field is required</p>
 
   <mat-form-field class="text-14 w-100">
     <mat-label>Province</mat-label>
@@ -59,11 +65,15 @@
     <input matInput
            formControlName="street">
   </mat-form-field>
-
+  <p *ngIf="getError(addressForm, 'street','required')"
+     class="text-danger error-message">This field is required</p>
 
   <mat-form-field class="w-100 text-14 ">
     <mat-label>Note</mat-label>
-    <textarea matInput
-              formControlName="note"></textarea>
+    <input matInput
+           formControlName="note">
   </mat-form-field>
+
+  <mat-checkbox class="w-100 text-14"
+                formControlName="isDefault">Set as default</mat-checkbox>
 </div>

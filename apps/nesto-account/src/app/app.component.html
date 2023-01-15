@@ -1,8 +1,13 @@
-<mix-header></mix-header>
+<div class="nesto-account-app-shell">
+  <mix-header></mix-header>
 
-<ng-container *ngIf="(authService.isAuthorized$ | async) as auth; else nologin">
-  <router-outlet></router-outlet>
-</ng-container>
+  <div class="nesto-account-main-workspace">
+    <ng-container *ngIf="(authService.isAuthorized$ | async) as auth; else nologin">
+      <router-outlet></router-outlet>
+    </ng-container>
+  </div>
+</div>
+
 
 <ng-template #nologin>
   <div class="nesto-section nesto-container d-flex align-items-center justify-content-center">

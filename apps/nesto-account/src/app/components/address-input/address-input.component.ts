@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Optional } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { BaseComponent, FormUtils, ProvinceApiService } from '@mix/mix.share';
 
+import { Address } from '../../models/user-data.model';
 import { NestoUserDataApiService } from '../../services/nesto-api.service';
-import { AddressFormComponent } from '../account-address/address-form/address-form.component';
 
 @Component({
   selector: 'mix-address-input',
@@ -12,6 +12,8 @@ import { AddressFormComponent } from '../account-address/address-form/address-fo
   styleUrls: ['./address-input.component.scss']
 })
 export class AddressInputComponent extends BaseComponent implements OnInit {
+  @Input() public mode: 'create' | 'update' = 'create';
+  @Input() public address?: Address;
   public allProvinces: { name: string; code: string; districts: [] }[] = [];
   public currentDistrict: { name: string; code: string; wards: [] }[] = [];
   public currentWards: { name: string; code: string }[] = [];
@@ -24,18 +26,28 @@ export class AddressInputComponent extends BaseComponent implements OnInit {
     province: new FormControl('', Validators.required),
     note: new FormControl(''),
     district: new FormControl('', Validators.required),
-    ward: new FormControl('')
+    ward: new FormControl(''),
+    isDefault: new FormControl(false)
   });
 
   constructor(
     public provinceApi: ProvinceApiService,
     public nestoUserData: NestoUserDataApiService,
-    public dialogRef: MatDialogRef<AddressFormComponent>
+    @Optional() public dialogRef: MatDialogRef<AddressInputComponent>
   ) {
     super();
   }
 
   public ngOnInit(): void {
+    if (this.mode == 'update' && this.address) {
+      this.addressForm.controls['name'].setValue(this.address.name);
+      this.addressForm.controls['email'].setValue(this.address.email);
+      this.addressForm.controls['phone'].setValue(this.address.phone);
+      this.addressForm.controls['isDefault'].setValue(this.address.isDefault);
+      this.addressForm.controls['note'].setValue(this.address.note);
+      this.addressForm.controls['street'].setValue(this.address.street);
+    }
+
     this.provinceApi.getProvince().subscribe(p => {
       this.allProvinces = p;
       this.addressForm.controls['province'].setValue(p[0].code);
@@ -56,36 +68,68 @@ export class AddressInputComponent extends BaseComponent implements OnInit {
     });
   }
 
-  public submitAddress(): void {
+  public submitAddress(callback?: (address: any) => void): void {
     if (FormUtils.validateForm(this.addressForm)) {
       const address = {
-        Name: this.addressForm.value.name,
-        Phone: this.addressForm.value.phone,
-        Email: this.addressForm.value.email,
-        Street: this.addressForm.value.street,
-        Note: this.addressForm.value.note,
-        Province: this.allProvinces.find(
+        name: this.addressForm.value.name,
+        phone: this.addressForm.value.phone,
+        email: this.addressForm.value.email,
+        street: this.addressForm.value.street,
+        note: this.addressForm.value.note,
+        isDefault: this.addressForm.value.isDefault,
+        province: this.allProvinces.find(
           v => v.code === this.addressForm.value.province
         )?.name,
-        District: this.currentDistrict.find(
+        district: this.currentDistrict.find(
           v => v.code === this.addressForm.value.district
+        )?.name,
+        ward: this.currentWards.find(
+          v => v.code === this.addressForm.value.ward
         )?.name
       };
 
-      this.nestoUserData
+      if (this.mode === 'create') {
+        this.nestoUserData
         .addAddress(address)
         .pipe(
           this.toast.observe({
-            loading: 'Add your shipping address...',
-            success: 'Successfully add your address',
+            loading: 'Adding your shipping address...',
+            success: 'Successfully add your shipping address',
             error: 'Something wrong, please try again'
           })
         )
         .subscribe({
-          next: () => {
-            this.dialogRef.close(true);
+          next: (result) => {
+            if (callback) {
+              callback(result)
+            } else {
+              this.dialogRef.close(true);
+            }
           }
         });
+      } else {
+        this.nestoUserData
+        .updateAddress({
+          ...this.address,
+          ...address
+        })
+        .pipe(
+          this.toast.observe({
+            loading: 'Updating your shipping address...',
+            success: 'Successfully add your shipping address',
+            error: 'Something wrong, please try again'
+          })
+        )
+        .subscribe({
+          next: (result) => {
+            if (callback) {
+              callback(result)
+            } else {
+              this.dialogRef.close(true);
+            }
+          }
+        });
+      }
     }
   }
 }

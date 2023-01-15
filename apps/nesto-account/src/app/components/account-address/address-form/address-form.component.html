@@ -1,30 +1,51 @@
-<div class="nesto-dialog"
+<div class="address-form-dialog"
      [formGroup]="addressForm">
-  <div class="nesto-dialog__header">
-    <div class="header-title">Add new Shipping Address</div>
+  <div class="address-form-dialog__header">
+    <div class="header-title text-uppercase">
+      <ng-container *ngIf="mode === 'create'">
+        Add new Shipping Address
+      </ng-container>
+
+      <ng-container *ngIf="mode === 'update'">
+        Update your address
+      </ng-container>
+    </div>
+
+    <a class="link-hoverable d-flex align-item-center"
+       (click)="cancel()">
+      <span class="material-symbols-outlined">
+        close
+      </span>
+    </a>
   </div>
 
-  <div class="nesto-dialog__body">
+  <div class="address-form-dialog__body">
     <mat-form-field class="w-100 text-14">
       <mat-label>Full name</mat-label>
       <input matInput
              formControlName="name">
     </mat-form-field>
+    <p *ngIf="getError(addressForm, 'name','required')"
+       class="text-danger error-message">This field is required</p>
 
     <mat-form-field class="w-100 text-14 ">
       <mat-label>Phone number</mat-label>
       <input matInput
              formControlName="phone">
     </mat-form-field>
+    <p *ngIf="getError(addressForm, 'phone','required')"
+       class="text-danger error-message">This field is required</p>
 
     <mat-form-field class="w-100 text-14 ">
       <mat-label>Email</mat-label>
       <input matInput
              formControlName="email">
     </mat-form-field>
+    <p *ngIf="getError(addressForm, 'email','required')"
+       class="text-danger error-message">This field is required</p>
 
-    <div class="row">
-      <div class="col-8">
+    <div class="row mt-16">
+      <div class="col-12 col-md-8">
         <mat-form-field class="text-14 w-100">
           <mat-label>Province / City</mat-label>
           <mat-select formControlName="province">
@@ -38,7 +59,7 @@
     </div>
 
     <div class="row">
-      <div class="col-4">
+      <div class="col-6 col-md-4">
         <mat-form-field class="text-14 w-100">
           <mat-label>District</mat-label>
           <mat-select formControlName="district">
@@ -50,7 +71,7 @@
         </mat-form-field>
       </div>
 
-      <div class="col-4">
+      <div class="col-6 col-md-4">
         <mat-form-field class="text-14 w-100">
           <mat-label>Ward</mat-label>
           <mat-select formControlName="ward">
@@ -64,17 +85,20 @@
     </div>
 
     <div class="row">
-      <div class="col-8">
+      <div class="col-12 col-md-8">
         <mat-form-field class="w-100 text-14 ">
           <mat-label>Full address</mat-label>
           <input matInput
                  formControlName="street">
         </mat-form-field>
+        <p *ngIf="getError(addressForm, 'street','required')"
+           class="text-danger error-message">This field is required
+        </p>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-8">
+      <div class="col-12 col-md-8">
         <mat-form-field class="w-100 text-14 ">
           <mat-label>Note</mat-label>
           <textarea matInput
@@ -82,17 +106,20 @@
         </mat-form-field>
       </div>
     </div>
+    <div class="row">
+      <mat-checkbox formControlName="isDefault">Set as default</mat-checkbox>
+    </div>
   </div>
 
-  <div class="nesto-dialog__footer">
+  <div class="address-form-dialog__footer">
     <div class="row">
-      <div class="col-6">
-        <button class="nesto-btn big w-100"
+      <div class="col-12 col-md-6">
+        <button class="nesto-btn big w-100 mb-3 mb-md-0"
                 (click)="cancel()">CANCEL</button>
       </div>
 
-      <div class="col-6">
-        <button class="nesto-btn primary big  w-100"
+      <div class="col-12 col-md-6">
+        <button class="nesto-btn primary big w-100"
                 (click)="submitAddress()">SUBMIT</button>
       </div>
     </div>
