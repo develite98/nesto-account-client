@@ -10,7 +10,7 @@
 
       <div class="header__nav">
         <ng-container *ngIf="currentUser; else login">
-          <a class="nav-item"
+          <a class="nav-item nav-user-name"
              [matMenuTriggerFor]="menu333">{{ currentUser.userData ? currentUser.userData['fullname']
             || currentUser.userName : currentUser.userName
             }}</a>
@@ -20,7 +20,7 @@
                mat-menu-item>Logout</a>
             <a [href]="navigation.account"
                mat-menu-item>Account Information</a>
-            <a [href]="navigation.cart"
+            <a [href]="navigation.account + '?tabIndex=2'"
                mat-menu-item>My Order</a>
           </mat-menu>
         </ng-container>
@@ -61,8 +61,10 @@
 
             <div class="header__nav">
               <ng-container *ngIf="currentUser; else login">
-                <a class="nav-item d-none d-md-block"
-                   [matMenuTriggerFor]="menu">{{ currentUser.userName }}</a>
+                <a class="nav-item nav-user-name d-none d-md-block"
+                   [matMenuTriggerFor]="menu">{{ currentUser.userData ? currentUser.userData['fullname']
+                   || currentUser.userName : currentUser.userName
+                   }}</a>
 
                 <mat-menu #menu="matMenu">
                   <a (click)="logOut()"
@@ -70,6 +72,11 @@
                   <a [href]="navigation.account"
                      mat-menu-item>Account Information</a>
                 </mat-menu>
+
+                <a *ngIf="currentUser"
+                   class="nav-item d-none d-md-block"
+                   (click)="showCartDialog()"> cart({{currentTotalCart}}) </a>
+
               </ng-container>
 
               <ng-template #login>
@@ -77,6 +84,7 @@
                    (click)="showLoginDialog()"> login
                 </a>
               </ng-template>
+
 
               <a class="nav-item"
                  (click)="dialog.closeAll()"
@@ -119,13 +127,9 @@
         <div class="nesto-container mb-100 mb-lg-80 mt-auto mt-xs-unset">
           <div class="row">
             <div class="col-12 col-md-1 d-flex d-md-block">
-              <a class="mt-24 me-3 text-12 reset-link link-hoverable text-xs-white d-flex align-items-center">Facebook
-                <span class="material-symbols-outlined text-12 icon ms-1">arrow_outward</span>
-              </a>
-              <a class="mt-24 me-3 text-12 reset-link link-hoverable text-xs-white d-flex align-items-center">Instagram
-                <span class="material-symbols-outlined text-12 icon ms-1">arrow_outward</span>
-              </a>
-              <a class="mt-24 me-3 text-12 reset-link link-hoverable text-xs-white d-flex align-items-center">Youtube
+              <a *ngFor="let network of currentSocialNetworks"
+                 class="mt-24 me-3 text-12 reset-link link-hoverable text-xs-white d-flex align-items-center"
+                 [href]="network.url">{{ network.name }}
                 <span class="material-symbols-outlined text-12 icon ms-1">arrow_outward</span>
               </a>
             </div>

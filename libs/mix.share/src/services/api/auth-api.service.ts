@@ -5,6 +5,7 @@ import {
   LoginModel,
   MixApiDict,
   SignUpModel,
+  SocialLoginModel,
   TokenInfo,
   User,
   UserInfo
@@ -42,6 +43,34 @@ export class AuthApiService extends BaseApiService {
     return this.post<{ message: string }, TokenInfo>(
       MixApiDict.ShareApi.signInEndpoint,
       { message: encrypted }
+    ).pipe(
+      tap((tokenInfo: TokenInfo) => {
+        if (!tokenInfo || !tokenInfo.info) return;
+
+        localStorage.setItem(
+          LocalStorageKeys.ACCESS_TOKEN,
+          tokenInfo.accessToken
+        );
+
+        localStorage.setItem(
+          LocalStorageKeys.REFRESH_TOKEN,
+          tokenInfo.refreshToken
+        );
+
+        localStorage.setItem(LocalStorageKeys.TOKEN_TYPE, tokenInfo.tokenType);
+
+        this.user$.next(tokenInfo.info);
+        this.isAuthorized$.next(true);
+      })
+    );
+  }
+
+  public socialLogin(data: SocialLoginModel): Observable<TokenInfo> {
+    return this.post<any,TokenInfo>(
+      `${MixApiDict.ShareApi.externalSignInEndpoint}?${new URLSearchParams(
+        data as any
+      ).toString()}`,
+      {}
     ).pipe(
       tap((tokenInfo: TokenInfo) => {
         if (!tokenInfo || !tokenInfo.info) return;

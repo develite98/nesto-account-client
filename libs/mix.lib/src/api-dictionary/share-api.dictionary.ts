@@ -2,6 +2,7 @@ export class ShareApiDictionary {
   public getCulturesEndpoint = `/rest/shared/json-data/Cultures`;
   public getGlobalSettingsEndpoint = `/rest/shared/get-global-settings`;
   public signInEndpoint = `/rest/mix-account/user/login`;
+  public externalSignInEndpoint = `/rest/mix-account/user/external-login-unsecure`;
   public signUpEndpoint = `/rest/mix-account/user/register`;
   public getAccountProfileEndpoint = `/rest/mix-account/user/my-profile`;
   public getSharedSettingEndpoint = `/rest/shared/get-shared-settings/en-US`;

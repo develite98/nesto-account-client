@@ -53,6 +53,25 @@
     <button class="nesto-btn outline big w-100 mt-16"
             [ngClass]="{'loading': loadingState === 'Loading'}"
             (click)="changeMode('signup')">SIGN UP</button>
+
+    <span class="d-block mt-24 text-14">Or login by</span>
+    <div class="row mt-2"
+         style="--bs-gutter-x: 10px;">
+      <div class="col-12">
+        <button class="nesto-btn outline big w-100"
+                [ngClass]="{'loading': loadingState === 'Loading'}"
+                (click)="facebookSignin('Facebook')">Facebook</button>
+      </div>
+
+      <!-- <div class="col-6"> -->
+      <!-- <button class=" nesto-btn
+                                  outline
+                                  big
+                                  w-100"
+                [ngClass]="{'loading': loadingState === 'Loading'}"
+                (click)="facebookSignin('Google')">Google</button> -->
+      <!-- </div> -->
+    </div>
   </div>
 
   <div *ngIf="mode === 'signup'"
@@ -110,6 +129,22 @@
     <button class="nesto-btn outline big w-100 mt-16"
             [ngClass]="{'loading': loadingState === 'Loading'}"
             (click)="changeMode('login')">LOGIN</button>
+
+    <span class="d-block mt-24 text-14">Or sign up by</span>
+    <div class="row mt-2"
+         style="--bs-gutter-x: 10px;">
+      <div class="col-12">
+        <button class="nesto-btn outline big w-100"
+                [ngClass]="{'loading': loadingState === 'Loading'}"
+                (click)="facebookSignin('Facebook', true)">Facebook</button>
+      </div>
+
+      <!-- <div class="col-6"> -->
+      <!-- <button class="nesto-btn outline big w-100"
+                [ngClass]="{'loading': loadingState === 'Loading'}"
+                (click)="facebookSignin('Google', true)">Google</button> -->
+      <!-- </div> -->
+    </div>
   </div>
 
   <div *ngIf="mode === 'update-personal-data'"

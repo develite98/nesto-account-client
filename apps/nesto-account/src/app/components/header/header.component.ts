@@ -16,8 +16,10 @@ import {
   BaseComponent,
   CartApiService,
   DestroyService,
+  DynamicDbApiService,
   LoadingState
 } from '@mix/mix.share';
+import { environment } from 'apps/nesto-account/src/environments/environment';
 import { filter, takeUntil } from 'rxjs';
 
 import { LoginComponent } from '../../routes/login/login.component';
@@ -33,27 +35,14 @@ import { HeaderService } from './header.service';
 export class HeaderComponent extends BaseComponent {
   @ViewChild('searchMenu', { static: true }) searchDialog!: TemplateRef<any>;
 
-  public nestoHost = 'http://nesto.tanconstructions.com.au/';
-  public navigation = {
-    product: this.nestoHost + 'products',
-    collection: this.nestoHost + 'collection',
-    stories: this.nestoHost + 'stories',
-    about: this.nestoHost + 'about-us',
-    career: this.nestoHost + 'career',
-    blogs: this.nestoHost + 'blogs',
-    search: this.nestoHost + 'search',
-    account: this.nestoHost + 'customer-account/account-information',
-    checkout: this.nestoHost + 'customer-account/cart/delivery-payment',
-    cart: this.nestoHost + 'customer-account/cart',
-    contact: this.nestoHost + 'contact-us',
-    partner: this.nestoHost + 'partner-ship'
-  };
+  public navigation = environment.navigation;
   public currentRoute = '';
 
   public currentUser: User | null = null;
   public currentTotalCart = 0;
   public currentOrderItems: OrderItem[] = [];
   public showLogin = false;
+  public currentSocialNetworks: {name: string, url: string}[] = [];
 
   constructor(
     private authSrv: AuthApiService,
@@ -63,7 +52,8 @@ export class HeaderComponent extends BaseComponent {
     public cdr: ChangeDetectorRef,
     private readonly zone: NgZone,
     public destroy: DestroyService,
-    public appEvent: AppEventService
+    public appEvent: AppEventService,
+    public dynamicDb: DynamicDbApiService
   ) {
     super();
     (window as any)['headerService'] = headerService;
@@ -85,6 +75,10 @@ export class HeaderComponent extends BaseComponent {
     this.appEvent.getEvent(AppEvent.CartUpdate).pipe(takeUntil(this.destroy)).subscribe((event) => {
       this.currentTotalCart = event.data?.orderItems?.length ?? 0;
     })
+
+    this.dynamicDb.getDb<{name: string, url: string}>('socialnetwork').subscribe((result) => {
+      this.currentSocialNetworks = result.items.slice(0, 3);
+    });
   }
 
   public checkAccount(): void {

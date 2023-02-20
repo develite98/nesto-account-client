@@ -19,6 +19,14 @@ export class LoginModel {
   public returnUrl: string | undefined;
 }
 
+export class SocialLoginModel {
+  public email?: string | undefined;
+  public userName: string | undefined;
+  public phoneNumber?: string | undefined;
+  public provider: 'Facebook' | 'Google' = 'Facebook';
+  public externalAccessToken: string | undefined;
+}
+
 export class TokenInfo {
   public accessToken!: string;
   public tokenType!: string;

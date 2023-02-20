@@ -12,8 +12,13 @@ import {
   AuthApiService,
   BaseComponent,
   FormUtils,
+  LoadingState,
   ShareApiService
 } from '@mix/mix.share';
+import {
+  FacebookLoginProvider,
+  SocialAuthService
+} from 'angularx-social-login';
 import { switchMap } from 'rxjs';
 
 import { AddressInputComponent } from '../../components/address-input/address-input.component';
@@ -25,7 +30,8 @@ import { AddressInputComponent } from '../../components/address-input/address-in
 })
 export class LoginComponent extends BaseComponent {
   @ViewChild(AddressInputComponent) public addressForm!: AddressInputComponent;
-  public mode: 'login' | 'signup' | 'update-data' | 'update-personal-data' = 'login';
+  public mode: 'login' | 'signup' | 'update-data' | 'update-personal-data' =
+    'login';
 
   public emailPattern = new RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$');
   public phoneNumber = new RegExp(
@@ -57,9 +63,7 @@ export class LoginComponent extends BaseComponent {
         };
   };
 
-  public emailValidator = (
-    control: FormControl
-  ): { [s: string]: boolean } => {
+  public emailValidator = (control: FormControl): { [s: string]: boolean } => {
     if (!control.value) {
       return {};
     }
@@ -98,8 +102,11 @@ export class LoginComponent extends BaseComponent {
   });
 
   public userProfileForm = new FormGroup({
-    email: new FormControl('', [ Validators.required, this.emailValidator]),
-    phoneNumber: new FormControl('',[ Validators.required, this.phoneNumberValidator]),
+    email: new FormControl('', [Validators.required, this.emailValidator]),
+    phoneNumber: new FormControl('', [
+      Validators.required,
+      this.phoneNumberValidator
+    ]),
     fullName: new FormControl(''),
     avatar: new FormControl(''),
     dateOfBirth: new FormControl<Date | null>(null),
@@ -111,7 +118,8 @@ export class LoginComponent extends BaseComponent {
     private shareSetting: ShareApiService,
     private authSrv: AuthApiService,
     public dialogRef: MatDialogRef<LoginComponent>,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private socialAuthService: SocialAuthService
   ) {
     super();
   }
@@ -121,6 +129,35 @@ export class LoginComponent extends BaseComponent {
     this.cdr.detectChanges();
 
     this.authSrv.fetchUserData().subscribe();
+  }
+
+  public facebookSignin(kind: 'Google' | 'Facebook', isSignUp = false): void {
+    const fbLoginOptions = {
+      scope: 'email'
+    };
+
+    this.loadingState$.next(LoadingState.Loading);
+    // const providerId = kind === 'Facebook' ? FacebookLoginProvider.PROVIDER_ID : GoogleLoginProvider.PROVIDER_ID;
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID, fbLoginOptions).then((user) => {
+      this.authSrv.socialLogin({
+        userName: user.email ?? '',
+        externalAccessToken: user.authToken,
+        provider: 'Facebook',
+        email: user.response.email ?? ''
+      }).pipe(this.observerLoadingState()).subscribe(
+        {
+          next: () => {
+            if (isSignUp) {
+              this.mode = 'update-personal-data';
+            } else {
+              this.handleLoginSuccess()
+            }
+          }
+        }
+      );
+    }).catch(() => {
+      this.loadingState$.next(LoadingState.Pending);
+    });
   }
 
   public login(callback?: () => void): void {
@@ -166,7 +203,9 @@ export class LoginComponent extends BaseComponent {
       };
 
       if (this.phoneNumber.test(registerData.userName)) {
-        this.userProfileForm.controls['phoneNumber'].patchValue(registerData.userName);
+        this.userProfileForm.controls['phoneNumber'].patchValue(
+          registerData.userName
+        );
       }
 
       this.globalError$.next(null);
@@ -196,8 +235,7 @@ export class LoginComponent extends BaseComponent {
               this.login(() => {
                 this.mode = 'update-personal-data';
               });
-            }, 100)
-
+            }, 100);
           },
           error: (error: { error: string[] }) => {
             this.globalError$.next(error.error[0]);

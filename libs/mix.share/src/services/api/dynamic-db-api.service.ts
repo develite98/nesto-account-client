@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MixApiDict } from '@mix/mix.lib';
+import { MixApiDict, PaginationResultModel } from '@mix/mix.lib';
 import { Observable } from 'rxjs';
 
 import { BaseApiService } from '../../bases';
@@ -11,5 +11,9 @@ export class DynamicDbApiService extends BaseApiService {
     dbName: string
   ): Observable<Record<string, string>> {
     return this.post(MixApiDict.DynamicDbApi.prefix + dbName, request);
+  }
+
+  public getDb<T>(dbName: string): Observable<PaginationResultModel<T>> {
+    return this.get<PaginationResultModel<T>>(MixApiDict.DynamicDbApi.prefix + dbName);
   }
 }

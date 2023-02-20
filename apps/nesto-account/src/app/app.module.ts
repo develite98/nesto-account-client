@@ -19,6 +19,7 @@ import { Route, RouterModule } from '@angular/router';
 import { AppEventService, BASE_URL } from '@mix/mix.share';
 import { EmptyContentComponent, SkeletonLoadingComponent } from '@mix/mix.ui';
 import { HotToastModule } from '@ngneat/hot-toast';
+import { FacebookLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -137,7 +138,8 @@ export const ROUTES: Route[] = [
     MatDatepickerModule,
     MatNativeDateModule,
     MatMenuModule,
-    EmptyContentComponent
+    EmptyContentComponent,
+    SocialLoginModule
   ],
   providers: [
     AppEventService,
@@ -149,6 +151,20 @@ export const ROUTES: Route[] = [
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
+    },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider(
+              '553558756810469'
+            )
+          }
+        ]
+      } as SocialAuthServiceConfig,
     }
   ],
   bootstrap: [AppComponent]
